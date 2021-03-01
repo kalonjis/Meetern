@@ -1,6 +1,15 @@
-const mongoose = require('mongoose');
-const { isEmail } = require('validator') // npm i -s validator
+/* Model de notre COMPANY dans la DB  */
 
+//On instancie le module 'mongoose' (si pas installé => npm i -s mongoose )
+const mongoose = require('mongoose');
+
+// On instancie {isEmail} du module validator pour valider l'email (npm i -s validator)
+const { isEmail } = require('validator');
+
+// On instancie bcrypt du module bcrypt pour crypter les passwords (npm i -s bcrypt)
+const bcrypt = require('bcrypt');
+
+// création Schema du user dans mongodb
 const companySchema = new mongoose.Schema(
     {
         companyName:{
@@ -60,7 +69,15 @@ const companySchema = new mongoose.Schema(
         timestamps: true
     }
 
-)
+);
+
+/* Fonction appelées par le controller*/
+// Fonction pour crypter le password AVANT l'enregistrement dans la db
+companySchema.pre('save', async function(next){
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+});
 
 // On instancie le companySchema et on définit la db dans laquelle on va l'utiliser ('companies')
 const CompanyModel = mongoose.model('company', companySchema); 

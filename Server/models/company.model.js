@@ -44,15 +44,12 @@ const companySchema = new mongoose.Schema(
         },
         phone: {
             type: String,
-            minlength: 3,
             maxlength: 55,
             trim: true 
         },
         webSite :{
             type: String,
-            minlength: 3,
             maxlength: 55,
-            unique: true,
             trim: true 
         },
         corporateWear: {

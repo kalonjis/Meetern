@@ -66,7 +66,7 @@ const companySchema = new mongoose.Schema(
 )
 
 // On instancie le companySchema et on définit la db dans laquelle on va l'utiliser ('companies')
-const CompanyModel = mongoose.model('companie', companySchema); //companie sans "s" car mongo va le rajouter automatiquement
+const CompanyModel = mongoose.model('company', companySchema); 
 
 // On exporte le CompanyModel qui sera recup par les controllers  
 module.exports = CompanyModel;

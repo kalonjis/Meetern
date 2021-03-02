@@ -9,5 +9,7 @@ router.post("/register", authCompanyController.signUp);
 router.get("/", companyController.getAllCompanies);
 router.get("/:id", companyController.companyInfo);
 router.put("/:id", companyController.updateCompany);
+router.delete('/:id', companyController.deleteCompany)
+
 
 module.exports = router;

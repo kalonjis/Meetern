@@ -32,7 +32,7 @@ module.exports.updateCompany = async (req, res) =>{
                   sector: req.body.sector,
                   phone: req.body.phone,
                   webSite: req.body.webSite,
-                  corporateWear: req.body.corporateWear
+                  corporateWear: req.body.corporateWear                  
               }
           },
           { new: true, upsert: true, setDefaultsOnInsert: true},
@@ -45,3 +45,17 @@ module.exports.updateCompany = async (req, res) =>{
         return res.status(500).json({ message: err})
     }
 }
+
+// Delete user avec la methode "DELETE"
+module.exports.deleteCompany = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        await CompanyModel.deleteOne({_id: req.params.id}).exec();
+        res.status(200).json({message: "Successfully deleted. "})
+
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};

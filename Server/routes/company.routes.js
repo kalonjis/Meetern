@@ -5,7 +5,8 @@ const companyController = require('../controllers/companyController') // read, u
 // auth
 router.post("/register", authCompanyController.signUp);
 
-
+// company display block
 router.get("/", companyController.getAllCompanies);
+router.get("/:id", companyController.companyInfo);
 
 module.exports = router;

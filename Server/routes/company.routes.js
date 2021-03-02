@@ -8,5 +8,6 @@ router.post("/register", authCompanyController.signUp);
 // company display block
 router.get("/", companyController.getAllCompanies);
 router.get("/:id", companyController.companyInfo);
+router.put("/:id", companyController.updateCompany);
 
 module.exports = router;

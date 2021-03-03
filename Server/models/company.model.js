@@ -44,9 +44,10 @@ const companySchema = new mongoose.Schema(
             max: 1024,
         },
         sector: {
-            type:String,
-            max: 30,
-            trim: true
+            type:String
+        },
+        companyType : {
+            type: String
         },
         location: {
             type: [String]

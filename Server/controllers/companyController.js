@@ -30,6 +30,7 @@ module.exports.updateCompany = async (req, res) =>{
               $set: {
                   bio: req.body.bio,
                   sector: req.body.sector,
+                  companyType: req.body.companyType,
                   phone: req.body.phone,
                   webSite: req.body.webSite,
                   corporateWear: req.body.corporateWear                  

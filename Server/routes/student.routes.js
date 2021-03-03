@@ -10,8 +10,8 @@ router.get("/", studentController.getAllStudents);
 router.get("/:id", studentController.studentInfo);
 router.put("/:id", studentController.updateStudent);
 router.delete('/:id', studentController.deleteStudent);
-// router.patch('/addLocation/:id', companyController.addLocation);
-// router.patch('/removeLocation/:id', companyController.removeLocation);
-
+router.patch('/addLanguage/:id', studentController.addLanguage);
+router.patch('/addHardSkills/:id', studentController.addHardSkills);
+router.patch('/addSoftSkills/:id', studentController.addSoftSkills);
 
 module.exports = router;

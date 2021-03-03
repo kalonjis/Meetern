@@ -63,3 +63,63 @@ module.exports.deleteStudent = async (req, res) => {
         return res.status(500).json({ message: err})
     }
 };
+
+// Add location avec la methode "PATCH"
+module.exports.addLanguage = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // add to the location list
+        await StudentModel.findByIdAndUpdate(
+            req.params.id,
+            { $addToSet: {language: req.body.language}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};
+module.exports.addHardSkills = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // add to the location list
+        await StudentModel.findByIdAndUpdate(
+            req.params.id,
+            { $addToSet: {hardSkills: req.body.hardSkills}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};
+
+module.exports.addSoftSkills = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // add to the location list
+        await StudentModel.findByIdAndUpdate(
+            req.params.id,
+            { $addToSet: {softSkills: req.body.softSkills}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};

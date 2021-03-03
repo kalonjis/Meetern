@@ -19,6 +19,7 @@ module.exports.companyInfo = (req, res) => {
     }).select('-password');
 }
 
+// Update du profil de la company
 module.exports.updateCompany = async (req, res) =>{
     if(!ObjectId.isValid(req.params.id)){
         return res.status(400).send('Id unknown : '+ req.params.id); // req.params = paramètres dans l'url

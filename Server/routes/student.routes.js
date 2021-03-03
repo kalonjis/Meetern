@@ -8,6 +8,7 @@ router.post("/register", authStudentController.signUp);
 // student display block
 router.get("/", studentController.getAllStudents);
 router.get("/:id", studentController.studentInfo);
+router.put("/:id", studentController.updateStudent);
 // router.put("/:id", companyController.updateCompany);
 // router.delete('/:id', companyController.deleteCompany);
 // router.patch('/addLocation/:id', companyController.addLocation);

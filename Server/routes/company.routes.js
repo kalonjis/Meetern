@@ -10,6 +10,7 @@ router.get("/", companyController.getAllCompanies);
 router.get("/:id", companyController.companyInfo);
 router.put("/:id", companyController.updateCompany);
 router.delete('/:id', companyController.deleteCompany)
+router.patch('/:id', companyController.addLocation)
 
 
 module.exports = router;

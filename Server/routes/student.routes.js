@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const authStudentController = require('../controllers/student/auth.studentController') //for signUp, login and signOut
-// const companyController = require('../controllers/company/companyController') // read, update and delete
+const studentController = require('../controllers/student/studentController') // read, update and delete
 
 // auth
 router.post("/register", authStudentController.signUp);
 
-// company display block
-// router.get("/", companyController.getAllCompanies);
+// student display block
+router.get("/", studentController.getAllStudents);
 // router.get("/:id", companyController.companyInfo);
 // router.put("/:id", companyController.updateCompany);
 // router.delete('/:id', companyController.deleteCompany);

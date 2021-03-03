@@ -49,7 +49,7 @@ module.exports.updateCompany = async (req, res) =>{
     }
 }
 
-// Delete user avec la methode "DELETE"
+// Delete la company avec la methode "DELETE"
 module.exports.deleteCompany = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);

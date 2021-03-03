@@ -17,7 +17,7 @@ module.exports.studentInfo = (req, res) => {
         if(!err) res.send(docs);
         else console.log('Id unknown : ' + err);
     }).select('-password');
-}
+};
 
 // Update du profil du student
 module.exports.updateStudent = async (req, res) =>{
@@ -48,4 +48,18 @@ module.exports.updateStudent = async (req, res) =>{
     } catch (err){
         return res.status(500).json({ message: err})
     }
-}
+};
+
+// Delete le student avec la methode "DELETE"
+module.exports.deleteStudent = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        await StudentModel.deleteOne({_id: req.params.id}).exec();
+        res.status(200).json({message: "Successfully deleted. "})
+
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};

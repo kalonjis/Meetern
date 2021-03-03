@@ -9,8 +9,7 @@ router.post("/register", authStudentController.signUp);
 router.get("/", studentController.getAllStudents);
 router.get("/:id", studentController.studentInfo);
 router.put("/:id", studentController.updateStudent);
-// router.put("/:id", companyController.updateCompany);
-// router.delete('/:id', companyController.deleteCompany);
+router.delete('/:id', studentController.deleteStudent);
 // router.patch('/addLocation/:id', companyController.addLocation);
 // router.patch('/removeLocation/:id', companyController.removeLocation);
 

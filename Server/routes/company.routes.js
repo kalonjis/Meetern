@@ -9,8 +9,9 @@ router.post("/register", authCompanyController.signUp);
 router.get("/", companyController.getAllCompanies);
 router.get("/:id", companyController.companyInfo);
 router.put("/:id", companyController.updateCompany);
-router.delete('/:id', companyController.deleteCompany)
-router.patch('/:id', companyController.addLocation)
+router.delete('/:id', companyController.deleteCompany);
+router.patch('/addLocation/:id', companyController.addLocation);
+router.patch('/removeLocation/:id', companyController.removeLocation);
 
 
 module.exports = router;

@@ -81,3 +81,24 @@ module.exports.addLocation = async (req, res) => {
         return res.status(500).json({ message: err})
     }
 };
+
+// Remove location avec la methode "PATCH"
+module.exports.removeLocation = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // remove from the location list
+        await CompanyModel.findByIdAndUpdate(
+            req.params.id,
+            { $pull: { location: req.body.location}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+        );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};

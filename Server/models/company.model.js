@@ -36,7 +36,7 @@ const companySchema = new mongoose.Schema(
         },
         picture: {
             type: String,
-            default: "./uploads/profil/random-company.png"
+            default: "./uploads/company/profil/random-company.png"
 
         },
         bio : {
@@ -80,7 +80,7 @@ companySchema.pre('save', async function(next){
     next();
 });
 
-// On instancie le companySchema et on définit la db dans laquelle on va l'utiliser ('companies')
+// On instancie le companySchema et on définit la db dans laquelle on va l'utiliser ('companies'-mongoDB l'accorde au pluriel automatiquement)
 const CompanyModel = mongoose.model('company', companySchema); 
 
 // On exporte le CompanyModel qui sera recup par les controllers  

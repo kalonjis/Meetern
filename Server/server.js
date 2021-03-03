@@ -1,5 +1,6 @@
 const express = require('express');
-const companyRoutes= require('./routes/company.routes')
+const companyRoutes= require('./routes/company.routes');
+const studentRoutes= require('./routes/student.routes');
 require('dotenv').config({path:'./config/.env'});
 require('./config/db')
 
@@ -13,7 +14,8 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 
 // routes (en avant derrnier!!!)
-app.use('/api/company/', companyRoutes)
+app.use('/api/company/', companyRoutes);
+app.use('/api/student/', studentRoutes);
 
 // server (tjs en dernier!!!)
 app.listen(process.env.PORT, ()=>{

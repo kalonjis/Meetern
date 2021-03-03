@@ -12,14 +12,14 @@ const bcrypt = require('bcrypt');
 // création Schema du user dans mongodb
 const studentSchema = new mongoose.Schema(
     {
-        studentFirstName:{
+        studentFirstname:{
             type: String,
             required : true,
             minlength: 3,
             maxlength: 55,
             trim: true
         },
-        studentLastName:{
+        studentLastname:{
             type: String,
             required : true,
             minlength: 3,

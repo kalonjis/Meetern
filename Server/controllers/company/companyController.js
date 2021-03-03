@@ -7,6 +7,7 @@ module.exports.getAllCompanies = async (req,res) => {
     res.status(200).json(companies);
 };
 
+//Afficher(lire) les infos d'un student en particulier avec la methode "GET"
 module.exports.companyInfo = (req, res) => {
     if(!ObjectId.isValid(req.params.id)){
         return res.status(400).send('Id unknown : '+ req.params.id); // req.params = paramètres dans l'url

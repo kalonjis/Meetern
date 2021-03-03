@@ -1,4 +1,4 @@
-const CompanyModel = require('../models/company.model');
+const CompanyModel = require('../../models/company.model');
 
 module.exports.signUp = async(req, res) =>{
     const {companyName, email, password} = req.body

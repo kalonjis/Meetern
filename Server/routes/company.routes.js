@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const authCompanyController = require('../controllers/auth.companyController') //for signUp, login and signOut
-const companyController = require('../controllers/companyController') // read, update and delete
+const authCompanyController = require('../controllers/company/auth.companyController') //for signUp, login and signOut
+const companyController = require('../controllers/company/companyController') // read, update and delete
 
 // auth
 router.post("/register", authCompanyController.signUp);

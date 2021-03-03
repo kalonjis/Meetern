@@ -1,4 +1,4 @@
-const CompanyModel = require('../models/company.model');
+const CompanyModel = require('../../models/company.model');
 const ObjectId = require('mongoose').Types.ObjectId;
 
 //Afficher(lire) les infos de toutes les compagnies avec la methode "GET"

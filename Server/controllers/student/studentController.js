@@ -64,13 +64,13 @@ module.exports.deleteStudent = async (req, res) => {
     }
 };
 
-// Add location avec la methode "PATCH"
+// Add language avec la methode "PATCH"
 module.exports.addLanguage = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // add to the location list
+        // add to the language list
         await StudentModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: {language: req.body.language}},
@@ -84,12 +84,34 @@ module.exports.addLanguage = async (req, res) => {
         return res.status(500).json({ message: err})
     }
 };
+// remove language avec la methode PATCH
+module.exports.removeLanguage = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // remove from the language list
+        await StudentModel.findByIdAndUpdate(
+            req.params.id,
+            { $pull: {language: req.body.language}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};
+
+// add hardSkills avec la methode PATCH
 module.exports.addHardSkills = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // add to the location list
+        // add to the hardSkills list
         await StudentModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: {hardSkills: req.body.hardSkills}},
@@ -104,15 +126,58 @@ module.exports.addHardSkills = async (req, res) => {
     }
 };
 
+// remove hardSkills avec la methode PATCH
+module.exports.removeHardSkills = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // remove from the hardSkills list
+        await StudentModel.findByIdAndUpdate(
+            req.params.id,
+            { $pull: {hardSkills: req.body.hardSkills}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};
+
+// add softSkills avec la methode PATCH
 module.exports.addSoftSkills = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // add to the location list
+        // add to the softSkills list
         await StudentModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: {softSkills: req.body.softSkills}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
+};
+
+// remove softSkills avec la methode PATCH
+module.exports.removeSoftSkills = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try {
+        // remove from the softSkills list
+        await StudentModel.findByIdAndUpdate(
+            req.params.id,
+            { $pull: {softSkills: req.body.softSkills}},
             { new: true, upsert: true},
             (err, docs) => {
                 if (!err) res.status(201).json(docs)

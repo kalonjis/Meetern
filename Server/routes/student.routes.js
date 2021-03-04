@@ -5,6 +5,7 @@ const studentController = require('../controllers/student/studentController') //
 // auth
 router.post("/register", authStudentController.signUp);
 router.post("/login", authStudentController.signIn);
+router.get("/logout", authStudentController.logout);
 
 // student display block
 router.get("/", studentController.getAllStudents);

@@ -4,6 +4,9 @@ const companyController = require('../controllers/company/companyController') //
 
 // auth
 router.post("/register", authCompanyController.signUp);
+router.post("/login", authCompanyController.signIn);
+router.post("/logout", authCompanyController.logout);
+
 
 // company display block
 router.get("/", companyController.getAllCompanies);

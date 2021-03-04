@@ -80,6 +80,19 @@ companySchema.pre('save', async function(next){
     next();
 });
 
+// fonction pour contrôler la correspondance du password crypté lors du signIN (UserModel.login)
+companySchema.statics.login = async function(email, password){
+    const company = await this.findOne({ email });
+    if (company) {
+        const auth = await bcrypt.compare(password, company.password)
+        if (auth) {
+            return company;
+        }
+        throw Error('incorrect password');
+    }
+    throw Error('incorrect email');
+};
+
 // On instancie le companySchema et on définit la db dans laquelle on va l'utiliser ('companies'-mongoDB l'accorde au pluriel automatiquement)
 const CompanyModel = mongoose.model('company', companySchema); 
 

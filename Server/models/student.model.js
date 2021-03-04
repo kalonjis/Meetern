@@ -107,7 +107,7 @@ studentSchema.statics.login = async function(email, password){
         throw Error('incorrect password');
     }
     throw Error('incorrect email');
-}
+};
 
 // On instancie le StudentSchema et on définit la db dans laquelle on va l'utiliser ('students'- mongoDB l'accorde au pluriel automatiquement')
 const StudentModel = mongoose.model('student', studentSchema); 

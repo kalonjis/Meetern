@@ -96,6 +96,19 @@ studentSchema.pre('save', async function(next){
     next();
 });
 
+// fonction pour contrôler la correspondance du password crypté lors du signIN (UserModel.login)
+studentSchema.statics.login = async function(email, password){
+    const student = await this.findOne({ email });
+    if (student) {
+        const auth = await bcrypt.compare(password, student.password)
+        if (auth) {
+            return student;
+        }
+        throw Error('incorrect password');
+    }
+    throw Error('incorrect email');
+}
+
 // On instancie le StudentSchema et on définit la db dans laquelle on va l'utiliser ('students'- mongoDB l'accorde au pluriel automatiquement')
 const StudentModel = mongoose.model('student', studentSchema); 
 

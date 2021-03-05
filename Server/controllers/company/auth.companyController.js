@@ -7,10 +7,13 @@ const CompanyModel = require('../../models/company.model');
 const jwt = require('jsonwebtoken'); //npm i -s jsonwebtoken
 
 //  On définit la fonction createToken qu'on appelle dans "signIN"
-const maxAge = 3 * 24 * 60 * 60 * 1000;// On stock la durée de validité dans une variable car on va la réutiliser
+const maxAge = 3 * 24 * 60 * 60 * 1000;//(en milliseconde- jour * heure * min. * sec. * millisec.) On stock la durée de validité dans une variable car on va la réutiliser
 const createToken = (id) => {
     return jwt.sign({id}, process.env.TOKEN_SECRET, {expiresIn: maxAge})
 };
+
+// On importe les modules qui vont gérer les erreurs
+const {signUpErrors, signInErrors } = require('../../utils/errors.utils');
 
 // Création d'une company
 module.exports.signUp = async(req, res) =>{
@@ -20,8 +23,8 @@ module.exports.signUp = async(req, res) =>{
         const company = await CompanyModel.create({companyName, email, password});
         res.status(201).json({company: company._id})
     } catch (err) {
-        console.log(err)
-        res.status(200).send({err})
+        const errors = signUpErrors(err);
+        res.status(200).send({errors})
     }
 }
 

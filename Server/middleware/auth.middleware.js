@@ -66,18 +66,6 @@ module.exports.checkStudent = ( req, res, next) => {
         next();
     }
 }
-// const checkCompany = ()=>{
-//     checkUser(CompanyModel,req,res,next)
-// }
-
-// const checkStudent = ()=>{
-//     checkUser(StudentModel,req,res,next)
-// }
-
-// module.exports.checkAnyUser = ()=>{
-//     checkCompany();
-//     checkStudent();
-// }
 
 // Fonction pour vérifier si déjà loggé (et ne pas devoir le refaire!) ou pas. On l'appelle qu'une seule fois en front!
 module.exports.requireAuth = (req, res, next) => {

@@ -13,6 +13,9 @@ const createToken = (id) => {
     return jwt.sign({id}, process.env.TOKEN_SECRET, {expiresIn: maxAge})
 };
 
+// On importe les modules qui vont gérer les erreurs
+const {signUpErrors, signInErrors } = require('../../utils/errors.utils');
+
 // Création d'un student
 module.exports.signUp = async(req, res) =>{
     const {studentFirstname, studentLastname, email, password} = req.body
@@ -21,8 +24,8 @@ module.exports.signUp = async(req, res) =>{
         const student = await StudentModel.create({studentFirstname, studentLastname, email, password});
         res.status(201).json({student: student._id})
     } catch (err) {
-        console.log(err)
-        res.status(200).send({err})
+        const errors = signUpErrors(err);
+        res.status(200).send({errors})
     }
 };
 

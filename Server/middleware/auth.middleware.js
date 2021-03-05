@@ -9,7 +9,7 @@ const StudentModel = require('../models/student.model');
 
 
 // Fonction permettant de vérifier l'utilisitateur par comparaison au token
-module.exports.checkCompany = ( req, res, next) => {
+module.exports.checkUser = ( req, res, next) => {
     //On stocke le(éventuel) cookie de l'utilisateur dans une const
     const token = req.cookies.jwt;
     //S'il y a un token
@@ -25,7 +25,9 @@ module.exports.checkCompany = ( req, res, next) => {
             
             // si le token match:
             } else {
-                let user = await CompanyModel.findById(decodedToken.id); // stocke le user correspondant à l'Id du decoded token ds une variable user
+                let company = await CompanyModel.findById(decodedToken.id); // stocke la company correspondant à l'Id du decoded token le cas échéant
+                let student = await StudentModel.findById(decodedToken.id); // stocke le student correspondant à l'Id du decoded token le cas échéant
+                let user = (company !== null ) ? company : student // on passe la valeur de company ou student selon ce qu'il aura trouvé
                 res.locals.user = user; // on passe ce user ds le res.locals.user: var qui n'est dispo que ds une vue/page en particulier
                 next(); // On continue le traitement de la requête
             }
@@ -38,34 +40,6 @@ module.exports.checkCompany = ( req, res, next) => {
     }
 }
 
-module.exports.checkStudent = ( req, res, next) => {
-    //On stocke le(éventuel) cookie de l'utilisateur dans une const
-    const token = req.cookies.jwt;
-    //S'il y a un token
-    if (token) {
-        //On compare le token avec celui du site (défini dans notre fichier .env)
-        jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-            //si ça ne correspond pas:
-            if (err) {
-                //Plus info sur res.local : http://expressjs.com/en/api.html#res.locals 
-                res.locals.user = null; 
-                //res.cookie('jwt','', { maxAge: 1}); // On supprime son cookie/token
-                next(); // On continue le traitement de la requête
-            
-            // si le token match:
-            } else {
-                let user = await StudentModel.findById(decodedToken.id); // stocke le user correspondant à l'Id du decoded token ds une variable user
-                res.locals.user = user; // on passe ce user ds le res.locals.user: var qui n'est dispo que ds une vue/page en particulier
-                next(); // On continue le traitement de la requête
-            }
-        })
-    
-    // si pas de token:
-    } else {
-        res.locals.user = null;
-        next();
-    }
-}
 
 // Fonction pour vérifier si déjà loggé (et ne pas devoir le refaire!) ou pas. On l'appelle qu'une seule fois en front!
 module.exports.requireAuth = (req, res, next) => {

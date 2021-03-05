@@ -17,7 +17,7 @@ require('dotenv').config({path:'./config/.env'});
 require('./config/db')
 
 // On importe le module checkUser et requireAuth
-const {checkCompany, requireAuth, checkStudent} = require('./middleware/auth.middleware');
+const {checkUser, requireAuth,} = require('./middleware/auth.middleware');
 
 // On instancie express
 const app = express();
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(cookieParser()); // pour lire les cookies
 
 // jwt
-app.get('*', checkCompany, checkStudent); // On check l'utilisateur pour n'importe quelle route
+app.get('*', checkUser); // On check l'utilisateur pour n'importe quelle route
 app.get('/jwtid', requireAuth, (req, res) =>{ // On check si l'utilisateur est déjà loggé pour qu'il n'ai pas à devoir le refaire (1 seul x!)
     res.status(200).send(res.locals.user._id)
 });

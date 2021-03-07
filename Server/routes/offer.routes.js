@@ -6,6 +6,7 @@ const offerController = require('../controllers/offerController');
 
 
 /*On définit les routes et les fonctions liées*/
+router.get('/', offerController.readOffer);
 router.post('/', offerController.createOffer);
 
 module.exports = router;

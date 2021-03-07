@@ -59,3 +59,16 @@ module.exports.updateOffer = (req, res) => {
         }
     ) 
 };
+
+module.exports.deleteOffer = (req, res) => {
+    if (!ObjectID.isValid(req.params.id)) 
+        res.status(400).send('ID unknown : ' + req.params.id);
+
+    OfferModel.findByIdAndRemove(
+      req.params.id,
+      (err, docs) => {
+          if(!err) res.status(200).json({message: "Offer successfully deleted. "});
+          else console.log('Delete error: '+ err);
+      }
+  ) 
+}

@@ -4,7 +4,7 @@
 const mongoose = require('mongoose');
 
 // création d'un schema des posts dans mongodb
-const internshipOfferSchema = new mongoose.Schema(
+const OfferSchema = new mongoose.Schema(
     {
         companyId: {
             type: String,
@@ -53,7 +53,7 @@ const internshipOfferSchema = new mongoose.Schema(
 );
 
 
-const internshipOfferModel = mongoose.model('post',internshipOffer);
+const OfferModel = mongoose.model('offer',OfferSchema);
 
 // On exporte le PostModel qui sera recup par les controllers  
-module.exports = internshipOffer;
+module.exports = OfferModel;

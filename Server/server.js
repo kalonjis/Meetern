@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser')
 // On importe le module de route
 const companyRoutes= require('./routes/company.routes');
 const studentRoutes= require('./routes/student.routes');
+const offerRoutes= require('./routes/offer.routes');
 
 // On importe le module .env qui contient les variables d'environnement (il est repris dans .gitignore)
 require('dotenv').config({path:'./config/.env'});
@@ -38,6 +39,7 @@ app.get('/jwtid', requireAuth, (req, res) =>{ // On check si l'utilisateur est d
 // routes (en avant derrnier!!!)
 app.use('/api/company/', companyRoutes);
 app.use('/api/student/', studentRoutes);
+app.use('/api/offer/', offerRoutes);
 
 // server (tjs en dernier!!!)
 app.listen(process.env.PORT, ()=>{

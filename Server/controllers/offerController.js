@@ -71,4 +71,37 @@ module.exports.deleteOffer = (req, res) => {
           else console.log('Delete error: '+ err);
       }
   ) 
-}
+};
+
+module.exports.applyOffer = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id)) 
+        res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try{
+        await OfferModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $addToSet: { applicants: req.body.studentId }
+            },
+            { new: true},
+            (err, docs)=>{
+                if (err) res.status(400).send(err);
+            }
+        );
+   
+        await StudentModel.findByIdAndUpdate(
+            req.body.studentId,
+            {
+                $addToSet : { applications: req.params.id }
+            },
+            { new: true },
+            (err, docs) => {
+                if (err) res.status(400).send(err);
+                else res.status(201).json({message: "you've just apply to this offer! "});
+            }
+        );
+
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+};

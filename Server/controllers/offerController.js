@@ -1,7 +1,7 @@
 const OfferModel = require('../models/offer.model');
 const CompanyModel = require('../models/company.model');
 const StudentModel = require('../models/student.model');
-const ObjectID = require('mongoose').Types.ObjectId;
+const ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports.getAllOffers = (req, res) => {
     OfferModel.find((err, docs) => {
@@ -12,7 +12,7 @@ module.exports.getAllOffers = (req, res) => {
 };
 
 module.exports.offerInfo = (req,res) => {
-    if (!ObjectID.isValid(req.params.id)) 
+    if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     OfferModel.findById(req.params.id, (err, docs) => {
@@ -33,7 +33,7 @@ module.exports.createOffer = async(req, res) => {
         internshipDuration: req.body.internshipDuration,
         internshipPlace: req.body.internshipPlace,
         faceToface: req.body.faceToface,        
-        applicants: []
+        applications: []
         
     });
 
@@ -46,7 +46,7 @@ module.exports.createOffer = async(req, res) => {
 };
 
 module.exports.updateOffer = (req, res) => {
-    if (!ObjectID.isValid(req.params.id)) 
+    if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     const updatedRecord = {
@@ -71,7 +71,7 @@ module.exports.updateOffer = (req, res) => {
 };
 
 module.exports.deleteOffer = (req, res) => {
-    if (!ObjectID.isValid(req.params.id)) 
+    if (!ObjectId.isValid(req.params.id)) 
         res.status(400).send('ID unknown : ' + req.params.id);
 
     OfferModel.findByIdAndRemove(
@@ -84,14 +84,14 @@ module.exports.deleteOffer = (req, res) => {
 };
 
 module.exports.apply = async (req, res) => {
-    if (!ObjectID.isValid(req.params.id)) 
+    if (!ObjectId.isValid(req.params.id)) 
         res.status(400).send('ID unknown : ' + req.params.id);
     
     try{
         await OfferModel.findByIdAndUpdate(
             req.params.id,
             {
-                $push: {
+                $addToSet: {
                     applications:{
                         studentId: req.body.studentId,
                         status: "pending",
@@ -101,8 +101,8 @@ module.exports.apply = async (req, res) => {
             },
             { new: true},
             (err, docs)=>{
-                if (err) res.status(400).send(err);
-                else res.status(201).json({message: "Thank you for applaying to this offer "});
+                if (!err) res.status(200).send(docs);
+                else res.status(400).send('error: '+ err)
 
             }
         );
@@ -111,3 +111,30 @@ module.exports.apply = async (req, res) => {
         return res.status(400).send(err);
     }
 };
+
+module.exports.editStatus = (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) 
+        res.status(400).send('ID unknown : ' + req.params.id);
+
+    try {
+        return OfferModel.findById(
+            req.params.id,
+            (err, docs) => {
+                const theApplication = docs.applications.find((application) =>
+                    application._id.equals(req.body.applicationId)
+                )
+
+                if (!theApplication) res.status(404).send('application not found');
+                else theApplication.status = req.body.status;
+
+                return docs.save((err)=>{
+                    if (!err) return res.status(200).send(docs);
+                    else return res.status(500).send(err)
+                })
+            }
+        )
+
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}

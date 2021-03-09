@@ -49,8 +49,7 @@ const OfferSchema = new mongoose.Schema(
                     status: String,
                     timestamp: Number
                 }
-            ],
-            required: true
+            ]
         }
     },
     {

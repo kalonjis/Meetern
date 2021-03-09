@@ -42,8 +42,14 @@ const OfferSchema = new mongoose.Schema(
         faceToface: {
             type:Boolean
         },
-        applicants: {
-            type: [String],
+        applications: {
+            type: [
+                {
+                    studentId: String,
+                    status: String,
+                    timestamp: Number
+                }
+            ],
             required: true
         }
     },

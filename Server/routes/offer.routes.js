@@ -11,6 +11,6 @@ router.get("/:id", offerController.offerInfo);
 router.post("/", offerController.createOffer);
 router.put("/:id", offerController.updateOffer);
 router.delete("/:id", offerController.deleteOffer);
-router.patch("/apply/:id", offerController.applyOffer);
+router.patch("/apply/:id", offerController.apply);
 
 module.exports = router;

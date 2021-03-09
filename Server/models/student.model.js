@@ -80,9 +80,6 @@ const studentSchema = new mongoose.Schema(
             type: String,
             maxlength: 55,
             trim: true 
-        },
-        applications: {
-            type: [String]
         }
     },
     {

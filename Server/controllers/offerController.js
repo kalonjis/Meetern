@@ -83,7 +83,7 @@ module.exports.deleteOffer = (req, res) => {
   ) 
 };
 
-module.exports.applyOffer = async (req, res) => {
+module.exports.apply = async (req, res) => {
     if (!ObjectID.isValid(req.params.id)) 
         res.status(400).send('ID unknown : ' + req.params.id);
     
@@ -91,23 +91,19 @@ module.exports.applyOffer = async (req, res) => {
         await OfferModel.findByIdAndUpdate(
             req.params.id,
             {
-                $addToSet: { applicants: req.body.studentId }
+                $push: {
+                    applications:{
+                        studentId: req.body.studentId,
+                        status: "pending",
+                        timestamp: new Date().getTime()
+                    }
+                }
             },
             { new: true},
             (err, docs)=>{
                 if (err) res.status(400).send(err);
-            }
-        );
-   
-        await StudentModel.findByIdAndUpdate(
-            req.body.studentId,
-            {
-                $addToSet : { applications: req.params.id }
-            },
-            { new: true },
-            (err, docs) => {
-                if (err) res.status(400).send(err);
-                else res.status(201).json({message: "you've just apply to this offer! "});
+                else res.status(201).json({message: "Thank you for applaying to this offer "});
+
             }
         );
 

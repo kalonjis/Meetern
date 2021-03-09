@@ -1,5 +1,5 @@
 // On importe les modules nécessaires
-const CompanyModel = require('../../models/company.model');
+const StudentModel = require('../../models/student.model');
 const fs = require('fs') // Module permettant la manip des fichiers (natif ds nodejs)
 const { promisify } = require('util'); // (natif ds nodejs)
 const pipeline = promisify(require('stream').pipeline);
@@ -29,15 +29,15 @@ module.exports.uploadProfil = async (req, res) => {
     await pipeline(
         req.file.stream,
         fs.createWriteStream(
-            `${__dirname}/../../client/public/uploads/profil/companies/${fileName}` // On ne le stocke pas ds la db!
+            `${__dirname}/../../client/public/uploads/profil/students/${fileName}` // On ne le stocke pas ds la db!
         )
     )
 
     // On met à jour la base de donnée avec le nouveau lien de la photo
     try {
-        await CompanyModel.findByIdAndUpdate(
-            req.body.companyId,
-            { $set : { picture: "./uploads/profil/companies/" +fileName}},
+        await StudentModel.findByIdAndUpdate(
+            req.body.studentId,
+            { $set : { picture: "./uploads/profil/students/" +fileName}},
             { new: true},
             (err, docs) => {
                 if (!err) res.status(200).send(docs);

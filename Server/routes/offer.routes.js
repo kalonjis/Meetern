@@ -6,7 +6,8 @@ const offerController = require('../controllers/offerController');
 
 
 /*On définit les routes et les fonctions liées*/
-router.get("/", offerController.readOffer);
+router.get("/", offerController.getAllOffers);
+router.get("/:id", offerController.offerInfo);
 router.post("/", offerController.createOffer);
 router.put("/:id", offerController.updateOffer);
 router.delete("/:id", offerController.deleteOffer);

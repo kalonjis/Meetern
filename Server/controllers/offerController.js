@@ -3,13 +3,23 @@ const CompanyModel = require('../models/company.model');
 const StudentModel = require('../models/student.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
-module.exports.readOffer = (req, res) => {
+module.exports.getAllOffers = (req, res) => {
     OfferModel.find((err, docs) => {
         if (!err) res.send(docs);
         else console.log('Error to get data ' + err)
     }).sort({ createdAt: -1 }); // permet de réorganiser du plus récent au plus ancien
 
-}
+};
+
+module.exports.offerInfo = (req,res) => {
+    if (!ObjectID.isValid(req.params.id)) 
+      res.status(400).send('ID unknown : ' + req.params.id);
+    
+    OfferModel.findById(req.params.id, (err, docs) => {
+        if(!err) res.send(docs);
+        else console.log('ID unknown : ' + err)
+    })
+};
 
 module.exports.createOffer = async(req, res) => {
     const newOffer = new OfferModel({

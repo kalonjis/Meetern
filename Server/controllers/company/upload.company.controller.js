@@ -29,7 +29,7 @@ module.exports.uploadProfil = async (req, res) => {
     await pipeline(
         req.file.stream,
         fs.createWriteStream(
-            `${__dirname}/../../client/public/uploads/profil/companies/${fileName}` // On ne le stocke pas ds la db!
+            `${__dirname}/../../../client/public/uploads/profil/companies/${fileName}` // On ne le stocke pas ds la db!
         )
     )
 

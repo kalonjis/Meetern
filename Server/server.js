@@ -18,7 +18,8 @@ require('dotenv').config({path:'./config/.env'});
 require('./config/db')
 
 // On importe le module checkUser et requireAuth
-const {checkUser, requireAuth,} = require('./middleware/auth.middleware');
+const {checkCompany, requireAuthCompany,} = require('./middleware/auth.company.middleware');
+const {checkStudent, requireAuthStudent,} = require('./middleware/auth.student.middleware');
 
 // On charge le module cors qui permet de gérer l'accessibilité à notre site depuis l'extérieur
 const cors = require('cors'); // npm i -s cors
@@ -43,10 +44,15 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(cookieParser()); // pour lire les cookies
 
 // jwt
-app.get('*', checkUser); // On check l'utilisateur pour n'importe quelle route
-app.get('/jwtid', requireAuth, (req, res) =>{ // On check si l'utilisateur est déjà loggé pour qu'il n'ai pas à devoir le refaire (1 seul x!)
-    res.status(200).send(res.locals.user._id)
+app.get('*', checkCompany); // On check l'utilisateur "COMPANY" pour n'importe quelle route
+app.get('*', checkStudent); // On check l'utilisateur "STUDENT" pour n'importe quelle route
+app.get('/jwtCompanyId', requireAuthCompany, (req, res) =>{ // On check si l'utilisateur est déjà loggé en tant que COMPANY pour qu'il n'ai pas à devoir le refaire (1 seul x!)
+    res.status(200).send(res.locals.company._id);
 });
+app.get('/jwtStudentId', requireAuthStudent, (req, res) =>{ // On check si l'utilisateur est déjà loggé en tant que STUDENT pour qu'il n'ai pas à devoir le refaire (1 seul x!)
+    res.status(200).send(res.locals.student._id);
+});
+
 
 // routes (en avant derrnier!!!)
 app.use('/api/company/', companyRoutes);

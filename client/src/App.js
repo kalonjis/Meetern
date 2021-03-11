@@ -1,59 +1,54 @@
 import React, { useEffect, useState} from 'react';
 import Routes from './components/routes/Routes';
-import {UidContext, UserTypeContext} from './components/AppContext';
+import { UserContext} from './components/AppContext';
 import axios from 'axios';
 
 function App() {
-  const [uid, setUid] = useState(null);
-  const [utype, setUtype] = useState(null);
-  const [companyId, setCompanyId] = useState(null);
-  const [studentId, setStudentId] = useState(null);
-  // const dispatch = useDispatch(); //permet de déclancher une action - On stocke la methode dans une const pour  pouvoir l'appeler dans le callback
-
+  const [user, setUser] = useState({})
+  const [company, setCompany] = useState({})
+  const [student, setStudent] = useState({})
   useEffect(() =>{
     const fetchTokenCompany = async ()=>{
       await axios({
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}jwtCompanyId`,
+        url: `${process.env.REACT_APP_API_URL}/jwtCompanyId`,
         withCredentials: true
       })
         .then((res)=>{
           console.log(res);
-          setCompanyId(res.data)
-          setUtype('company');
-          
+          setCompany({id: res.data, type: "company"})
           })
         .catch((err)=> console.log('No token'));
     };
     const fetchTokenStudent = async ()=>{
       await axios({
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}jwtStudentId`,
+        url: `${process.env.REACT_APP_API_URL}/jwtStudentId`,
         withCredentials: true
       })
         .then((res)=>{
           console.log(res);
-          setStudentId(res.data);
-          setUtype('student')
-          
+          setStudent({id: res.data, type: "student"})          
           })
         .catch((err)=> console.log('No token'));
     };
 
     fetchTokenCompany();
     fetchTokenStudent();
-    setUid(companyId !== null? companyId:(studentId !== null ? studentId: null)) 
+    setUser(company.id !== null? company : (student.id !== null ? student: {})) 
 
 
     // s'il y a un uid alors on le "dispatch" dans le store en appelant getUser
     // if (uid) dispatch(getUser(uid));  
-  }, [uid, utype, companyId, studentId])
+  }, [user, company, student])
   return (
-    <UidContext.Provider value={uid}>
-      <UserTypeContext.Provider value ={utype}>
+    // <UidContext.Provider value={uid}>
+    //   <UserTypeContext.Provider value ={utype}>
+      <UserContext.Provider value={user}>
         <Routes/>
-      </UserTypeContext.Provider>
-    </UidContext.Provider>
+      </UserContext.Provider>
+    //   </UserTypeContext.Provider>
+    // </UidContext.Provider>
   );
 }
 

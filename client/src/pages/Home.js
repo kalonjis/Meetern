@@ -1,18 +1,17 @@
 import React, { useContext } from 'react';
-import { UserTypeContext } from '../components/AppContext';
+import { UserContext } from '../components/AppContext';
 import HomeComp from '../components/HomeComp';
 import HomeStudent from '../components/HomeStudent';
 
-
-
 function Home() {
-  const utype= useContext(UserTypeContext)
+  const user = useContext(UserContext)
+  console.log(user)
   let company = false
-  let student = true
-  if (utype ==="company") {
+  let student = false
+  if ( user.type ==="company") {
     company = true
   }
-  if (utype ==="student") {
+  if ( user.type ==="student") {
     student = true
   }
 

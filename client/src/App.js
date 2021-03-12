@@ -24,7 +24,7 @@ function App() {
 
     // s'il y a un uid alors on le "dispatch" dans le store en appelant getUser
     // if (uid) dispatch(getUser(uid));  
-    if (uid) setUser({id: uid, type: "student"})// pour tester mais il faudra changer cela par : dispatch(getUser(uid)) ensuite     const userData = useSelector((state)=>state.userReducer); ensuite setUser({id:uid, type: userData.userType})
+    if (uid) setUser({id: uid, type: "company"})// pour tester mais il faudra changer cela par : dispatch(getUser(uid)) ensuite     const userData = useSelector((state)=>state.userReducer); ensuite setUser({id:uid, type: userData.userType})
 
   }, [uid])
   

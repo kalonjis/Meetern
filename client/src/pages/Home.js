@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../components/AppContext';
-import HomeComp from '../components/HomeComp';
-import HomeStudent from '../components/HomeStudent';
+import HomeCompany from '../components/home/HomeCompany';
+import HomeStudent from '../components/home/HomeStudent';
 
 function Home() {
   const user = useContext(UserContext)
@@ -17,7 +17,7 @@ function Home() {
 
   return (
   <div>
-     {company ? <HomeComp/>: (student ? <HomeStudent/>:<div>Hello! signUP man!</div>)}
+     {company ? <HomeCompany/>: (student ? <HomeStudent/>:<div>Hello! signUP man!</div>)}
   </div>
   );
 }

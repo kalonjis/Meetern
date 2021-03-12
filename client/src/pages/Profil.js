@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { UserContext} from '../components/AppContext';
-// import Log from '../components/log/Log';
+import Log from '../components/log/Log';
 // import UpdateProfil from '../components/Profil/UpdateProfil';
 
 
@@ -18,7 +18,7 @@ const Profil = () =>{
               ):( user.type === "student" ? (
                     <div>UpdateProfilStudent</div>
                   ):(
-                    <div>LogForm</div>
+                    <Log/>
                   )  
                 )
             }

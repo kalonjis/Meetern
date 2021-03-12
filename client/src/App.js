@@ -4,51 +4,36 @@ import { UserContext} from './components/AppContext';
 import axios from 'axios';
 
 function App() {
-  const [user, setUser] = useState({})
-  const [company, setCompany] = useState({})
-  const [student, setStudent] = useState({})
+  const [uid, setUid] = useState(null);
+  const [user, setUser]= useState({})
   useEffect(() =>{
-    const fetchTokenCompany = async ()=>{
+    const fetchToken = async ()=>{
       await axios({
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}/jwtCompanyId`,
+        url: `${process.env.REACT_APP_API_URL}jwtid`,
         withCredentials: true
       })
         .then((res)=>{
           console.log(res);
-          setCompany({id: res.data, type: "company"})
+          setUid(res.data);
           })
         .catch((err)=> console.log('No token'));
     };
-    const fetchTokenStudent = async ()=>{
-      await axios({
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}/jwtStudentId`,
-        withCredentials: true
-      })
-        .then((res)=>{
-          console.log(res);
-          setStudent({id: res.data, type: "student"})          
-          })
-        .catch((err)=> console.log('No token'));
-    };
-
-    fetchTokenCompany();
-    fetchTokenStudent();
-    setUser(company.id !== null? company : (student.id !== null ? student: {})) 
-
+  
+    fetchToken();
 
     // s'il y a un uid alors on le "dispatch" dans le store en appelant getUser
     // if (uid) dispatch(getUser(uid));  
-  }, [user, company, student])
+    if (uid) setUser({id: uid, type: "student"})// pour tester mais il faudra changer cela par : dispatch(getUser(uid)) ensuite     const userData = useSelector((state)=>state.userReducer); ensuite setUser({id:uid, type: userData.userType})
+
+  }, [uid])
+  
   return (
-    // <UidContext.Provider value={uid}>
-    //   <UserTypeContext.Provider value ={utype}>
+    
       <UserContext.Provider value={user}>
         <Routes/>
       </UserContext.Provider>
-    //   </UserTypeContext.Provider>
-    // </UidContext.Provider>
+ 
   );
 }
 

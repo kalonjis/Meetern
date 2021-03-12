@@ -4,8 +4,9 @@ import StudentSignInForm from '../signIN/StudentSignInForm';
 
 const StudentSignUpForm = () => {
 
-    const [formSubmit, setFormSubmit] = useState(false);
-    const [pseudo, setPseudo] = useState('');
+    const [formSubmit, setFormSubmit] = useState(false); //studentFirstname, studentLastname
+    const [studentFirstname, setStudentFirstname] = useState('');
+    const [studentLastname, setStudentLastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [controlPassword, setControlPassword] = useState('');
@@ -14,7 +15,8 @@ const StudentSignUpForm = () => {
         e.preventDefault();
 
         const terms = document.getElementById('terms');
-        const pseudoError = document.querySelector('.pseudo.error');
+        const studentFirstnameError = document.querySelector('.studentFirstname.error');
+        const studentLastnameError = document.querySelector('.studentLastname.error');
         const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         const passwordConfirmError = document.querySelector('.password-confirm.error');
@@ -33,10 +35,11 @@ const StudentSignUpForm = () => {
         } else {
             await axios({
                 method: "post",
-                url:`${process.env.REACT_APP_API_URL}api/user/register`,
+                url:`${process.env.REACT_APP_API_URL}api/student/register`,
                 withCredentials: true,
                 data: {
-                    pseudo,
+                    studentFirstname,
+                    studentLastname,
                     email,
                     password,
                 }
@@ -44,7 +47,8 @@ const StudentSignUpForm = () => {
             .then((res)=>{
                 console.log(res)
                 if(res.data.errors) {
-                    pseudoError.innerHTML = res.data.errors.pseudo;
+                    studentFirstnameError.innerHTML = res.data.errors.studentFirstname;
+                    studentLastnameError.innerHTML = res.data.errors.studentLastname;
                     emailError.innerHTML = res.data.errors.email;
                     passwordError.innerHTML = res.data.errors.password;
 
@@ -73,17 +77,29 @@ const StudentSignUpForm = () => {
                 </>
             ) : ( 
                 <form action="" onSubmit={handleRegister} id="sign-up-form" >
-                <label htmlFor="pseudo">Pseudo</label>
+                <label htmlFor="studentFirstname">Firstname</label>
                 <br/>
                 <input 
                         type="text"
-                        name="pseudo"
-                        id="pseudo"
-                        onChange={(e)=>setPseudo(e.target.value)}
-                        value={pseudo}>
+                        name="studentFirstname"
+                        id="studentFirstname"
+                        onChange={(e)=>setStudentFirstname(e.target.value)}
+                        value={studentFirstname}>
                 </input>
                 <br/>
-                <div className="pseudo error"></div>
+                <div className="studentFirstname error"></div>
+                <br/>
+                <label htmlFor="studentLastname">Lastname</label>
+                <br/>
+                <input 
+                        type="text"
+                        name="studentLastname"
+                        id="studentLastname"
+                        onChange={(e)=>setStudentLastname(e.target.value)}
+                        value={studentLastname}>
+                </input>
+                <br/>
+                <div className="studentLastname error"></div>
                 <br/>
                 <label htmlFor="email">Email</label>
                 <br/>

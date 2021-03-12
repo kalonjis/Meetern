@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import CompanySignInForm from './signIN/CompanySignInForm';
+import CompanySignUpForm from './signUp/CompanySignUpForm';
 import StudentSignInForm from './signIN/StudentSignInForm';
+import StudentSignUpForm from './signUp/StudentSignUpForm';
 // import SignInForm from './SignInForm';
 // import SignUpForm from './SignUpForm';
 
 
 const Log = (props)=>{
-    const [userType, setUserType] = useState('company')
+    const [userType, setUserType] = useState('company');
+    const [actionType, setActionType]= useState('signUP')
     // const [signUpModal, setSignUpModal] = useState(props.signup);
     // const [signInModal, setSignInModal] = useState(props.signin);
     
@@ -31,6 +34,16 @@ const Log = (props)=>{
 
         }
     }
+
+    const handleAction = (e)=>{
+        e.preventDefault();
+        if (e.target.id ==='signIn'){
+            setActionType('signIn')
+        }else if(e.target.id === 'signUp'){
+            setActionType('signUp')
+        }
+    }
+
     return (
         <section className= "connection-form">
                 <article className = "selection-userType">
@@ -41,9 +54,22 @@ const Log = (props)=>{
                     <button id='student' onClick={handleUserType}>
                         Etudiant
                     </button>
+                    <h4 style={{color: 'blue'}} >{userType}</h4>
                 </article>
-                {userType==='company' && <CompanySignInForm/>}
-                {userType==='student' && <StudentSignInForm/> }
+                <article className = "selection-userAction">
+                    <h1>Je veux </h1>
+                    <button id='signIn' onClick ={handleAction}>
+                        Me connecter
+                    </button>
+                    <button id='signUp' onClick={handleAction}>
+                        M'enregistrer
+                    </button>
+                    <h4 style={{color: 'blue'}} >{actionType}</h4>
+                </article>
+                {userType==='company' && actionType === 'signIn' && <CompanySignInForm/>}
+                {userType==='company' && actionType === 'signUp' && <CompanySignUpForm />}
+                {userType==='student' && actionType === 'signIn' && <StudentSignInForm/> }
+                {userType==='student' && actionType === 'signUp' && <StudentSignUpForm /> }
             {/* <article className="form-container">
                 <ul>
                     <li onClick ={handleModals} id='register' className={signUpModal? "active-btn":null}> S'incrire </li>

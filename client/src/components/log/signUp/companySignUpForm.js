@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import SignInForm from '../signIN/CompanySignInForm';
 
-const SignUpForm = () => {
+const CompanySignUpForm = () => {
 
     const [formSubmit, setFormSubmit] = useState(false);
     const [pseudo, setPseudo] = useState('');
@@ -131,4 +131,4 @@ const SignUpForm = () => {
         </>
     )
 };
-export default SignUpForm;
+export default CompanySignUpForm;

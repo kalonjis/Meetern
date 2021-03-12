@@ -11,7 +11,7 @@ const bcrypt = require('bcrypt');
 
 // création Schema du user dans mongodb
 const companySchema = new mongoose.Schema(
-    {
+    {   
         companyName:{
             type: String,
             required : true,
@@ -34,10 +34,13 @@ const companySchema = new mongoose.Schema(
           max: 1024,
           minlength: 6  
         },
+        userType: {
+            type: String,
+            default:"company"
+        },
         picture: {
             type: String,
             default: "./uploads/company/profil/random-company.png"
-
         },
         bio : {
             type: String,

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import SignInForm from '../signIN/CompanySignInForm';
+import CompanySignInForm from '../signIN/CompanySignInForm';
 
 const CompanySignUpForm = () => {
 
     const [formSubmit, setFormSubmit] = useState(false);
-    const [pseudo, setPseudo] = useState('');
+    const [companyName, setCompanyName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [controlPassword, setControlPassword] = useState('');
@@ -14,7 +14,7 @@ const CompanySignUpForm = () => {
         e.preventDefault();
 
         const terms = document.getElementById('terms');
-        const pseudoError = document.querySelector('.pseudo.error');
+        const companyNameError = document.querySelector('.companyName.error');
         const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         const passwordConfirmError = document.querySelector('.password-confirm.error');
@@ -33,10 +33,10 @@ const CompanySignUpForm = () => {
         } else {
             await axios({
                 method: "post",
-                url:`${process.env.REACT_APP_API_URL}api/user/register`,
+                url:`${process.env.REACT_APP_API_URL}api/company/register`,
                 withCredentials: true,
                 data: {
-                    pseudo,
+                    companyName,
                     email,
                     password,
                 }
@@ -44,7 +44,7 @@ const CompanySignUpForm = () => {
             .then((res)=>{
                 console.log(res)
                 if(res.data.errors) {
-                    pseudoError.innerHTML = res.data.errors.pseudo;
+                    companyNameError.innerHTML = res.data.errors.companyName;
                     emailError.innerHTML = res.data.errors.email;
                     passwordError.innerHTML = res.data.errors.password;
 
@@ -67,23 +67,23 @@ const CompanySignUpForm = () => {
         <>
             {formSubmit ? (
                 <>
-                <SignInForm />
+                <CompanySignInForm/>
                 <span></span>
                 <h4 className='success'>Enregistrement réussi, veuillez vous connecter</h4>
                 </>
             ) : ( 
                 <form action="" onSubmit={handleRegister} id="sign-up-form" >
-                <label htmlFor="pseudo">Pseudo</label>
+                <label htmlFor="companyName">CompanyName</label>
                 <br/>
                 <input 
                         type="text"
-                        name="pseudo"
-                        id="pseudo"
-                        onChange={(e)=>setPseudo(e.target.value)}
-                        value={pseudo}>
+                        name="companyName"
+                        id="companyName"
+                        onChange={(e)=>setCompanyName(e.target.value)}
+                        value={companyName}>
                 </input>
                 <br/>
-                <div className="pseudo error"></div>
+                <div className="companyName error"></div>
                 <br/>
                 <label htmlFor="email">Email</label>
                 <br/>

@@ -3,8 +3,8 @@ import Routes from './components/routes/Routes';
 import { UserContext} from './components/AppContext';
 import axios from 'axios';
 import { useDispatch, useSelector} from 'react-redux';
-import { getStudent } from './actions/student/student.action';
-import { getCompany } from './actions/company/company.action'
+import { getStudent } from './actions/student.action';
+import { getCompany } from './actions/company.action'
 
 
 function App() {

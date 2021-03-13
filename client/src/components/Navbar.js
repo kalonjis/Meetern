@@ -36,14 +36,14 @@ const Navbar = ()=>{
                             <LogoutCompany />
                         </ul>):(
                          <ul>
-                         <li></li>
-                         <li className="welcome">
-                             <NavLink exact to='/profil'>
-                                 <h5>Bienvenue Student</h5>
-                             </NavLink>
-                         </li>
-                         <LogoutStudent />
-                     </ul>   
+                            <li></li>
+                            <li className="welcome">
+                                <NavLink exact to='/profil'>
+                                    <h5>Bienvenue Student</h5>
+                                </NavLink>
+                            </li>
+                            <LogoutStudent />
+                        </ul>   
                         )
                 ) : (
                     <ul>

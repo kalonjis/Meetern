@@ -39,7 +39,6 @@ function App() {
   console.log(company)
   const student = useSelector((state)=> state.studentReducer);
   console.log(student)
-  // const user = ({id: company._id, type:company.userType})
   let user = {}
   if (company){
     user = {id: company._id, type:company.userType}

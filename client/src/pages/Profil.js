@@ -14,9 +14,9 @@ const Profil = () =>{
     return (
         <div className="profil-page">
             {user.type === "company"?( 
-                <div>UpdateProfilCompany</div>
+                <h2>Update Profil Company</h2>
               ):( user.type === "student" ? (
-                    <div>UpdateProfilStudent</div>
+                    <h2>Update Profil Student</h2>
                   ):(
                     <Log/>
                   )  

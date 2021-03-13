@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter  as Router, Switch, Route, Redirect } from 'react-router-dom';
 import  Home  from '../../pages/Home'
 import Profil from '../../pages/Profil';
-import Trending from '../../pages/Trending';
+import Offers from '../../pages/Offers';
+import Messages from '../../pages/Messages';
 import Navbar from '../Navbar';
 
 const routes = () =>{
@@ -12,7 +13,8 @@ const routes = () =>{
            <Switch>
                <Route path="/" exact component ={Home} />
                <Route path="/profil" exact component ={Profil} />
-               <Route path="/trending" exact component ={Trending} />
+               <Route path="/offers" exact component ={Offers} />
+               <Route path="/messages" exact component ={Messages} />
                <Redirect to="/" />
            </Switch>
        </Router>

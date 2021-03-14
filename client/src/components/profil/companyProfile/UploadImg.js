@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadPicture } from '../../actions/user.action';
+import { uploadPictureCompany } from '../../../actions/company.action';
 
 const UploadImg = ()=>{
     const [file, setFile] = useState('');
     const dispatch = useDispatch(); 
-    const userData = useSelector((state) => state.userReducer); // on selectionne les infos dans le store
+    const company = useSelector((state) => state.companyReducer);
+
     const errors = useSelector((state)=> state.errorReducer)
 
     // traitement à la soumission du form
     const handlePicture = (e)=>{
         e.preventDefault();
         const data = new FormData(); // "new FormData()" objet natif à JS - permet de stocker un fichier ('file') et ses infos
-        data.append("name", userData.pseudo); // on lui attribue le nom du user
-        data.append("userId", userData._id); // on lui associe l'id du user
+        data.append("name", company.companyName); // on lui attribue le nom du user
+        data.append("userId", company._id); // on lui associe l'id du user
         data.append("file", file); // le file = la photo sélectionnée
 
-        dispatch(uploadPicture(data, userData._id))  // on envoie au store 
+        dispatch(uploadPictureCompany(data, company._id))  // on envoie au store 
     }
 
 
@@ -32,8 +33,8 @@ const UploadImg = ()=>{
             />
             <br/>
             <input type='submit' value="Envoyer" />
-            {errors.userErrors.format && <p>{errors.userErrors.format}</p>}
-            {errors.userErrors.maxSize && <p>{errors.userErrors.maxSize}</p>}
+            {errors.companyErrors.format && <p>{errors.companyErrors.format}</p>}
+            {errors.companyErrors.maxSize && <p>{errors.companyErrors.maxSize}</p>}
         </form>
     )
 }

@@ -2,11 +2,11 @@ import axios from 'axios';
 
 // Action type
 export const GET_COMPANY = 'GET_COMPANY';
-// export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
+export const UPLOAD_PICTURE_COMPANY = 'UPLOAD_PICTURE_COMPANY';
 // export const UPDATE_BIO = 'UPDATE_BIO';
 // export const FOLLOW_USER = 'FOLLOW_USER';
 // export const UNFOLLOW_USER = 'UNFOLLOW_USER';
-// export const GET_USER_ERRORS = 'GET_USER_ERRORS'
+export const GET_COMPANY_ERRORS = 'GET_COMPANY_ERRORS'
 
 // function to get the user info
 export const getCompany = (uid)=>{
@@ -23,33 +23,33 @@ export const getCompany = (uid)=>{
     };
 };
 
-// // function to upload a new pic for the user's profile
-// export const uploadPicture = (data, id)=> {
-//     return (dispatch)=>{ //traitement pour envoi au reducer:
+// function to upload a new pic for the user's profile
+export const uploadPictureCompany = (data, id)=> {
+    return (dispatch)=>{ //traitement pour envoi au reducer:
 
-//         return axios
-//          .post(`${process.env.REACT_APP_API_URL}api/user/upload`, data) //1) on envoie la new data à la db
-//          .then((res)=>{
-//             if(res.data.errors){
-//                 dispatch({
-//                     type: GET_USER_ERRORS,
-//                     payload : res.data.errors
-//                 })
-//             } else { 
-//              res.data.errors=''
-//              return axios
-//               .get(`${process.env.REACT_APP_API_URL}api/user/${id}`) // 2) On va recupérer les datas du user dans la db
-//               .then((res) =>{
-//                     dispatch({ //3) on envoie au reducer...
-//                         type: UPLOAD_PICTURE, 
-//                         payload: res.data.picture // ...le chemin de l'image
-//                     })
-//                })
-//             }
-//         })
-//         .catch((err)=> console.log(err));
-//     }
-// }
+        return axios
+         .post(`${process.env.REACT_APP_API_URL}api/company/upload`, data) //1) on envoie la new data à la db
+         .then((res)=>{
+            if(res.data.errors){
+                dispatch({
+                    type: GET_COMPANY_ERRORS,
+                    payload : res.data.errors
+                })
+            } else { 
+             res.data.errors=''
+             return axios
+              .get(`${process.env.REACT_APP_API_URL}api/company/${id}`) // 2) On va recupérer les datas du user dans la db
+              .then((res) =>{
+                    dispatch({ //3) on envoie au reducer...
+                        type: UPLOAD_PICTURE_COMPANY, 
+                        payload: res.data.picture // ...le chemin de l'image
+                    })
+               })
+            }
+        })
+        .catch((err)=> console.log(err));
+    }
+}
 
 // // function to update user's bio
 // export const updateBio = (userId, bio)=> {

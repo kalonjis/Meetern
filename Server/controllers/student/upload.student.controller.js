@@ -5,7 +5,7 @@ const { promisify } = require('util'); // (natif ds nodejs)
 const pipeline = promisify(require('stream').pipeline);
 const { uploadErrors } = require('../../utils/errors.utils');// On importe la fonction du modules qui va gérer les erreurs
 
-module.exports.uploadProfil = async (req, res) => {
+module.exports.uploadProfilStud = async (req, res) => {
     try {
         // On check le type d'image
         if (

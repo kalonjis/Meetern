@@ -2,6 +2,11 @@ import axios from 'axios';
 
 // Action type
 export const GET_STUDENT = 'GET_STUDENT';
+export const UPLOAD_PICTURE_STUDENT = 'UPLOAD_PICTURE_STUDENT';
+// export const UPDATE_BIO = 'UPDATE_BIO';
+// export const FOLLOW_USER = 'FOLLOW_USER';
+// export const UNFOLLOW_USER = 'UNFOLLOW_USER';
+export const GET_STUDENT_ERRORS = 'GET_STUDENT_ERRORS'
 
 // function to get the user info
 export const getStudent = (uid)=>{
@@ -17,3 +22,31 @@ export const getStudent = (uid)=>{
             .catch((err)=> console.log(err));
     };
 };
+
+// function to upload a new pic for the user's profile
+export const uploadPictureStudent = (data, id)=> {
+    return (dispatch)=>{ //traitement pour envoi au reducer:
+
+        return axios
+         .post(`${process.env.REACT_APP_API_URL}api/student/upload`, data) //1) on envoie la new data à la db
+         .then((res)=>{
+            if(res.data.errors){
+                dispatch({
+                    type: GET_STUDENT_ERRORS,
+                    payload : res.data.errors
+                })
+            } else { 
+             res.data.errors=''
+             return axios
+              .get(`${process.env.REACT_APP_API_URL}api/student/${id}`) // 2) On va recupérer les datas du user dans la db
+              .then((res) =>{
+                    dispatch({ //3) on envoie au reducer...
+                        type: UPLOAD_PICTURE_STUDENT, 
+                        payload: res.data.picture // ...le chemin de l'image
+                    })
+               })
+            }
+        })
+        .catch((err)=> console.log(err));
+    }
+}

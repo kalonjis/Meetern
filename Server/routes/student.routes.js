@@ -28,6 +28,6 @@ router.patch('/addSoftSkills/:id', studentController.addSoftSkills);
 router.patch('/removeSoftSkills/:id', studentController.removeSoftSkills);
 
 // upload
-router.post('/upload', upload.single('file'), uploadController.uploadProfil);
+router.post('/upload', upload.single('file'), uploadController.uploadProfilStud);
 
 module.exports = router;

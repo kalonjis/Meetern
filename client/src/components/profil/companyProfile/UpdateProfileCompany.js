@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import LeftNav from '../LeftNav';
 import {useDispatch, useSelector} from 'react-redux';
-import UploadImg from './UploadImg';
+import UploadImg from './UploadImgCompany';
 // import { updateBio } from '../../actions/user.action';
 // import { dateParser } from '../utils';
 // import FollowHandler from './FollowHandler';

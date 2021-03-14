@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { UserContext} from '../components/AppContext';
 import Log from '../components/log/Log';
-import UpdateProfil from '../components/profil/companyProfile/UpdateProfil';
+import UpdateProfileCompany from '../components/profil/companyProfile/UpdateProfileCompany';
+import UpdateProfileStudent from '../components/profil/studentProfile/UpdateProfileStudent';
 // import UpdateProfil from '../components/Profil/UpdateProfil';
 
 
@@ -17,10 +18,14 @@ const Profil = () =>{
             {user.type === "company"?(
               <div>
                 <h2>Update Profil Company</h2>
-                <UpdateProfil/>
+                <UpdateProfileCompany/>
               </div> 
               ):( user.type === "student" ? (
+                  <div>
                     <h2>Update Profil Student</h2>
+                    <UpdateProfileStudent />
+
+                  </div>
                   ):(
                     <Log/>
                   )  

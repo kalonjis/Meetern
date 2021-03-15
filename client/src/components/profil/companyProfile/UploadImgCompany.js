@@ -6,7 +6,7 @@ const UploadImg = ()=>{
     const [file, setFile] = useState('');
     const dispatch = useDispatch(); 
     const company = useSelector((state) => state.companyReducer);
-
+    console.log(company._id)
     const errors = useSelector((state)=> state.errorReducer)
 
     // traitement à la soumission du form
@@ -14,10 +14,11 @@ const UploadImg = ()=>{
         e.preventDefault();
         const data = new FormData(); // "new FormData()" objet natif à JS - permet de stocker un fichier ('file') et ses infos
         data.append("name", company.companyName); // on lui attribue le nom du user
-        data.append("userId", company._id); // on lui associe l'id du user
+        data.append("companyId", company._id); // on lui associe l'id du user
         data.append("file", file); // le file = la photo sélectionnée
 
         dispatch(uploadPictureCompany(data, company._id))  // on envoie au store 
+        console.log("image"+company._id)
     }
 
 

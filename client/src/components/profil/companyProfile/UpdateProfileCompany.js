@@ -11,6 +11,8 @@ const UpdateProfil = ()=>{
     const [bio, setBio] = useState('');
     const [updateForm, setUpdateForm] = useState(false); // pour gérer l'affichage conditionnel
     const company = useSelector((state)=>state.companyReducer);// On récupère les datas dans le store
+    console.log(company._id)
+
     // const usersData = useSelector((state)=>state.usersReducer);// On récupère les datas dans le store
     const dispatch = useDispatch() // on instancie la methode pour pouvoir l'utiliser ds le callback
     // const [followingPopup, setFollowingPopup] = useState(false);

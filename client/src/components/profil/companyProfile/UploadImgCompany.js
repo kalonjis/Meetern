@@ -6,7 +6,6 @@ const UploadImg = ()=>{
     const [file, setFile] = useState('');
     const dispatch = useDispatch(); 
     const company = useSelector((state) => state.companyReducer);
-    console.log(company._id)
     const errors = useSelector((state)=> state.errorReducer)
 
     // traitement à la soumission du form

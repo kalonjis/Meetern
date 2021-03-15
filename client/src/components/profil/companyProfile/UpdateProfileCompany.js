@@ -3,12 +3,17 @@ import React, { useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import UploadImg from './UploadImgCompany';
 import { dateParser } from '../../utils';
-import { updateBioCompany } from '../../../actions/company.action';
+import { updateCompany } from '../../../actions/company.action';
 // import FollowHandler from './FollowHandler';
  
 // Component sous la barre Navbar qu'on récupère dans la page '/profil' quand user est connecté
 const UpdateProfil = ()=>{
     const [bio, setBio] = useState('');
+    const [sector, setSector] = useState('');
+    const [companyType, setCompanyType] = useState('');
+    const [phone, setPhone] = useState('');
+    const [webSite, setWebSite] = useState('');
+    const [corporateWear, setCorporateWear] = useState('');
     const [updateForm, setUpdateForm] = useState(false); // pour gérer l'affichage conditionnel
     const company = useSelector((state)=>state.companyReducer);// On récupère les datas dans le store
     console.log(company._id)
@@ -19,7 +24,7 @@ const UpdateProfil = ()=>{
     // const [followersPopup, setFollowersPopup] = useState(false);
 
     const handleUpdate=()=>{
-        dispatch(updateBioCompany(company._id, bio)); // déclanche l'action updateBio
+        dispatch(updateCompany(company._id, bio, sector, companyType, phone, webSite, corporateWear)); // déclanche l'action updateBio
         setUpdateForm(false); // permet de changer l'affichage
     }
 
@@ -43,6 +48,87 @@ const UpdateProfil = ()=>{
                     {updateForm && (  /*affichage conditionnel*/
                         <>
                         <textarea type="text" defaultValue={company.bio} onChange={(e)=>setBio(e.target.value)}>
+                        </textarea>
+                        <button onClick={handleUpdate} >Valider modifications</button>  
+                        </>
+                    )}
+                </div>
+                <div className="sector-update">
+                    <h3>sector</h3>
+                    {updateForm === false && (  /*affichage conditionnel*/ 
+                        <>
+                            <p onClick={()=>setUpdateForm(!updateForm)} >{company.sector}</p>
+                            <button onClick={()=>setUpdateForm(!updateForm)}>Modifier sector</button>
+                        </>
+                    )}
+                    {updateForm && (  /*affichage conditionnel*/
+                        <>
+                        <textarea type="text" defaultValue={company.sector} onChange={(e)=>setSector(e.target.value)}>
+                        </textarea>
+                        <button onClick={handleUpdate} >Valider modifications</button>  
+                        </>
+                    )}
+                </div>
+                
+                <div className="companyType">
+                    <h3>companyType</h3>
+                    {updateForm === false && (  /*affichage conditionnel*/ 
+                        <>
+                            <p onClick={()=>setUpdateForm(!updateForm)} >{company.companyType}</p>
+                            <button onClick={()=>setUpdateForm(!updateForm)}>Modifier companyType</button>
+                        </>
+                    )}
+                    {updateForm && (  /*affichage conditionnel*/
+                        <>
+                        <textarea type="text" defaultValue={company.companyType} onChange={(e)=>setCompanyType(e.target.value)}>
+                        </textarea>
+                        <button onClick={handleUpdate} >Valider modifications</button>  
+                        </>
+                    )}
+                </div>
+                <div className="phone">
+                    <h3>phone</h3>
+                    {updateForm === false && (  /*affichage conditionnel*/ 
+                        <>
+                            <p onClick={()=>setUpdateForm(!updateForm)} >{company.phone}</p>
+                            <button onClick={()=>setUpdateForm(!updateForm)}>Modifier phone</button>
+                        </>
+                    )}
+                    {updateForm && (  /*affichage conditionnel*/
+                        <>
+                        <textarea type="text" defaultValue={company.phone} onChange={(e)=>setPhone(e.target.value)}>
+                        </textarea>
+                        <button onClick={handleUpdate} >Valider modifications</button>  
+                        </>
+                    )}
+                </div>
+                <div className="webSite">
+                    <h3>webSite</h3>
+                    {updateForm === false && (  /*affichage conditionnel*/ 
+                        <>
+                            <p onClick={()=>setUpdateForm(!updateForm)} >{company.webSite}</p>
+                            <button onClick={()=>setUpdateForm(!updateForm)}>Modifier webSite</button>
+                        </>
+                    )}
+                    {updateForm && (  /*affichage conditionnel*/
+                        <>
+                        <textarea type="text" defaultValue={company.webSite} onChange={(e)=>setWebSite(e.target.value)}>
+                        </textarea>
+                        <button onClick={handleUpdate} >Valider modifications</button>  
+                        </>
+                    )}
+                </div>
+                <div className="phone">
+                    <h3>corporateWear</h3>
+                    {updateForm === false && (  /*affichage conditionnel*/ 
+                        <>
+                            <p onClick={()=>setUpdateForm(!updateForm)} >{company.corporateWear}</p>
+                            <button onClick={()=>setUpdateForm(!updateForm)}>Modifier corporateWear</button>
+                        </>
+                    )}
+                    {updateForm && (  /*affichage conditionnel*/
+                        <>
+                        <textarea type="text" defaultValue={company.corporateWear} onChange={(e)=>setCorporateWear(e.target.value)}>
                         </textarea>
                         <button onClick={handleUpdate} >Valider modifications</button>  
                         </>

@@ -3,7 +3,7 @@ import axios from 'axios';
 // Action type
 export const GET_COMPANY = 'GET_COMPANY';
 export const UPLOAD_PICTURE_COMPANY = 'UPLOAD_PICTURE_COMPANY';
-export const UPDATE_BIO_COMPANY = 'UPDATE_BIO_COMPANY';
+export const UPDATE_COMPANY = 'UPDATE_COMPANY';
 // export const FOLLOW_USER = 'FOLLOW_USER';
 // export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const GET_COMPANY_ERRORS = 'GET_COMPANY_ERRORS'
@@ -52,14 +52,14 @@ export const uploadPictureCompany = (data, id)=> {
 }
 
 // function to update user's bio
-export const updateBioCompany = (userId, bio)=> {
+export const updateCompany = (userId, bio, sector, companyType, phone, webSite, corporateWear)=> {
     return (dispatch)=>{
         return axios
-         .put(`${process.env.REACT_APP_API_URL}api/company/${userId}`, {bio}) //1) on envoie la new data à la db
+         .put(`${process.env.REACT_APP_API_URL}api/company/${userId}`, {bio, sector, companyType, phone, webSite, corporateWear}) //1) on envoie la new data à la db
          .then((res)=>{
             dispatch({ //2) on envoie au reducer...
-                    type: UPDATE_BIO_COMPANY, 
-                    payload: bio
+                    type: UPDATE_COMPANY, 
+                    payload: {bio, sector, companyType, phone, webSite, corporateWear}
             }) 
          })
          .catch((err)=> console.log(err));

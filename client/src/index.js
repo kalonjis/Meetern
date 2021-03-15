@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// import './styles/index.scss';
+import './styles/index.scss';
 import {applyMiddleware, createStore} from 'redux';
 import { Provider } from 'react-redux'; // "supra component" à notre "App" qui prend le store en props
 import thunk from 'redux-thunk';// Permet de faire des req asynchrones avec redux (voir:https://riptutorial.com/redux/example/12005/redux-thunk--basics)...

@@ -7,22 +7,10 @@ import StudentSignUpForm from './signUp/StudentSignUpForm';
 // import SignUpForm from './SignUpForm';
 
 
-const Log = (props)=>{
+const Log = ()=>{
     const [userType, setUserType] = useState('company');
     const [actionType, setActionType]= useState('signUP')
-    // const [signUpModal, setSignUpModal] = useState(props.signup);
-    // const [signInModal, setSignInModal] = useState(props.signin);
     
-    // const handleModals = (e)=>{
-    //     e.preventDefault()
-    //     if (e.target.id === 'register'){
-    //         setSignInModal(false)
-    //         setSignUpModal(true)
-    //     } else if (e.target.id ==='login'){
-    //         setSignInModal(true)
-    //         setSignUpModal(false)
-    //     }
-    // }
     const handleUserType = (e) =>{
         e.preventDefault();
         if (e.target.id ==='company'){

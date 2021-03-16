@@ -1,16 +1,16 @@
 /**Module de gestion d'erreur relatifs à l'authentification */
 
 module.exports.signUpErrors = (err) => {
-    let errors = { companyName: '',studentFirstname: '', studentLastname: '', email: '', password: ''}
+    let errors = { companyName: '',firstname: '', lastname: '', email: '', password: ''}
 
     if (err.message.includes('companyName'))
         errors.companyName = "companyName trop court";
 
-    if (err.message.includes('studentFirstname'))
-        errors.studentFirstname = "studentFirstname trop court";
+    if (err.message.includes('firstname'))
+        errors.firstname = "firstname trop court";
     
-    if (err.message.includes('studentLastname'))
-        errors.studentLastname = "studentLastname trop court";
+    if (err.message.includes('lastname'))
+        errors.lastname = "lastname trop court";
         
     if (err.message.includes('email'))
         errors.email = "Email incorrect";

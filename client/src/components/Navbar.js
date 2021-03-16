@@ -52,7 +52,7 @@ const Navbar = ()=>{
                             <li></li>
                             <li className="welcome-student">
                                 <NavLink exact to='/profil'>
-                                    <h5>Bienvenue {student.studentFirstname}</h5>
+                                    <h5>Bienvenue {student.firstname}</h5>
                                 </NavLink>
                             </li>
                             <li></li>

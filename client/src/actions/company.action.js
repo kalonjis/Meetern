@@ -4,8 +4,6 @@ import axios from 'axios';
 export const GET_COMPANY = 'GET_COMPANY';
 export const UPLOAD_PICTURE_COMPANY = 'UPLOAD_PICTURE_COMPANY';
 export const UPDATE_COMPANY = 'UPDATE_COMPANY';
-// export const FOLLOW_USER = 'FOLLOW_USER';
-// export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const GET_COMPANY_ERRORS = 'GET_COMPANY_ERRORS'
 
 // function to get the user info
@@ -51,11 +49,11 @@ export const uploadPictureCompany = (data, id)=> {
     }
 }
 
-// function to update user's bio
-export const updateCompany = (userId, bio, sector, companyType, phone, webSite, corporateWear)=> {
+// function to update company's bio
+export const updateCompany = (companyId, bio, sector, companyType, phone, webSite, corporateWear)=> {
     return (dispatch)=>{
         return axios
-         .put(`${process.env.REACT_APP_API_URL}api/company/${userId}`, {bio, sector, companyType, phone, webSite, corporateWear}) //1) on envoie la new data à la db
+         .put(`${process.env.REACT_APP_API_URL}api/company/${companyId}`, {bio, sector, companyType, phone, webSite, corporateWear}) //1) on envoie la new data à la db
          .then((res)=>{
             dispatch({ //2) on envoie au reducer...
                     type: UPDATE_COMPANY, 

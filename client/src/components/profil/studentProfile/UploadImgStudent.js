@@ -13,7 +13,7 @@ const UploadImg = ()=>{
     const handlePicture = (e)=>{
         e.preventDefault();
         const data = new FormData(); // "new FormData()" objet natif à JS - permet de stocker un fichier ('file') et ses infos
-        data.append("name", student.studentFirstname); // on lui attribue le nom du user
+        data.append("name", student.firstname); // on lui attribue le nom du user
         data.append("studentId", student._id); // on lui associe l'id du user
         data.append("file", file); // le file = la photo sélectionnée
 

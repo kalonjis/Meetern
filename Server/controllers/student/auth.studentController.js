@@ -18,10 +18,10 @@ const {signUpErrors, signInErrors } = require('../../utils/errors.utils');
 
 // Création d'un student
 module.exports.signUp = async(req, res) =>{
-    const {studentFirstname, studentLastname, email, password} = req.body
+    const {firstname, lastname, email, password} = req.body
 
     try {
-        const student = await StudentModel.create({studentFirstname, studentLastname, email, password});
+        const student = await StudentModel.create({firstname, lastname, email, password});
         res.status(201).json({student: student._id})
     } catch (err) {
         const errors = signUpErrors(err);

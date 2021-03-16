@@ -1,118 +1,124 @@
 import React, { useState } from 'react';
-// import LeftNav from '../LeftNav';
 import {useDispatch, useSelector} from 'react-redux';
+import { updateStudent } from '../../../actions/student.action';
 import UploadImg from './UploadImgStudent';
-// import { updateBio } from '../../actions/user.action';
-// import { dateParser } from '../utils';
-// import FollowHandler from './FollowHandler';
+import { dateParser } from '../../utils';
+
+
  
 // Component sous la barre Navbar qu'on récupère dans la page '/profil' quand user est connecté
 const UpdateProfil = ()=>{
-    // const [bio, setBio] = useState('');
-    // const [updateForm, setUpdateForm] = useState(false); // pour gérer l'affichage conditionnel
     const student = useSelector((state)=>state.studentReducer);// On récupère les datas dans le store
-    // const usersData = useSelector((state)=>state.usersReducer);// On récupère les datas dans le store
-    // const dispatch = useDispatch() // on instancie la methode pour pouvoir l'utiliser ds le callback
-    // const [followingPopup, setFollowingPopup] = useState(false);
-    // const [followersPopup, setFollowersPopup] = useState(false);
+    const [bio, setBio] = useState(student.bio);
+    const [internshipStart, setInternshipStart] = useState(student.internshipStart);
+    const [internshipDuration, setInternshipDuration] = useState(student.internshipDuration);
+    const [school, setSchool] = useState(student.school);
+    const [studyOption, setStudyOption] = useState(student.studyOption);
+    const [currentStudyLevel, setCurrentStudyLevel] = useState(student.currentStudyLevel);
+    const [portfolio, setPortfolio] = useState(student.portfolio);
+    const [updateForm, setUpdateForm] = useState(false); // pour gérer l'affichage conditionnel
+    const dispatch = useDispatch()
 
-    // const handleUpdate=studentstudent()=>{
-    //     dispatch(updateBio(userData._id, bio)); // déclanche l'action updateBio
-    //     setUpdateForm(false); // permet de changer l'affichage
-    // }
+    const handleUpdate= ()=>{
+        dispatch(updateStudent(student._id, bio, internshipStart, internshipDuration, school, studyOption, currentStudyLevel, portfolio)); // déclanche l'action updateBio
+        setUpdateForm(false); // permet de changer l'affichage
+    }
 
     // On affiche la LeftNav, l'uploadImg et la Bio
     return (
         <div className="profil-container">
             {/* <LeftNav/> */}
-            <h1> Profil de {student.studentFirstname}</h1>
+            <h1> Profil de {student.firstname}</h1>
             <div className="update-container" >
-                <div className="left-part">
-                    <h3>Photo de profil</h3>
-                    <img src={student.picture} alt="user-pic" />
-                    <UploadImg />
-                </div>
+                <h3>Photo de profil</h3>
+                <img src={student.picture} alt="user-pic" />
+                <UploadImg /> 
+                <br/>
+                <h2>About you</h2>
+                {updateForm === false && (
+                        <div className="student-info" onClick={(e)=> setUpdateForm(true)}>
+                            <p><h4>Bio</h4>{student.bio}</p>
+                            <p> <h4>internshipStart</h4> {student.internshipStart}</p>
+                            <p><h4>internshipDuration</h4>{student.internshipDuration}</p>
+                            <p><h4>school</h4>{student.school}</p>
+                            <p><h4>studyOption</h4>{student.studyOption}</p>
+                            <p><h4>currentStudyLevel</h4>{student.currentStudyLevel}</p>
+                            <p><h4>portfolio</h4>{student.portfolio}</p>
+                        </div>
+                )}
+                { updateForm === true && (
+                <form action="" onSubmit={handleUpdate} id="student-update-form">
+                    <label htmlFor="bio" ><h4>Bio</h4> </label>                 
+                    <input
+                        type="text"
+                        name="bio"
+                        id="bio"
+                        onChange={(e)=> setBio(e.target.value)}
+                        defaultValue={student.bio}
+                    />
+                    <br/><br/>
+                    <label htmlFor="internshipStart" ><h4>internshipStart</h4> </label>
+                    <input
+                        type="text"
+                        name="internshipStart"
+                        id="internshipStart"
+                        onChange={(e)=> setInternshipStart(e.target.value)}
+                        defaultValue={student.internshipStart}                      
+                    />
+                    <br/><br/>
+                    <label htmlFor="internshipDuration" ><h4>internshipDuration</h4></label>
+                    <input
+                        type="text"
+                        name="internshipDuration"
+                        id="internshipDuration"
+                        onChange={(e)=> setInternshipDuration(e.target.value)}
+                        defaultValue={student.internshipDuration}
+                    />
+                    <br/><br/>
+                    <label htmlFor="school" ><h4>school</h4></label>
+                    <input
+                        type="text"
+                        name="school"
+                        id="school"
+                        onChange={(e)=> setSchool(e.target.value)}
+                        defaultValue={student.school}
+                    />
+                    <br/><br/>
+                    <label htmlFor="studyOption" ><h4>studyOption</h4></label>
+                    <input
+                        type="text"
+                        name="studyOption"
+                        id="studyOption"
+                        onChange={(e)=> setStudyOption(e.target.value)}
+                        defaultValue={student.studyOption}
+                    />
+                    <br/><br/>
+                    <label htmlFor="currentStudyLevel" ><h4>currentStudyLevel</h4></label>
+                    <input
+                        type="text"
+                        name="currentStudyLevel"
+                        id="currentStudyLevel"
+                        onChange={(e)=> setCurrentStudyLevel(e.target.value)}
+                        defaultValue={student.currentStudyLevel}
+                    />
+                    <br/><br/>
+                    <label htmlFor="portfolio" ><h4>portfolio</h4></label>
+                    <input
+                        type="text"
+                        name="currentStudyLevel"
+                        id="portfolio"
+                        onChange={(e)=> setPortfolio(e.target.value)}
+                        defaultValue={student.portfolio}
+                    />
+                    <br/><br/>
+                    
+                    <input type="submit" value="Valider les modifications" />
+                </form>
+                )}
+                              
+                <h4>Membre depuis le : {dateParser(student.createdAt)/* date de la db formatée */}</h4>    
             </div>
         </div> 
-        // {/* //         <div className="right-part">
-        // //             <div className="bio-pdate">
-        // //                 <h3>Bio</h3>
-        // //                 {updateForm === false && (  /*affichage conditionnel*/ */}
-        // {/* //                     <>
-        // //                       <p onClick={()=>setUpdateForm(!updateForm)} >{userData.bio}</p>
-        // //                       <button onClick={()=>setUpdateForm(!updateForm)}>Modifier Bio</button>
-        // //                     </>
-        // //                 )}
-        // //                 {updateForm && (  /*affichage conditionnel*/
-        // //                     <>
-        // //                       <textarea type="text" defaultValue={userData.bio} onChange={(e)=>setBio(e.target.value)}>
-        // //                       </textarea>
-        // //                       <button onClick={handleUpdate} >Valider modifications</button>  
-        // //                     </>
-        // //                 )}
-        // //             </div>
-        // //             <h4>Membre depuis le : {dateParser(userData.createdAt)/* date de la db formatée */}</h4>
-        // //             <h5 onClick={()=>setFollowingPopup(true)}> 
-        // //                 Abonnements {userData.following? userData.following.length:""/*Il faut mettre une ternaire sinon affiche erreur*/}
-        // //             </h5>
-        // //             <h5 onClick={()=>setFollowersPopup(true)}>
-        // //                 Abonnés {userData.followers? userData.followers.length:""}
-        // //             </h5>
-        // //         </div>
-        // //     </div>
-        // //     { followingPopup && (
-        // //         <div className="popup-profil-container">
-        // //             <div className="modal">
-        // //                 <h3>Abonnements</h3>
-        // //                 <span className="cross" onClick={()=> setFollowingPopup(false)}>&#10005;</span>
-        // //                 <ul>
-        // //                     {usersData.map((user) => {
-        // //                             for (let i = 0; i < userData.following.length; i++) {
-        // //                                 if (user._id === userData.following[i]){
-        // //                                     return (
-        // //                                         <li key={user._id}>
-        // //                                             <img src={user.picture} alt="user-pic"/>
-        // //                                             <h4>{user.pseudo}</h4>
-        // //                                             <div className="follow-handler">
-        // //                                                 <FollowHandler idToFollow={user._id} type={'suggestion'}/>
-        // //                                             </div>
-        // //                                         </li>
-        // //                                     )
-        // //                                 }  
-        // //                             }return null // ça fct sans mais alors il afiche une err ds la console
-        // //                         })
-        // //                     }
-        // //                 </ul>
-        // //             </div>
-        // //         </div>)
-        // //     }
-        // //     { followersPopup && (
-        // //         <div className="popup-profil-container">
-        // //             <div className="modal">
-        // //                 <h3>Abonnés</h3>
-        // //                 <span className="cross" onClick={()=> setFollowersPopup(false)}>&#10005;</span>
-        // //                 <ul>
-        // //                     {usersData.map((user) => {
-        // //                             for (let i = 0; i < userData.followers.length; i++) {
-        // //                                 if (user._id === userData.followers[i]){
-        // //                                     return (
-        // //                                         <li key={user._id}>
-        // //                                         <img src={user.picture} alt="user-pic"/>
-        // //                                         <h4>{user.pseudo}</h4>
-        // //                                         <div className="follow-handler">
-        // //                                             <FollowHandler idToFollow={user._id} type={'suggestion'}/>
-        // //                                         </div>
-        // //                                         </li>
-        // //                                     )
-        // //                                 }  
-        // //                             }return null //ça fct sans mais alors il afiche une err ds la console
-        // //                         })
-        // //                     }                            
-        // //                 </ul>
-        // //             </div>
-        // //         </div>)
-        // //     } */}
-        // </div>
         
     )
 }

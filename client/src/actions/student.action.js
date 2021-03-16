@@ -3,10 +3,8 @@ import axios from 'axios';
 // Action type
 export const GET_STUDENT = 'GET_STUDENT';
 export const UPLOAD_PICTURE_STUDENT = 'UPLOAD_PICTURE_STUDENT';
-// export const UPDATE_BIO = 'UPDATE_BIO';
-// export const FOLLOW_USER = 'FOLLOW_USER';
-// export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const GET_STUDENT_ERRORS = 'GET_STUDENT_ERRORS'
+export const UPDATE_STUDENT = 'UPDATE_STUDENT'
 
 // function to get the user info
 export const getStudent = (uid)=>{
@@ -48,5 +46,20 @@ export const uploadPictureStudent = (data, id)=> {
             }
         })
         .catch((err)=> console.log(err));
+    }
+}
+
+// function to update user's bio
+export const updateStudent = (studentId, bio, internshipStart, internshipDuration, school, studyOption, currentStudyLevel, portfolio)=> {
+    return (dispatch)=>{
+        return axios
+         .put(`${process.env.REACT_APP_API_URL}api/student/${studentId}`, {bio, internshipStart, internshipDuration, school, studyOption, currentStudyLevel, portfolio}) //1) on envoie la new data à la db
+         .then((res)=>{
+            dispatch({ //2) on envoie au reducer...
+                    type: UPDATE_STUDENT, 
+                    payload: {bio, internshipStart, internshipDuration, school, studyOption, currentStudyLevel, portfolio}
+            }) 
+         })
+         .catch((err)=> console.log(err));
     }
 }

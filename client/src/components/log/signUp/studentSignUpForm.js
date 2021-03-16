@@ -4,9 +4,9 @@ import StudentSignInForm from '../signIN/StudentSignInForm';
 
 const StudentSignUpForm = () => {
 
-    const [formSubmit, setFormSubmit] = useState(false); //studentFirstname, studentLastname
-    const [studentFirstname, setStudentFirstname] = useState('');
-    const [studentLastname, setStudentLastname] = useState('');
+    const [formSubmit, setFormSubmit] = useState(false); //firstname, lastname
+    const [firstname, setfirstname] = useState('');
+    const [lastname, setlastname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [controlPassword, setControlPassword] = useState('');
@@ -15,8 +15,8 @@ const StudentSignUpForm = () => {
         e.preventDefault();
 
         const terms = document.getElementById('terms');
-        const studentFirstnameError = document.querySelector('.studentFirstname.error');
-        const studentLastnameError = document.querySelector('.studentLastname.error');
+        const firstnameError = document.querySelector('.firstname.error');
+        const lastnameError = document.querySelector('.lastname.error');
         const emailError = document.querySelector('.email.error');
         const passwordError = document.querySelector('.password.error');
         const passwordConfirmError = document.querySelector('.password-confirm.error');
@@ -38,8 +38,8 @@ const StudentSignUpForm = () => {
                 url:`${process.env.REACT_APP_API_URL}api/student/register`,
                 withCredentials: true,
                 data: {
-                    studentFirstname,
-                    studentLastname,
+                    firstname,
+                    lastname,
                     email,
                     password,
                 }
@@ -47,8 +47,8 @@ const StudentSignUpForm = () => {
             .then((res)=>{
                 console.log(res)
                 if(res.data.errors) {
-                    studentFirstnameError.innerHTML = res.data.errors.studentFirstname;
-                    studentLastnameError.innerHTML = res.data.errors.studentLastname;
+                    firstnameError.innerHTML = res.data.errors.firstname;
+                    lastnameError.innerHTML = res.data.errors.lastname;
                     emailError.innerHTML = res.data.errors.email;
                     passwordError.innerHTML = res.data.errors.password;
 
@@ -77,29 +77,29 @@ const StudentSignUpForm = () => {
                 </>
             ) : ( 
                 <form action="" onSubmit={handleRegister} id="sign-up-form" >
-                <label htmlFor="studentFirstname">Firstname</label>
+                <label htmlFor="firstname">Firstname</label>
                 <br/>
                 <input 
                         type="text"
-                        name="studentFirstname"
-                        id="studentFirstname"
-                        onChange={(e)=>setStudentFirstname(e.target.value)}
-                        value={studentFirstname}>
+                        name="firstname"
+                        id="firstname"
+                        onChange={(e)=>setfirstname(e.target.value)}
+                        value={firstname}>
                 </input>
                 <br/>
-                <div className="studentFirstname error"></div>
+                <div className="firstname error"></div>
                 <br/>
-                <label htmlFor="studentLastname">Lastname</label>
+                <label htmlFor="lastname">Lastname</label>
                 <br/>
                 <input 
                         type="text"
-                        name="studentLastname"
-                        id="studentLastname"
-                        onChange={(e)=>setStudentLastname(e.target.value)}
-                        value={studentLastname}>
+                        name="lastname"
+                        id="lastname"
+                        onChange={(e)=>setlastname(e.target.value)}
+                        value={lastname}>
                 </input>
                 <br/>
-                <div className="studentLastname error"></div>
+                <div className="lastname error"></div>
                 <br/>
                 <label htmlFor="email">Email</label>
                 <br/>

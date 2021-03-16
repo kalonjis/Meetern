@@ -3,8 +3,7 @@ import CompanySignInForm from './signIN/CompanySignInForm';
 import CompanySignUpForm from './signUp/CompanySignUpForm';
 import StudentSignInForm from './signIN/StudentSignInForm';
 import StudentSignUpForm from './signUp/StudentSignUpForm';
-// import SignInForm from './SignInForm';
-// import SignUpForm from './SignUpForm';
+
 
 
 const Log = ()=>{

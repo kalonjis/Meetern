@@ -1,4 +1,4 @@
-import { GET_ALL_OFFERS } from "../actions/offers.actions";
+import { GET_ALL_OFFERS } from "../actions/allOffers.actions";
 
 
 const initialState = {};

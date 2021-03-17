@@ -28,7 +28,7 @@ const OfferSchema = new mongoose.Schema(
             maxlength: 160
         },
         hiringPossibility:{
-            type:Boolean
+            type:String
         },
         internshipStart: {
             type: String
@@ -40,7 +40,7 @@ const OfferSchema = new mongoose.Schema(
             type:String
         },
         faceToface: {
-            type:Boolean
+            type:String
         },
         applications: {
             type: [

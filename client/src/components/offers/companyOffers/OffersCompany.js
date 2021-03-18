@@ -1,7 +1,7 @@
-import { set } from 'js-cookie';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOffer } from '../../../actions/offer.action';
+import { addOffer, getOffer } from '../../../actions/offer.action';
+import OfferDetails from './OfferDetails';
 
 
 const OffersCompany = () =>{
@@ -18,6 +18,7 @@ const OffersCompany = () =>{
     const [internshipPlace, setInternshipPlace] = useState('');
     const [faceToface, setFaceToface] = useState('');
     const dispatch = useDispatch();
+    const [detailsId, setDetailsId] = useState(null)
     
     const handleSubmit = (e)=>{
         e.preventDefault()
@@ -33,6 +34,12 @@ const OffersCompany = () =>{
             setCreateForm(false)
             document.location.reload();// mauvaise pratique=> temporaire!!!
         }
+    
+    const showDetails = (offerId) =>{
+        setOfferDetails(true);
+        dispatch(getOffer(offerId))
+        setDetailsId(offerId)
+    }
 
     return (
         <div className="offers-company-container">
@@ -43,17 +50,20 @@ const OffersCompany = () =>{
                 <div> 
                     <h2>Your offers list</h2> 
                     <ol>               
-
-                        { myOffers[0] ? (<li onClick={(e)=> setOfferDetails(true)}>{myOffers[0].position}</li>) : (<li>Offer One <button onClick={(e)=> setCreateForm(true)}> Add an offer</button></li>)}
-                        { myOffers[1] ? (<li>{myOffers[1].position}</li>) : (<li>Offer Two <button onClick={(e)=> setCreateForm(true)}> Add an offer</button></li>)}
-                        { myOffers[2] ? (<li>{myOffers[2].position}</li>) : (<li>Offer Three <button onClick={(e)=> setCreateForm(true)}> Add an offer</button></li>)}
-                        
+                        { myOffers.map((offer) => {
+                            return(
+                                 <li onClick={(e)=>{showDetails(offer._id)} }>
+                                     {offer.position}
+                                </li>
+                                ) 
+                            })
+                        }                       
                     </ol>
                 </div>
              </>
             )}
             { createForm === false && offerDetails &&(
-                <div> test detatils <button onClick={(e)=> setOfferDetails(false)}>close</button></div>
+                <div> <OfferDetails offerId={detailsId}/> <button onClick={(e)=> setOfferDetails(false)}>close</button></div>
             )}
             { createForm && ( 
                <form className='CreateOffer-form' onSubmit={handleSubmit}>
@@ -114,6 +124,7 @@ const OffersCompany = () =>{
                     />
                     <br/><br/>
                     <button type="submit" > Valider</button>
+                    <button onClick={(e)=> setCreateForm(false)}> Annuler </button>
                 </form> 
             )}
         </div>

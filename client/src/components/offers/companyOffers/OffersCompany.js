@@ -63,7 +63,7 @@ const OffersCompany = () =>{
              </>
             )}
             { createForm === false && offerDetails &&(
-                <div> <OfferDetails offerId={detailsId}/> <button onClick={(e)=> setOfferDetails(false)}>close</button></div>
+                <div> <OfferDetails offerId={detailsId}/> <button onClick={(e)=> setOfferDetails(false)}>Retour à la liste</button></div>
             )}
             { createForm && ( 
                <form className='CreateOffer-form' onSubmit={handleSubmit}>

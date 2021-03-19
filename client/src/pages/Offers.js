@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { UserContext } from '../components/AppContext';
 import OffersCompany from '../components/offers/companyOffers/OffersCompany';
+import OffersStudent from '../components/offers/studentOffers/Offers.student';
 
 const Offers = ()=> {
   const user = useContext(UserContext)
@@ -13,7 +14,7 @@ const Offers = ()=> {
         {user.type === "company"?( 
           <OffersCompany/>
           ):( user.type === "student" ? (
-            <h2>Hello from Offers - apply now</h2>
+            <OffersStudent/>
             ):(
               <h2>Hello from Offers</h2>
               )              

@@ -52,7 +52,7 @@ const OffersCompany = () =>{
                     <ol>               
                         { myOffers.map((offer) => {
                             return(
-                                 <li onClick={(e)=>{showDetails(offer._id)} }>
+                                 <li key={offer._id} onClick={(e)=>{showDetails(offer._id)} }>
                                      {offer.position}
                                 </li>
                                 ) 

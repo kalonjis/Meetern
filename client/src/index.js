@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'; // "supra component" à notre "App" qui 
 import thunk from 'redux-thunk';// Permet de faire des req asynchrones avec redux (voir:https://riptutorial.com/redux/example/12005/redux-thunk--basics)...
 import rootReducer from './reducers'; // Il va chercher l'index.js dans ce dossier par defaut
 import { getAllOffers } from './actions/allOffers.actions';
+import { getAllCompanies } from './actions/allCompanies.actions';
 
 // dev tools
 import {composeWithDevTools} from 'redux-devtools-extension'; // A EFFACER DES QU'ON PASSE EN PROD!!!!!!!!!!!!!!!!!
@@ -17,8 +18,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'; // A EFFACER DES Q
 
 const store = createStore(
   rootReducer, composeWithDevTools(applyMiddleware(thunk))
-);
-store.dispatch(getAllOffers());
+  );
+  store.dispatch(getAllOffers());
+  store.dispatch(getAllCompanies());
 
 
 ReactDOM.render(

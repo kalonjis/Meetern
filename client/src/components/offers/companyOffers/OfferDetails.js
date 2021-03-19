@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 
 const OfferDetails = (offerId) => {
     const offer = useSelector((state)=> state.offerReducer)
-    console.log(offer.position)
+    const companies = useSelector((state)=> state.allCompaniesReducer)
+    console.log(companies)
     return(
         <div className="offer-details-container">
             <div>Position : {offer.position}</div>

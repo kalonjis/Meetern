@@ -22,16 +22,19 @@ const OfferDetails = (offerId) => {
                         <div>Place :  {offer.internshipPlace} </div>
                         <div>Face to face : {offer.faceToface} </div>      
                     </div>
-                    <button onClick={(e)=>setCheckApplication(true)}>
-                    Voir les candidats {offer.applications.length}
-                    </button>
+                        {  offer.applications[0] && (
+                            <button onClick={(e)=>setCheckApplication(true)}>
+                                Voir les candidats 
+                            </button>
+                            )
+                        }
                     <button onClick={(e)=>setUpdateOffer(true)}> Modifier l'offre </button>
                     </div>
                 )
             }
-            { checkApplication &&(
+            { checkApplication && offer.applications[0] &&(
                 <div className="applications-list-container">
-                    <div>Liste des candidats</div>
+                    <div>Liste des candidats {offer.applications[0].studentId}</div>
                     <button onClick={(e)=>setCheckApplication(false)} >Retour</button>
                 </div>
                 )

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // Action type
 export const GET_OFFER = 'GET_OFFER';
+export const APPLY_OFFER = 'APPLY_OFFER';
 
 // function to create a new offer
 export const addOffer = (id, 
@@ -43,3 +44,17 @@ export const getOffer = (offerId) =>{
             .catch((err)=> console.log(err))
     };
 };
+
+export const applyNow =(offerId, studentId) =>{
+    return(dispatch)=>{
+        return axios
+            .patch(`${process.env.REACT_APP_API_URL}api/offer/apply/${offerId}`,{studentId})
+            .then((res)=>{
+                dispatch({
+                    type: APPLY_OFFER,
+                    payload: {offerId, studentId}
+                })
+            })
+            .catch((err)=> console.log(err))
+    }
+}

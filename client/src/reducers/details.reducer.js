@@ -1,0 +1,13 @@
+import { GET_COMPANY_DETAILS} from "../actions/details.actions"
+
+const initialState = {};
+
+export default function detailsReducer(state = initialState, action){
+    switch (action.type) {
+        case GET_COMPANY_DETAILS:   
+            return action.payload; // on charge le (init)State avec les datas du user 
+
+        default:
+                return state;
+    }
+}

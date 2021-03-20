@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  getOffer } from '../../../actions/offer.action';
+import OfferDetails from './Student.OfferDetails';
 
 
 const OffersStudent = ()=>{
@@ -19,6 +20,7 @@ const OffersStudent = ()=>{
         dispatch(getOffer(offerId))
         setDetailsId(offerId)
     }
+    
     return (
         <>
             {offerDetails === false &&(
@@ -37,6 +39,14 @@ const OffersStudent = ()=>{
                 </div>
                 )
             }
+            { offerDetails &&(
+                <div> 
+                    <OfferDetails offerId={detailsId}/> 
+                    <button onClick={(e)=> setOfferDetails(false)}>
+                        Retour à la liste
+                    </button>
+                </div>
+            )}
         </>
 
 )

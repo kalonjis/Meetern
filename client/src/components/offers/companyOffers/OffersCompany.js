@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOffer, getOffer } from '../../../actions/offer.action';
-import OfferDetails from './OfferDetails';
+import OfferDetails from './Company.OfferDetails';
 
 
 const OffersCompany = () =>{
@@ -63,7 +63,12 @@ const OffersCompany = () =>{
              </>
             )}
             { createForm === false && offerDetails &&(
-                <div> <OfferDetails offerId={detailsId}/> <button onClick={(e)=> setOfferDetails(false)}>Retour à la liste</button></div>
+                <div> 
+                    <OfferDetails offerId={detailsId}/> 
+                    <button onClick={(e)=> setOfferDetails(false)}>
+                        Retour à la liste
+                    </button>
+                </div>
             )}
             { createForm && ( 
                <form className='CreateOffer-form' onSubmit={handleSubmit}>

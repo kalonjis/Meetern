@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { isEmpty, timestampParser } from '../../utils';
 
 const OfferDetails = (offerId) => {
     const offer = useSelector((state)=> state.offerReducer)
@@ -11,7 +12,7 @@ const OfferDetails = (offerId) => {
 
     return(
         <>
-            {updateOffer === false && checkApplication=== false &&(
+            {updateOffer === false && checkApplication=== false && (
                 <div className="details container">
                     <div className="offer-details-container">
                         <div>Position : {offer.position}</div>
@@ -22,7 +23,7 @@ const OfferDetails = (offerId) => {
                         <div>Place :  {offer.internshipPlace} </div>
                         <div>Face to face : {offer.faceToface} </div>      
                     </div>
-                        {  offer.applications[0] && (
+                        {  !isEmpty(offer.applications) && (
                             <button onClick={(e)=>setCheckApplication(true)}>
                                 Voir les candidats 
                             </button>
@@ -32,9 +33,28 @@ const OfferDetails = (offerId) => {
                     </div>
                 )
             }
-            { checkApplication && offer.applications[0] &&(
+            { checkApplication && !isEmpty(offer.applications) &&(
                 <div className="applications-list-container">
-                    <div>Liste des candidats {offer.applications[0].studentId}</div>
+                    <div>
+                        <h1>Liste des candidats </h1>
+                        <ol>
+                            { 
+                                offer.applications.map((application)=>{
+                                    return(
+                                        <li key={application._id}>
+                                            <div>Student : {application.studentId} <button>voir le profil</button> </div>
+                                            <div>Statut : {application.status}</div> 
+                                            <div>Déposée le : {timestampParser(application.timestamp)}</div>
+                                            <button>Like</button> <button>Reject</button>
+                                            <br></br>
+                                            <br></br>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ol>
+                              
+                    </div>
                     <button onClick={(e)=>setCheckApplication(false)} >Retour</button>
                 </div>
                 )

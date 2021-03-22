@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStudentDetails } from '../../../actions/details.actions';
 import { isEmpty, timestampParser } from '../../utils';
+import StudentDetails from './StudentDetails';
 
 const OfferDetails = (offerId) => {
     const offer = useSelector((state)=> state.offerReducer)
     const students = useSelector((state)=> state.allStudentsReducer)
-    console.log(students)
     const [updateOffer, setUpdateOffer] = useState(false);
     const [checkApplication, setCheckApplication] = useState(false);
+    const [studentDetails, setStudentDetails] = useState(false);
+    const [detailsId, setDetailsId] = useState(null)
+
+    const dispatch = useDispatch();
+    
+    const checkStudentDetails = (id)=>{
+        dispatch(getStudentDetails(id))
+        setDetailsId(id)
+        setStudentDetails(true)
+        console.log('test')
+        console.log(id)
+    }
 
     return(
         <>
@@ -42,20 +55,29 @@ const OfferDetails = (offerId) => {
                                     return(
                                         <li key={application._id}>
                                             <div>Student : { students.map((student)=>{
-                                                                    if (student._id === application.studentId){
-                                                                        return <span key={student._id}>{student.firstname + " "+ student.lastname}</span>
-                                                                    }else {
-                                                                        return null
-                                                                    }
-                                                                })
-                                                           } 
-                                                <button>voir le profil</button> 
+                                                if (student._id === application.studentId){
+                                                    return (<span key={student._id}>{student.firstname + " "+ student.lastname} 
+                                                    <button onClick={(e)=>checkStudentDetails(application.studentId)}>profil</button>   </span>)
+                                                }else {
+                                                    return null
+                                                }
+                                            })
+                                            } 
                                             </div>
                                             <div>Statut : {application.status}</div> 
                                             <div>Déposée le : {timestampParser(application.timestamp)}</div>
-                                            <button>Like</button> <button>Reject</button>
                                             <br></br>
                                             <br></br>
+                                            { studentDetails &&(
+                                                <>
+                                                <StudentDetails id={detailsId}/>
+                                                <br></br>
+                                                <button onClick={(e)=>setStudentDetails(false)}>Retour</button>
+                                                <br></br>
+                                                </>
+                                            )}
+                                            <br></br>
+
                                         </li>
                                     )
                                 })

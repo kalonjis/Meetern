@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';// Permet de faire des req asynchrones avec redu
 import rootReducer from './reducers'; // Il va chercher l'index.js dans ce dossier par defaut
 import { getAllOffers } from './actions/allOffers.actions';
 import { getAllCompanies } from './actions/allCompanies.actions';
+import { getAllStudents } from './actions/allStudents.action';
 
 // dev tools
 import {composeWithDevTools} from 'redux-devtools-extension'; // A EFFACER DES QU'ON PASSE EN PROD!!!!!!!!!!!!!!!!!
@@ -21,6 +22,8 @@ const store = createStore(
   );
   store.dispatch(getAllOffers());
   store.dispatch(getAllCompanies());
+  store.dispatch(getAllStudents());
+  
 
 
 ReactDOM.render(

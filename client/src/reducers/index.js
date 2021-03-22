@@ -7,7 +7,7 @@ import errorReducer from './error.reducer';
 import offerReducer from './offer.reducer';
 import allCompaniesReducer from './allCompanies.reducer';
 import detailsReducer from './details.reducer'
-
+import allStudentsReducer from './allStudents.reducer'
 
 export default combineReducers({
     companyReducer,
@@ -16,5 +16,7 @@ export default combineReducers({
     errorReducer,
     offerReducer,
     allCompaniesReducer,
+    allStudentsReducer,
     detailsReducer
+
 });

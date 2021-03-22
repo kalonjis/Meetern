@@ -4,11 +4,10 @@ import { isEmpty, timestampParser } from '../../utils';
 
 const OfferDetails = (offerId) => {
     const offer = useSelector((state)=> state.offerReducer)
-    // const companies = useSelector((state)=> state.allCompaniesReducer)
-    // console.log(companies)
+    const students = useSelector((state)=> state.allStudentsReducer)
+    console.log(students)
     const [updateOffer, setUpdateOffer] = useState(false);
     const [checkApplication, setCheckApplication] = useState(false);
-
 
     return(
         <>

@@ -41,7 +41,16 @@ const OfferDetails = (offerId) => {
                                 offer.applications.map((application)=>{
                                     return(
                                         <li key={application._id}>
-                                            <div>Student : {application.studentId} <button>voir le profil</button> </div>
+                                            <div>Student : { students.map((student)=>{
+                                                                    if (student._id === application.studentId){
+                                                                        return <span key={student._id}>{student.firstname + " "+ student.lastname}</span>
+                                                                    }else {
+                                                                        return null
+                                                                    }
+                                                                })
+                                                           } 
+                                                <button>voir le profil</button> 
+                                            </div>
                                             <div>Statut : {application.status}</div> 
                                             <div>Déposée le : {timestampParser(application.timestamp)}</div>
                                             <button>Like</button> <button>Reject</button>

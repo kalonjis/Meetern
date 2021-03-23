@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllStudents } from '../../../actions/allStudents.action';
 import { getOffer } from '../../../actions/offer.action';
 import OfferDetails from './Company.OfferDetails';
-import CreateForm from './CreateForm';
+import CreateOfferForm from './CreateOfferForm';
 
 
 const OffersCompany = () =>{
@@ -22,6 +22,12 @@ const OffersCompany = () =>{
         dispatch(getOffer(offerId))
         setDetailsId(offerId)
         setOfferDetails(true);
+    }
+
+    // function used as props for <CreatForm> (line 64)
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        setCreateForm(false)
     }
 
     return (
@@ -55,7 +61,7 @@ const OffersCompany = () =>{
             )}
             { createForm && (
                 <div>
-                    <CreateForm/> 
+                    <CreateOfferForm submit={handleSubmit}/> 
                     <button onClick={(e)=> setCreateForm(false)}> Retour </button>
                 </div>
             )}

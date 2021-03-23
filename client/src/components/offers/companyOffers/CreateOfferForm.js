@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOffer } from '../../../actions/offer.action';
+import { getAllOffers } from '../../../actions/allOffers.actions';
 
 
     
-    const CreateForm = ()=>{
+    const CreateOfferForm = (submit)=>{
         const company =  useSelector((state)=> state.companyReducer);
         const [position, setPosition] = useState('');
         const [description, setDescription] = useState('');
@@ -15,9 +16,8 @@ import { addOffer } from '../../../actions/offer.action';
         const [faceToface, setFaceToface] = useState('');
         const dispatch = useDispatch();
         
-        const handleSubmit = (e)=>{
-            e.preventDefault()
-            dispatch(addOffer(company._id,
+        const handleSubmit = async ()=>{
+            await dispatch(addOffer(company._id,
                 position,
                 description,
                 hiringPossibility,
@@ -26,7 +26,8 @@ import { addOffer } from '../../../actions/offer.action';
                 internshipPlace,
                 faceToface)
                 )
-                document.location.reload();// mauvaise pratique=> temporaire!!!
+            dispatch((getAllOffers()))
+            submit()    
             }
 
         return(
@@ -91,4 +92,4 @@ import { addOffer } from '../../../actions/offer.action';
                 </form> 
         )
     } 
-    export default CreateForm;
+    export default CreateOfferForm;

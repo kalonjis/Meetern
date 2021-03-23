@@ -19,8 +19,6 @@ const OfferDetails = (offerId) => {
         dispatch(getStudentDetails(id))
         setDetailsId(id)
         setStudentDetails(true)
-        console.log('test')
-        console.log(id)
     }
 
     const handleLike =(offerId, applicationId)=>{

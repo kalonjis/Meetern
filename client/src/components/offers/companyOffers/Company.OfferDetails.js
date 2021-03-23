@@ -96,10 +96,10 @@ const OfferDetails = (offerId) => {
                                 <br></br>
                             </div>
                         )}
+                        <button onClick={(e)=>setCheckApplication(false)} >Retour détails offre</button>
                     </div>
                 )
             }
-            <button onClick={(e)=>setCheckApplication(false)} >Retour détails offre</button>
         </>
     )  
 }   

@@ -77,14 +77,7 @@ const OfferDetails = (offerId) => {
                                             <button onClick={(e)=>handleLike(offer._id, application._id)}>Like</button><button onClick={(e)=>handleReject(offer._id, application._id)}>Reject</button>
                                             <br></br>
                                             <br></br>
-                                            { studentDetails &&(
-                                                <>
-                                                <StudentDetails id={detailsId}/>
-                                                <br></br>
-                                                <button onClick={(e)=>setStudentDetails(false)}>Hide</button>
-                                                <br></br>
-                                                </>
-                                            )}
+                                            
                                             <br></br>
 
                                         </li>
@@ -94,10 +87,18 @@ const OfferDetails = (offerId) => {
                         </ol>
                               
                     </div>
-                    <button onClick={(e)=>setCheckApplication(false)} >Retour détails offre</button>
                 </div>
                 )
             }
+            { studentDetails &&(
+                <div className="student-details-container">
+                    <StudentDetails id={detailsId}/>
+                    <br></br>
+                    <button onClick={(e)=>setStudentDetails(false)}>Hide</button>
+                    <br></br>
+                </div>
+            )}
+            <button onClick={(e)=>setCheckApplication(false)} >Retour détails offre</button>
         </>
     )  
 }   

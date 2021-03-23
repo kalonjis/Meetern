@@ -3,6 +3,8 @@ import axios from 'axios';
 // Action type
 export const GET_OFFER = 'GET_OFFER';
 export const APPLY_OFFER = 'APPLY_OFFER';
+export const LIKE_STUDENT = 'LIKE_STUDENT';
+export const REJECT_STUDENT = 'REJECT_STUDENT';
 
 // function to create a new offer
 export const addOffer = (id, 
@@ -58,3 +60,39 @@ export const applyNow =(offerId, studentId) =>{
             .catch((err)=> console.log(err))
     }
 }
+
+export const likeStudent = (offerId, applicationId) =>{
+    return(dispatch)=>{
+        return axios({
+            method:"patch",
+            url:`${process.env.REACT_APP_API_URL}api/offer/editStatus/${offerId}`,
+            data:{applicationId :applicationId,
+                  status: "liked"}
+            })
+            .then((res)=>{
+                dispatch({
+                    type: LIKE_STUDENT,
+                    payload:{applicationId}
+                })
+            })
+            .catch((err)=> console.log(err))
+    }
+};
+
+export const rejectStudent = (offerId, applicationId) =>{
+    return(dispatch)=>{
+        return axios({
+            method:"patch",
+            url:`${process.env.REACT_APP_API_URL}api/offer/editStatus/${offerId}`,
+            data:{applicationId :applicationId,
+                  status: "rejected"}
+            })
+            .then((res)=>{
+                dispatch({
+                    type: REJECT_STUDENT,
+                    payload:{applicationId}
+                })
+            })
+            .catch((err)=> console.log(err))
+    }
+};

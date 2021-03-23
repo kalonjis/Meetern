@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStudentDetails } from '../../../actions/details.actions';
+import { likeStudent, rejectStudent } from '../../../actions/offer.action';
 import { isEmpty, timestampParser } from '../../utils';
 import StudentDetails from './StudentDetails';
 
@@ -22,12 +23,13 @@ const OfferDetails = (offerId) => {
         console.log(id)
     }
 
-    const handleLike =(id)=>{
-        alert('Like')
+    const handleLike =(offerId, applicationId)=>{
+        dispatch(likeStudent(offerId, applicationId))
     }
 
-    const handleReject = (id)=>{
-        alert('reject')
+    const handleReject = (offerId, applicationId)=>{
+        dispatch(rejectStudent(offerId, applicationId))
+
     }
     
     return(
@@ -74,7 +76,7 @@ const OfferDetails = (offerId) => {
                                             </div>
                                             <div>Statut : {application.status}</div> 
                                             <div>Déposée le : {timestampParser(application.timestamp)}</div>
-                                            <button onClick={handleLike}>Like</button><button onClick={handleReject}>Reject</button>
+                                            <button onClick={(e)=>handleLike(offer._id, application._id)}>Like</button><button onClick={(e)=>handleReject(offer._id, application._id)}>Reject</button>
                                             <br></br>
                                             <br></br>
                                             { studentDetails &&(

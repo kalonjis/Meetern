@@ -7,14 +7,15 @@ const CompanyDetails = () =>{
     console.log(company)
 
     return(
-        <div>
-        <div> name : {company.companyName}</div>
-        <div> bio: {company.bio}</div>
-        <div> sector: {company.sector}</div>
-        <div> companyType: {company.companyType}</div>
-        <div> phone: {company.phone}</div>
-        <div> website: {company.webSite}</div>
-        <div> Dress Code: {company.corporateWear}</div>
+        <div className="company-info" style={{border:  '2px solid blue', width:'30%'}}>
+            <img src={company.picture} alt="user-pic" style={{minWidth:50, maxWidth:200, width:150, height:150, minHeight:50, maxHeight:200}}/>
+            <div> name : {company.companyName}</div>
+            <div> bio: {company.bio}</div>
+            <div> sector: {company.sector}</div>
+            <div> companyType: {company.companyType}</div>
+            <div> phone: {company.phone}</div>
+            <div> website: {company.webSite}</div>
+            <div> Dress Code: {company.corporateWear}</div>
         </div>
     )
 }

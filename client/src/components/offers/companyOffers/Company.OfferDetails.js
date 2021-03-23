@@ -34,7 +34,7 @@ const OfferDetails = (offerId) => {
         <>
             {updateOffer === false && checkApplication=== false && (
                 <div className="details container">
-                    <div className="offer-details-container">
+                    <div className="offer-details-container" style={{border:  '2px solid blue', width:'30%'}}>
                         <div>Position : {offer.position}</div>
                         <div>Description :  {offer.description} </div>
                         <div>Hiring possibility :  {offer.hiringPossibility} </div>

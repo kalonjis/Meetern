@@ -6,7 +6,7 @@ const StudentDetails = (id)=>{
     console.log(student)
 
     return (
-        <div className="student-info" >
+        <div className="student-info" style={{border:  '2px solid blue', width:'30%'}} >
             <p>Bio : {student.bio}</p>
             <p> internshipStart:  {student.internshipStart}</p>
             <p>internshipDuration: {student.internshipDuration}</p>

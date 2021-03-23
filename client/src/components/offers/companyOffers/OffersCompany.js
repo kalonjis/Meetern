@@ -18,10 +18,10 @@ const OffersCompany = () =>{
     
 
     const showDetails = (offerId) =>{
+        dispatch(getAllStudents())
+        dispatch(getOffer(offerId))
         setDetailsId(offerId)
         setOfferDetails(true);
-        dispatch(getOffer(offerId))
-        dispatch(getAllStudents())
     }
 
     return (
@@ -49,7 +49,7 @@ const OffersCompany = () =>{
                 <div> 
                     <OfferDetails offerId={detailsId}/> 
                     <button onClick={(e)=> setOfferDetails(false)}>
-                        Retour à la liste
+                        Retour à la liste des offres
                     </button>
                 </div>
             )}

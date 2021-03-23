@@ -22,6 +22,14 @@ const OfferDetails = (offerId) => {
         console.log(id)
     }
 
+    const handleLike =(id)=>{
+        alert('Like')
+    }
+
+    const handleReject = (id)=>{
+        alert('reject')
+    }
+    
     return(
         <>
             {updateOffer === false && checkApplication=== false && (
@@ -66,13 +74,14 @@ const OfferDetails = (offerId) => {
                                             </div>
                                             <div>Statut : {application.status}</div> 
                                             <div>Déposée le : {timestampParser(application.timestamp)}</div>
+                                            <button onClick={handleLike}>Like</button><button onClick={handleReject}>Reject</button>
                                             <br></br>
                                             <br></br>
                                             { studentDetails &&(
                                                 <>
                                                 <StudentDetails id={detailsId}/>
                                                 <br></br>
-                                                <button onClick={(e)=>setStudentDetails(false)}>Retour</button>
+                                                <button onClick={(e)=>setStudentDetails(false)}>Hide</button>
                                                 <br></br>
                                                 </>
                                             )}
@@ -85,7 +94,7 @@ const OfferDetails = (offerId) => {
                         </ol>
                               
                     </div>
-                    <button onClick={(e)=>setCheckApplication(false)} >Retour</button>
+                    <button onClick={(e)=>setCheckApplication(false)} >Retour détails offre</button>
                 </div>
                 )
             }

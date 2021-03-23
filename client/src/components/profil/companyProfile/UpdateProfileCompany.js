@@ -33,7 +33,7 @@ const UpdateProfil = ()=>{
             <h1> Profil de {company.companyName}</h1>
             <div className="update-container" >
                 <h3>Photo de profil</h3>
-                <img src={company.picture} alt="user-pic" />
+                <img src={company.picture} alt="user-pic" style={{minWidth:50, maxWidth:200, width:150, height:150, minHeight:50, maxHeight:200}}/>
                 <UploadImg />
                 <br/>
                 <h2>About your company</h2>

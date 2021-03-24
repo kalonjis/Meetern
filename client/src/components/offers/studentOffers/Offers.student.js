@@ -43,7 +43,7 @@ const OffersStudent = ()=>{
                 <div> 
                     <OfferDetails offerId={detailsId}/> 
                     <button onClick={(e)=> setOfferDetails(false)}>
-                        Retour à la liste
+                        Retour à la liste des offres de stage
                     </button>
                 </div>
             )}

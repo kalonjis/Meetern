@@ -106,6 +106,16 @@ module.exports.apply = async (req, res) => {
 
             }
         );
+        // add to Student.applications list
+        await StudentModel.findByIdAndUpdate(
+            req.body.studentId,
+            { $addToSet: { applications: req.params.id}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                // if (!err) res.status(201).json(docs);
+                if (err) res.status(400).json(err);
+            }
+        );
 
     } catch (err) {
         return res.status(400).send(err);

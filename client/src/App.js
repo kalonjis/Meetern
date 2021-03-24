@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useDispatch, useSelector} from 'react-redux';
 import { getStudent } from './actions/student.action';
 import { getCompany } from './actions/company.action'
-import { getStudentApplicationsList } from './actions/applicationsList.action';
 
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
     user = {id: company._id, type:company.userType}
   }else if (student){
     user = {id: student._id, type:student.userType}
-    dispatch(getStudentApplicationsList(user.id))      
 
   }
   return (

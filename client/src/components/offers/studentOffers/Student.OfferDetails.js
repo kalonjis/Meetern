@@ -1,7 +1,8 @@
 import React, {  useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { getCompanyDetails } from '../../../actions/details.actions';
-import { applyNow } from '../../../actions/offer.action';
+import { applyNow, getOffer } from '../../../actions/offer.action';
+import { getStudent } from '../../../actions/student.action';
 import CompanyDetails from './CompanyDetails';
 
 const OfferDetails = (offerId) => {
@@ -17,10 +18,15 @@ const OfferDetails = (offerId) => {
     const handleDetails =(id)=>{
         dispatch(getCompanyDetails(id))
     }
+    const handleReturn = async (e)=>{
+        await dispatch( getOffer(offerId))
+        setCompanyDetails(false)
+    }
 
-    const handleApply = (offerId, studentId)=>{
-        dispatch(applyNow(offerId, studentId))
-        setApply(true)
+    const handleApply = async(offerId, studentId)=>{
+        await dispatch(applyNow(offerId, studentId))
+            dispatch(getStudent(studentId))
+            setApply(true)
         console.log('apply :'+offerId, studentId)
     }
 
@@ -60,7 +66,7 @@ const OfferDetails = (offerId) => {
             { companyDetails && apply === false &&(
                 <div className="company-container">
                     <CompanyDetails/>
-                    <button onClick={(e)=>setCompanyDetails(false)} >Retour</button>
+                    <button onClick={handleReturn} >Retour</button>
                 </div>
                 )
             }

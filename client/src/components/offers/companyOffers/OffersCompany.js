@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllStudents } from '../../../actions/allStudents.action';
+import { getAllStudents } from '../../../actions/allStudents.actions';
 import { getOffer } from '../../../actions/offer.action';
 import OfferDetails from './Company.OfferDetails';
 import CreateOfferForm from './CreateOfferForm';

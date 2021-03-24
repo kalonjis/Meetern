@@ -8,6 +8,8 @@ import offerReducer from './offer.reducer';
 import allCompaniesReducer from './allCompanies.reducer';
 import detailsReducer from './details.reducer'
 import allStudentsReducer from './allStudents.reducer'
+import applicationsListReducer from './applicationsList.reducer'
+
 
 export default combineReducers({
     companyReducer,
@@ -17,6 +19,7 @@ export default combineReducers({
     offerReducer,
     allCompaniesReducer,
     allStudentsReducer,
-    detailsReducer
+    detailsReducer,
+    applicationsListReducer
 
 });

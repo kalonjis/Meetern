@@ -12,6 +12,8 @@ const OffersStudent = ()=>{
     const dispatch = useDispatch();
     const [offerDetails, setOfferDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null)
+    const myApp = useSelector((state)=> state.applicationsListReducer)
+    console.log(myApp)
 
 
 

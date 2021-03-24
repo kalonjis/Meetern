@@ -1,4 +1,4 @@
-import { GET_ALL_STUDENTS } from "../actions/allStudents.action"
+import { GET_ALL_STUDENTS } from "../actions/allStudents.actions"
 
 const initialState = {}
 

@@ -14,7 +14,7 @@ router.delete("/:id", offerController.deleteOffer);
 
 // applications
 router.patch("/apply/:id", offerController.apply);
-router.patch("/cancel-application/:id", offerController.cancelApplication);
+router.patch("/cancelapplication/:id", offerController.cancelApplication);
 router.patch("/editStatus/:id", offerController.editStatus);
 
 module.exports = router;

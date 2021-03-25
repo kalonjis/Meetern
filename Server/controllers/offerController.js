@@ -1,5 +1,4 @@
 const OfferModel = require('../models/offer.model');
-const CompanyModel = require('../models/company.model');
 const StudentModel = require('../models/student.model');
 const ObjectId = require('mongoose').Types.ObjectId;
 
@@ -123,14 +122,18 @@ module.exports.apply = async (req, res) => {
 };
 
 module.exports.cancelApplication = async (req, res) => {
-    if (!ObjectId.isValid(req.params.id)|| !ObjectId.isValid(req.body.appicationId) || !ObjectId.isValid(req.body.studentId)) 
+    if (!ObjectId.isValid(req.params.id)) 
         res.status(400).send('ID unknown : ' + req.params.id);
     
     try{
         await OfferModel.findByIdAndUpdate(
             req.params.id,
             {
-                $pull: { applications: req.body.appicationId}
+                $pull: {
+                    applications: {
+                        _id: req.body.applicationId
+                    }
+                }
             },
             { new: true},
             (err, docs)=>{
@@ -138,8 +141,9 @@ module.exports.cancelApplication = async (req, res) => {
                 else res.status(400).send('error: '+ err)
 
             }
-        );
-        // add to Student.applications list
+        )
+        
+        // remove from Student.applications list
         await StudentModel.findByIdAndUpdate(
             req.body.studentId,
             { $pull: { applications: req.params.id}},
@@ -149,7 +153,7 @@ module.exports.cancelApplication = async (req, res) => {
                 if (err) res.status(400).json(err);
             }
         );
-
+        
     } catch (err) {
         return res.status(500).send(err);
     }

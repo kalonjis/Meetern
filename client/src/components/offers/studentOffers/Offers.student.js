@@ -17,12 +17,10 @@ const OffersStudent = ()=>{
     // console.log(allOffers)
     const dispatch = useDispatch();
     const [offerDetails, setOfferDetails] = useState(false);
-    const [detailsId, setDetailsId] = useState(null)
     const [applied, setApplied] = useState(false)
 
     const showDetails = (offerId, type) =>{
         dispatch(getOffer(offerId))
-        setDetailsId(offerId)
         setOfferDetails(true);
         setApplied(type);
     }
@@ -80,7 +78,7 @@ const OffersStudent = ()=>{
             }
             { offerDetails &&(
                 <div> 
-                    <OfferDetails offerId={detailsId} appliedYet={applied}/> 
+                    <OfferDetails appliedYet={applied}/> 
                     <button onClick={(e)=> setOfferDetails(false)}>
                         Retour à la liste des offres de stage
                     </button>

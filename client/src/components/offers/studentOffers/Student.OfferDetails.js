@@ -6,7 +6,8 @@ import { getStudent } from '../../../actions/student.action';
 import {getAllOffers} from '../../../actions/allOffers.actions'
 import CompanyDetails from './CompanyDetails';
 
-const OfferDetails = (offerId, appliedYet) => {
+const OfferDetails = (props) => {
+    console.log(props.appliedYet)
     const offer = useSelector((state)=> state.offerReducer)
     const student = useSelector((state)=> state.studentReducer)
     console.log(offer)
@@ -67,8 +68,8 @@ const OfferDetails = (offerId, appliedYet) => {
                         } 
                         </span> 
                     </button>
-                    {appliedYet === false && (<button onClick={(e)=> handleApply(offer._id, student._id)}> Postuler </button>)}
-                    {appliedYet && (<button onClick={(e)=> handelCancel(offer._id, student._id)}> Annuler la candidature </button>)}
+                    {props.appliedYet === false && (<button onClick={(e)=> handleApply(offer._id, student._id)}> Postuler </button>)}
+                    {props.appliedYet && (<button onClick={(e)=> handelCancel(offer._id, student._id)}> Annuler la candidature </button>)}
                     </div>
                 )
             }

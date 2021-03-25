@@ -50,10 +50,13 @@ const OffersStudent = ()=>{
                                         return (
                                             <li key={offer._id} onClick={(e)=>{showDetails(offer._id)}}>
                                                 {offer.position}  <span>
-                                                     - Postulé le : {
-                                                        offer.applications.map((application)=>{
+                                                    { offer.applications.map((application)=>{
                                                             if (application.studentId === student._id){
-                                                                return timestampParser(application.timestamp)
+                                                                return (<>
+                                                                    <span> Postulé le : {timestampParser(application.timestamp)}</span> 
+                                                                    <span> Statut : {application.status}</span>
+                                                                    </>
+                                                                )
                                                             }else{
                                                                 return null
                                                             }

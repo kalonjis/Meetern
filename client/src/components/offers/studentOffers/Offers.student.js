@@ -18,11 +18,13 @@ const OffersStudent = ()=>{
     const dispatch = useDispatch();
     const [offerDetails, setOfferDetails] = useState(false);
     const [detailsId, setDetailsId] = useState(null)
+    const [applied, setApplied] = useState(false)
 
-    const showDetails = (offerId) =>{
-        setOfferDetails(true);
+    const showDetails = (offerId, type) =>{
         dispatch(getOffer(offerId))
         setDetailsId(offerId)
+        setOfferDetails(true);
+        setApplied(type);
     }
     
     return (
@@ -34,7 +36,7 @@ const OffersStudent = ()=>{
                         <ol>               
                             { opportunities.map((offer) => {
                                     return(
-                                        <li key={offer._id} onClick={(e)=>{showDetails(offer._id)} }>
+                                        <li key={offer._id} onClick={(e)=>{showDetails(offer._id, false)} }>
                                             {offer.position}
                                         </li>
                                     )
@@ -48,7 +50,7 @@ const OffersStudent = ()=>{
                             {   allOffers.map((offer)=>{
                                     if (myApplications.includes(offer._id)){
                                         return (
-                                            <li key={offer._id} onClick={(e)=>{showDetails(offer._id)}}>
+                                            <li key={offer._id} onClick={(e)=>{showDetails(offer._id, true)}}>
                                                 {offer.position}  <span>
                                                     { offer.applications.map((application)=>{
                                                             if (application.studentId === student._id){
@@ -78,7 +80,7 @@ const OffersStudent = ()=>{
             }
             { offerDetails &&(
                 <div> 
-                    <OfferDetails offerId={detailsId}/> 
+                    <OfferDetails offerId={detailsId} appliedYet={applied}/> 
                     <button onClick={(e)=> setOfferDetails(false)}>
                         Retour à la liste des offres de stage
                     </button>

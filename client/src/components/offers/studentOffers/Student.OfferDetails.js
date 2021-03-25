@@ -6,13 +6,14 @@ import { getStudent } from '../../../actions/student.action';
 import {getAllOffers} from '../../../actions/allOffers.actions'
 import CompanyDetails from './CompanyDetails';
 
-const OfferDetails = (offerId) => {
+const OfferDetails = (offerId, appliedYet) => {
     const offer = useSelector((state)=> state.offerReducer)
     const student = useSelector((state)=> state.studentReducer)
     console.log(offer)
     const companies = useSelector((state)=> state.allCompaniesReducer)
     console.log(companies)
     const [apply, setApply] = useState(false);
+    const [cancel, setCancel] = useState(false)
     const [companyDetails, setCompanyDetails] = useState(false);
     const dispatch = useDispatch();
 
@@ -27,11 +28,20 @@ const OfferDetails = (offerId) => {
         setApply(true)
         console.log('apply :'+offerId, studentId)
     }
+
+    const handelCancel = async (offerId, studentId) =>{
+        setCancel(true)
+    }
+
+    const handleReturn =(e)=>{
+        setCompanyDetails(false)
+        setCancel(false)
+    }
    
 
     return(
         <>
-            {companyDetails === false && apply === false &&(
+            {companyDetails === false && apply === false && cancel === false &&(
                 <div className="details container">
                     <div className="offer-details-container" style={{border:  '2px solid blue', width:'30%'}}>
                         <div>Position : {offer.position}</div>
@@ -54,23 +64,29 @@ const OfferDetails = (offerId) => {
                                     return null
                                 } 
                             })
-                        
                         } 
                         </span> 
                     </button>
-                    <button onClick={(e)=> handleApply(offer._id, student._id)}> Postuler </button>
+                    {appliedYet === false && (<button onClick={(e)=> handleApply(offer._id, student._id)}> Postuler </button>)}
+                    {appliedYet && (<button onClick={(e)=> handelCancel(offer._id, student._id)}> Annuler la candidature </button>)}
                     </div>
                 )
             }
-            { companyDetails && apply === false &&(
+            { companyDetails && apply === false && cancel ===false &&(
                 <div className="company-container">
                     <CompanyDetails/>
-                    <button onClick={(e)=>setCompanyDetails(false)}>Retour</button>
+                    <button onClick={handleReturn}>Retour</button>
                 </div>
                 )
             }
             { apply && (
                 <div> Merci pour votre candidature!
+                      Multipliez vos chances de décrocher un stage en postulant à d'autres offres
+                </div>
+             )
+            }
+            { cancel && (
+                <div> Nous comprenons: il y a tellement d'autres offres qui vous correspondent mieux!
                       Multipliez vos chances de décrocher un stage en postulant à d'autres offres
                 </div>
              )

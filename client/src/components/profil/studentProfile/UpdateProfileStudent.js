@@ -37,18 +37,18 @@ const UpdateProfil = ()=>{
                 <h2>About you</h2>
                 {updateForm === false && (
                         <div className="student-info" onClick={(e)=> setUpdateForm(true)}>
-                            <p><h4>Bio</h4>{student.bio}</p>
-                            <p> <h4>internshipStart</h4> {student.internshipStart}</p>
-                            <p><h4>internshipDuration</h4>{student.internshipDuration}</p>
-                            <p><h4>school</h4>{student.school}</p>
-                            <p><h4>studyOption</h4>{student.studyOption}</p>
-                            <p><h4>currentStudyLevel</h4>{student.currentStudyLevel}</p>
-                            <p><h4>portfolio</h4>{student.portfolio}</p>
+                            <p><b>Bio</b> :{student.bio}</p>
+                            <p> <b>internshipStart</b> :{student.internshipStart}</p>
+                            <p><b>internshipDuration</b> :{student.internshipDuration}</p>
+                            <p><b>school</b> :{student.school}</p>
+                            <p><b>studyOption</b> :{student.studyOption}</p>
+                            <p><b>currentStudyLevel</b> :{student.currentStudyLevel}</p>
+                            <p><b>portfolio</b> :{student.portfolio}</p>
                         </div>
                 )}
                 { updateForm === true && (
                 <form action="" onSubmit={handleUpdate} id="student-update-form">
-                    <label htmlFor="bio" ><h4>Bio</h4> </label>                 
+                    <label htmlFor="bio" ><b>Bio</b> </label>                 
                     <input
                         type="text"
                         name="bio"
@@ -57,7 +57,7 @@ const UpdateProfil = ()=>{
                         defaultValue={student.bio}
                     />
                     <br/><br/>
-                    <label htmlFor="internshipStart" ><h4>internshipStart</h4> </label>
+                    <label htmlFor="internshipStart" ><b>internshipStart</b> </label>
                     <input
                         type="text"
                         name="internshipStart"
@@ -66,7 +66,7 @@ const UpdateProfil = ()=>{
                         defaultValue={student.internshipStart}                      
                     />
                     <br/><br/>
-                    <label htmlFor="internshipDuration" ><h4>internshipDuration</h4></label>
+                    <label htmlFor="internshipDuration" ><b>internshipDuration</b></label>
                     <input
                         type="text"
                         name="internshipDuration"
@@ -75,7 +75,7 @@ const UpdateProfil = ()=>{
                         defaultValue={student.internshipDuration}
                     />
                     <br/><br/>
-                    <label htmlFor="school" ><h4>school</h4></label>
+                    <label htmlFor="school" ><b>school</b></label>
                     <input
                         type="text"
                         name="school"
@@ -84,7 +84,7 @@ const UpdateProfil = ()=>{
                         defaultValue={student.school}
                     />
                     <br/><br/>
-                    <label htmlFor="studyOption" ><h4>studyOption</h4></label>
+                    <label htmlFor="studyOption" ><b>studyOption</b></label>
                     <input
                         type="text"
                         name="studyOption"
@@ -93,7 +93,7 @@ const UpdateProfil = ()=>{
                         defaultValue={student.studyOption}
                     />
                     <br/><br/>
-                    <label htmlFor="currentStudyLevel" ><h4>currentStudyLevel</h4></label>
+                    <label htmlFor="currentStudyLevel" ><b>currentStudyLevel</b></label>
                     <input
                         type="text"
                         name="currentStudyLevel"
@@ -102,7 +102,7 @@ const UpdateProfil = ()=>{
                         defaultValue={student.currentStudyLevel}
                     />
                     <br/><br/>
-                    <label htmlFor="portfolio" ><h4>portfolio</h4></label>
+                    <label htmlFor="portfolio" ><b>portfolio</b></label>
                     <input
                         type="text"
                         name="currentStudyLevel"
@@ -116,7 +116,7 @@ const UpdateProfil = ()=>{
                 </form>
                 )}
                               
-                <h4>Membre depuis le : {dateParser(student.createdAt)/* date de la db formatée */}</h4>    
+                <i><b>Membre depuis le</b> : {dateParser(student.createdAt)/* date de la db formatée */} </i>   
             </div>
         </div> 
         

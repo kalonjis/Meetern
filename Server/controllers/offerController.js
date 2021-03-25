@@ -84,7 +84,7 @@ module.exports.deleteOffer = (req, res) => {
 };
 
 module.exports.apply = async (req, res) => {
-    if (!ObjectId.isValid(req.params.id)) 
+    if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.studentId)) 
         res.status(400).send('ID unknown : ' + req.params.id);
     
     try{
@@ -122,6 +122,39 @@ module.exports.apply = async (req, res) => {
     }
 };
 
+module.exports.cancelApplication = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)|| !ObjectId.isValid(req.body.appicationId) || !ObjectId.isValid(req.body.studentId)) 
+        res.status(400).send('ID unknown : ' + req.params.id);
+    
+    try{
+        await OfferModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull: { applications: req.body.appicationId}
+            },
+            { new: true},
+            (err, docs)=>{
+                if (!err) res.status(200).send(docs);
+                else res.status(400).send('error: '+ err)
+
+            }
+        );
+        // add to Student.applications list
+        await StudentModel.findByIdAndUpdate(
+            req.body.studentId,
+            { $pull: { applications: req.params.id}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                // if (!err) res.status(201).json(docs);
+                if (err) res.status(400).json(err);
+            }
+        );
+
+    } catch (err) {
+        return res.status(500).send(err);
+    }
+}
+
 module.exports.editStatus = (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
         res.status(400).send('ID unknown : ' + req.params.id);
@@ -145,6 +178,6 @@ module.exports.editStatus = (req, res) => {
         )
 
     } catch (err) {
-        res.status(400).send(err);
+        res.status(500).send(err);
     }
 };

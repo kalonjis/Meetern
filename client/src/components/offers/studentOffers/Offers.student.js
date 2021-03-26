@@ -8,13 +8,8 @@ import {timestampParser} from '../../utils'
 const OffersStudent = ()=>{
     const student = useSelector((state)=>state.studentReducer)
     const myApplications = student.applications;
-    console.log(myApplications)
     const allOffers = useSelector((state)=>state.allOffersReducer)
     const opportunities = allOffers.filter((offer)=>(!myApplications.includes(offer._id)))
-    console.log(opportunities)
-    // const allCompanies = useSelector((state)=>state.allCompaniesReducer)
-    // console.log(allCompanies)
-    // console.log(allOffers)
     const dispatch = useDispatch();
     const [offerDetails, setOfferDetails] = useState(false);
     const [applied, setApplied] = useState(false)

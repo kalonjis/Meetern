@@ -33,7 +33,9 @@ const OfferDetails = (props) => {
     }
 
     const handelCancel = async (offerId,applicationId, studentId) =>{
-        dispatch(cancelApplication(offerId,applicationId, studentId))
+        await dispatch(cancelApplication(offerId,applicationId, studentId))
+        dispatch(getStudent(studentId))
+        dispatch(getAllOffers())
         setCancel(true)
     }
 

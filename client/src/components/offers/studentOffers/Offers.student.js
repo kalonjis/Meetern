@@ -12,12 +12,14 @@ const OffersStudent = ()=>{
     const opportunities = allOffers.filter((offer)=>(!myApplications.includes(offer._id)))
     const dispatch = useDispatch();
     const [offerDetails, setOfferDetails] = useState(false);
-    const [applied, setApplied] = useState(false)
+    const [applied, setApplied] = useState(false);
+    const [applicId, setApplicId] = useState(null)
 
-    const showDetails = (offerId, type) =>{
+    const showDetails = (offerId, type, applicationId) =>{
         dispatch(getOffer(offerId))
         setOfferDetails(true);
         setApplied(type);
+        setApplicId(applicationId)
     }
     
     return (
@@ -29,7 +31,7 @@ const OffersStudent = ()=>{
                         <ol>               
                             { opportunities.map((offer) => {
                                     return(
-                                        <li key={offer._id} onClick={(e)=>{showDetails(offer._id, false)} }>
+                                        <li key={offer._id} onClick={(e)=>{showDetails(offer._id, false, null)} }>
                                             {offer.position}
                                         </li>
                                     )
@@ -43,13 +45,14 @@ const OffersStudent = ()=>{
                             {   allOffers.map((offer)=>{
                                     if (myApplications.includes(offer._id)){
                                         return (
-                                            <li key={offer._id} onClick={(e)=>{showDetails(offer._id, true)}}>
+                                            <li key={offer._id} >
                                                 {offer.position}  <span>
                                                     { offer.applications.map((application)=>{
                                                             if (application.studentId === student._id){
                                                                 return (<>
                                                                     <span> Postulé le : {timestampParser(application.timestamp)}</span> 
                                                                     <span> Statut : {application.status}</span>
+                                                                    <button onClick={(e)=>{showDetails(offer._id, true, application._id )}}>Détail</button>
                                                                     </>
                                                                 )
                                                             }else{
@@ -73,7 +76,7 @@ const OffersStudent = ()=>{
             }
             { offerDetails &&(
                 <div> 
-                    <OfferDetails appliedYet={applied}/> 
+                    <OfferDetails appliedYet={applied} applicationId={applicId}/> 
                     <button onClick={(e)=> setOfferDetails(false)}>
                         Retour à la liste des offres de stage
                     </button>

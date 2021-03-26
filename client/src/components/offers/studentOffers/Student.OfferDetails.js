@@ -1,7 +1,7 @@
 import React, {  useState } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
 import { getCompanyDetails } from '../../../actions/details.actions';
-import { applyNow } from '../../../actions/offer.action';
+import { applyNow, cancelApplication } from '../../../actions/offer.action';
 import { getStudent } from '../../../actions/student.action';
 import {getAllOffers} from '../../../actions/allOffers.actions'
 import CompanyDetails from './CompanyDetails';
@@ -13,6 +13,8 @@ const OfferDetails = (props) => {
     console.log(offer)
     const companies = useSelector((state)=> state.allCompaniesReducer)
     console.log(companies)
+    const applicId = props.applicationId;
+    console.log('applicId : '+applicId)
     const [apply, setApply] = useState(false);
     const [cancel, setCancel] = useState(false)
     const [companyDetails, setCompanyDetails] = useState(false);
@@ -30,7 +32,8 @@ const OfferDetails = (props) => {
         console.log('apply :'+offerId, studentId)
     }
 
-    const handelCancel = async (offerId, studentId) =>{
+    const handelCancel = async (offerId,applicationId, studentId) =>{
+        dispatch(cancelApplication(offerId,applicationId, studentId))
         setCancel(true)
     }
 
@@ -69,7 +72,7 @@ const OfferDetails = (props) => {
                         </span> 
                     </button>
                     {props.appliedYet === false && (<button onClick={(e)=> handleApply(offer._id, student._id)}> Postuler </button>)}
-                    {props.appliedYet && (<button onClick={(e)=> handelCancel(offer._id, student._id)}> Annuler la candidature </button>)}
+                    {props.appliedYet && (<button onClick={(e)=> handelCancel(offer._id,applicId, student._id)}> Annuler la candidature </button>)}
                     </div>
                 )
             }

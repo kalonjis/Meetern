@@ -5,6 +5,7 @@ export const GET_OFFER = 'GET_OFFER';
 export const APPLY_OFFER = 'APPLY_OFFER';
 export const LIKE_STUDENT = 'LIKE_STUDENT';
 export const REJECT_STUDENT = 'REJECT_STUDENT';
+export const CANCEL_APPLICATION = 'CANCEL_APPLICATION';
 
 // function to create a new offer
 export const addOffer = (id, 
@@ -91,6 +92,24 @@ export const rejectStudent = (offerId, applicationId) =>{
                 dispatch({
                     type: REJECT_STUDENT,
                     payload:{applicationId}
+                })
+            })
+            .catch((err)=> console.log(err))
+    }
+};
+
+export const cancelApplication = (offerId, applicationId, studentId) =>{
+    return(dispatch)=>{
+        return axios({
+            method:"patch",
+            url:`${process.env.REACT_APP_API_URL}api/offer//cancelapplication/${offerId}`,
+            data:{applicationId :applicationId,
+                  studentId: studentId}
+            })
+            .then((res)=>{
+                dispatch({
+                    type: CANCEL_APPLICATION,
+                    payload:{applicationId, studentId}
                 })
             })
             .catch((err)=> console.log(err))

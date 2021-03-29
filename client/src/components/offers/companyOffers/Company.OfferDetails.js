@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllOffers } from '../../../actions/allOffers.actions';
 import { getStudentDetails } from '../../../actions/details.actions';
 import { likeStudent, rejectStudent } from '../../../actions/offer.action';
 import { isEmpty, timestampParser } from '../../utils';
@@ -21,14 +22,23 @@ const OfferDetails = (offerId) => {
         setViewProfile(true)
     }
 
-    const handleLike =(offerId, applicationId)=>{
-        dispatch(likeStudent(offerId, applicationId))
-    }
-
-    const handleReject = (offerId, applicationId)=>{
-        dispatch(rejectStudent(offerId, applicationId))
+    const handleLike = async(offerId, applicationId)=>{
+        await dispatch(likeStudent(offerId, applicationId))
+        await dispatch(getAllOffers())
+      
 
     }
+
+    const handleReject = async (offerId, applicationId)=>{
+        await dispatch(rejectStudent(offerId, applicationId))
+        await dispatch(getAllOffers())
+    }
+
+    const handleReturn = async()=>{
+        await dispatch(getAllOffers())
+        setCheckApplication(false)
+    }
+   
     
     return(
         <>
@@ -96,7 +106,7 @@ const OfferDetails = (offerId) => {
                                 <br></br>
                             </div>
                         )}
-                        <button onClick={(e)=>setCheckApplication(false)} >Retour détails offre</button>
+                        <button onClick={(e)=> handleReturn()} >Retour détails offre</button>
                     </div>
                 )
             }

@@ -39,7 +39,9 @@ const OfferDetails = (props) => {
         setCancel(true)
     }
 
-    const handleReturn =(e)=>{
+    const handleReturn = async(studentId)=>{
+        await dispatch(getStudent(studentId))
+        dispatch(getAllOffers())
         setCompanyDetails(false)
         setCancel(false)
     }
@@ -63,7 +65,7 @@ const OfferDetails = (props) => {
                         {  companies.map((company)=> {
                                 if (company._id === offer.companyId){
                                     return (
-                                        <div key={company._id} onClick={handleDetails(offer.companyId)}>
+                                        <div key={company._id} onClick={(e)=>handleDetails(offer.companyId)}>
                                             {company.companyName}
                                         </div>)
                                 } else {
@@ -81,7 +83,7 @@ const OfferDetails = (props) => {
             { companyDetails && apply === false && cancel ===false &&(
                 <div className="company-container">
                     <CompanyDetails/>
-                    <button onClick={handleReturn}>Retour</button>
+                    <button onClick={(e)=>handleReturn(student._id)}>Retour</button>
                 </div>
                 )
             }

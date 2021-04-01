@@ -121,8 +121,8 @@ module.exports.apply = async (req, res) => {
     }
 };
 
-module.exports.cancelApplication = async (req, res) => {
-    if (!ObjectId.isValid(req.params.id)) 
+module.exports.deleteApplication = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.applicationId) || !ObjectId.isValid(req.body.studentId)) 
         res.status(400).send('ID unknown : ' + req.params.id);
     
     try{
@@ -160,7 +160,7 @@ module.exports.cancelApplication = async (req, res) => {
 }
 
 module.exports.editStatus = (req, res) => {
-    if (!ObjectId.isValid(req.params.id)) 
+    if (!ObjectId.isValid(req.params.id)|| !ObjectId.isValid(req.body.applicationId)) 
         res.status(400).send('ID unknown : ' + req.params.id);
 
     try {

@@ -56,7 +56,7 @@ const OffersStudent = ()=>{
                                                                 return (<>
                                                                     <span> Postulé le : {timestampParser(application.timestamp)} </span> 
                                                                     <span> Statut : {application.status} </span>
-                                                                    <span><button onClick={(e)=>{showDetails(offer._id, true, application._id )}}> Détail </button></span>
+                                                                    <span><button onClick={(e)=>{(application.status ==="cancelled by the student"? showDetails(offer._id, false, null):showDetails(offer._id, true, application._id ))}}> Détail </button></span>
                                                                     </>
                                                                 )
                                                             }else{

@@ -102,14 +102,14 @@ export const cancelApplication = (offerId, applicationId, studentId) =>{
     return(dispatch)=>{
         return axios({
             method:"patch",
-            url:`${process.env.REACT_APP_API_URL}api/offer/cancelapplication/${offerId}`,
+            url:`${process.env.REACT_APP_API_URL}api/offer/editStatus/${offerId}`,
             data:{applicationId :applicationId,
-                  studentId: studentId}
+                  status: "cancelled by the student"}
             })
             .then((res)=>{
                 dispatch({
                     type: CANCEL_APPLICATION,
-                    payload:{applicationId, studentId}
+                    payload:{applicationId}
                 })
             })
             .catch((err)=> console.log(err))

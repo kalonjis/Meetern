@@ -10,12 +10,17 @@ const OfferDetails = (offerId) => {
     const offer = useSelector((state)=> state.offerReducer)
     const students = useSelector((state)=> state.allStudentsReducer)
     const [updateOffer, setUpdateOffer] = useState(false);
-    const [checkApplication, setCheckApplication] = useState(false);
+    const [checkApplications, setCheckApplications] = useState(false);
     const [detailsId, setDetailsId] = useState(null)
     const [viewProfile, setViewProfile] = useState(false);
-
     const dispatch = useDispatch();
     
+    const checkApplication = async ()=>{
+        await dispatch(getAllOffers())
+        setCheckApplications(true)
+
+    }
+
     const checkStudentDetails = (id)=>{
         dispatch(getStudentDetails(id))
         setDetailsId(id)
@@ -36,13 +41,13 @@ const OfferDetails = (offerId) => {
 
     const handleReturn = async()=>{
         await dispatch(getAllOffers())
-        setCheckApplication(false)
+        setCheckApplications(false)
     }
    
     
     return(
         <>
-            {updateOffer === false && checkApplication=== false && (
+            {updateOffer === false && checkApplications=== false && (
                 <div className="details container">
                     <div className="offer-details-container" style={{border:  '2px solid blue', width:'30%'}}>
                         <div>Position : {offer.position}</div>
@@ -54,7 +59,7 @@ const OfferDetails = (offerId) => {
                         <div>Face to face : {offer.faceToface} </div>      
                     </div>
                         {  !isEmpty(offer.applications) && (
-                            <button onClick={(e)=>setCheckApplication(true)}>
+                            <button onClick={(e)=>checkApplication()}>
                                 Voir les candidats 
                             </button>
                             )
@@ -63,7 +68,7 @@ const OfferDetails = (offerId) => {
                     </div>
                 )
             }
-            { checkApplication && !isEmpty(offer.applications) && (
+            { checkApplications && !isEmpty(offer.applications) && (
                 <div className="applications-list-container">
                         { viewProfile === false && (
                         <div>

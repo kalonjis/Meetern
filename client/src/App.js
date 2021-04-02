@@ -32,7 +32,7 @@ function App() {
     if (uid) {
       dispatch(getStudent(uid));
       dispatch(getCompany(uid))
-    }// pour tester mais il faudra changer cela par : dispatch(getUser(uid)) ensuite     const userData = useSelector((state)=>state.userReducer); ensuite setUser({id:uid, type: userData.userType}) 
+    }
   }, [uid, dispatch])
 
   const company = useSelector((state) => state.companyReducer);

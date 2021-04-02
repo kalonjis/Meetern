@@ -53,10 +53,32 @@ const StudentSignUpForm = () => {
                     passwordError.innerHTML = res.data.errors.password;
 
                 } else{
-                    // 
-                    setFormSubmit(true)
-                    res.status(200)
-                    console.log(res)
+                    axios({
+                        method: "post",
+                        url:`${process.env.REACT_APP_API_URL}api/student/login`,
+                        withCredentials: true,
+                        data: {
+                            email,
+                            password,
+                        }
+                    }) 
+                    .then((res)=>{
+                        // console.log(res)
+                        // if(res.data.errors) {
+                        //     emailError.innerHTML = res.data.errors.email;
+                        //     passwordError.innerHTML = res.data.errors.password;
+                        // } else{
+                            window.location=('/profil')
+                            res.status(200)
+                            console.log(res)
+                        // }
+                    })
+                    .catch((err) =>{
+                        console.log(err)
+                    })
+                    // setFormSubmit(true)
+                    // res.status(200)
+                    // console.log(res)
                 }
             })
             .catch((err) =>{

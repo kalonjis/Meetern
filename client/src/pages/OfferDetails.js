@@ -1,5 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllOffers } from '../actions/allOffers.actions';
+import { likeStudent, rejectStudent } from '../actions/offer.action';
+import ApplicationCard from '../components/offers/companyOffers/ApplicationCard';
 
 // import {useParams} from 'react-router-dom';
 
@@ -7,7 +10,27 @@ import { useSelector } from 'react-redux';
 const OfferDetails = () => {
 
     const offer = useSelector(state => state.offerReducer);
-    console.log(offer)
+    const [applications, setApplications] = useState([])
+    
+    useEffect(()=>{
+        if(offer){
+            setApplications(offer.applications)
+        }
+    }, [offer])
+    console.log(applications)
+
+    const dispatch = useDispatch();
+
+    const handleLike = async(offerId, applicationId)=>{
+        await dispatch(likeStudent (offerId, applicationId))
+        await dispatch( getAllOffers)
+    }
+
+    const handleReject = async (offerId, applicationId)=>{
+        await dispatch(rejectStudent (offerId, applicationId))
+        await dispatch( getAllOffers)
+
+    }
 
     return (
         <div className= "company-offer-details-container">
@@ -19,6 +42,21 @@ const OfferDetails = () => {
                 <div> Duration :  {offer.internshipDuration} </div>
                 <div>Place :  {offer.internshipPlace} </div>
                 <div>Face to face : {offer.faceToface} </div>
+            </div>
+
+            <div className="applications-list-container">
+                <h2>Liste des candidats </h2>
+                <ol>
+                    {
+                        applications.map((application)=> (
+                            <>
+                            <ApplicationCard key={application._id} application={application} />
+                            <button onClick={(e)=>handleLike(offer._id, application._id)}>Like</button><button onClick={(e)=>handleReject(offer._id, application._id)}>Reject</button>
+                            </>
+                        ))
+
+                    }
+                </ol>
             </div>
 
         </div>

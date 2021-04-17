@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllStudents } from '../../../actions/allStudents.actions';
-import { getOffer } from '../../../actions/offer.action';
-import OfferDetails from './Company.OfferDetails';
-import CreateOfferForm from './CreateOfferForm';
+import { useSelector } from 'react-redux';
+// import { getAllStudents } from '../../../actions/allStudents.actions';
+// import { getOffer } from '../../../actions/offer.action';
+// import OfferDetails from './Company.OfferDetails';
+// import CreateOfferForm from './CreateOfferForm';
 import OfferCard from './OfferCard';
 
 

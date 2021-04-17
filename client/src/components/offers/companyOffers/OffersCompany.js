@@ -18,8 +18,6 @@ const OffersCompany = () =>{
         }
     },[allOffers, company])
     
-    console.log(myOffers)
-
     return (
         <div className="offers-company-container">
             <h1>Welcome to the company offer page</h1>
@@ -40,17 +38,7 @@ const OffersCompany = () =>{
 
     // const [createForm, setCreateForm] = useState(false);
     // const [offerDetails, setOfferDetails] = useState(false);
-    // const [detailsId, setDetailsId] = useState(null)
     // const dispatch = useDispatch();
-
-    
-
-    // const showDetails = (offerId) =>{
-    //     dispatch(getAllStudents())
-    //     dispatch(getOffer(offerId))
-    //     setDetailsId(offerId)
-    //     setOfferDetails(true);
-    // }
 
     // // function used as props for <CreatForm> (line 64)
     // const handleSubmit = (e)=>{

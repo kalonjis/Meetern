@@ -49,7 +49,7 @@ return (
                 {
                     applicationList.map((application)=> (
                         <li key={application._id}>
-                        <ApplicationCard  application={application} />
+                        <ApplicationCard application={application} />
                         <button onClick={(e)=>handleLike(offer._id, application._id)}>Like</button><button onClick={(e)=>handleReject(offer._id, application._id)}>Reject</button>
                         </li>
                     ))
@@ -58,7 +58,7 @@ return (
         </div>
 
     </div>
-)
+    )
 }   
 
 export default OfferDetailsCompany;

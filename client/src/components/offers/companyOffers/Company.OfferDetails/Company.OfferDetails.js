@@ -5,6 +5,7 @@ import { likeStudent, rejectStudent } from '../../../../actions/offer.action'
 import ApplicationCard from '../ApplicationCard';
 import { isEmpty } from '../../../utils';
 import './Company.OfferDetails.css'
+import OfferCard from '../../OfferCard';
 
 const OfferDetailsCompany = () => {
     const offer = useSelector((state)=> state.offerReducer);
@@ -31,15 +32,8 @@ const OfferDetailsCompany = () => {
 
     return (
         <div className= "company-offer-details-container">
-            <h1>{offer.position}</h1>
-            <div className="offer-details-container" style={{border: '2px solid blue', width:'30%'}}>
-                <div>Description :  {offer.description} </div>
-                <div>Hiring possibility :  {offer.hiringPossibility} </div>
-                <div>Starting date :  {offer.internshipStart} </div>
-                <div> Duration :  {offer.internshipDuration} </div>
-                <div>Place :  {offer.internshipPlace} </div>
-                <div>Face to face : {offer.faceToface} </div>
-            </div>
+            <OfferCard offer={offer}/>
+            
             <div className="applications-list-container">
                 <h2>Liste des candidats </h2>
                 <>

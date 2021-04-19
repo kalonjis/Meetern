@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CreateOfferForm from './CreateOfferForm';
 import OfferCard from '../OfferCard';
+import { Link } from 'react-router-dom'
 
 const OffersCompany = () =>{
     const company =  useSelector((state)=> state.companyReducer);
@@ -22,13 +23,16 @@ const OffersCompany = () =>{
                     <h1>Welcome to the company offer page</h1>
                     <h2>Your offers list</h2> 
                     <button onClick={ e=> setAddOffer(true)}>ADD an OFFER</button>
-                    <ol className="offers-company-list">
+                    <ul className="offers-company-list">
                         {
                             myOffers.map( offer=> (
-                                <OfferCard key={offer._id} offer={offer} />
+                                <li key={offer._id}>
+                                    <OfferCard  offer={offer} />
+                                    <span> <Link to={`/offers/${offer._id}`}>View</Link></span>
+                                </li>
                             ))
                         }
-                    </ol>
+                    </ul>
                 </div>
             )}
             {addOffer &&(

@@ -32,7 +32,7 @@ const OfferDetailsCompany = () => {
     return (
         <div className= "company-offer-details-container">
             <h1>{offer.position}</h1>
-            <div className="offer-details-container" style={{border:  '2px solid blue', width:'30%'}}>
+            <div className="offer-details-container" style={{border: '2px solid blue', width:'30%'}}>
                 <div>Description :  {offer.description} </div>
                 <div>Hiring possibility :  {offer.hiringPossibility} </div>
                 <div>Starting date :  {offer.internshipStart} </div>
@@ -50,7 +50,10 @@ const OfferDetailsCompany = () => {
                         {applicationList.map((application) => (
                             <li key={application._id}>
                                 <ApplicationCard application={application} />
-                                <button onClick={(e)=>handleLike(offer._id, application._id)}>Like</button> <button onClick={(e)=>handleReject(offer._id, application._id)}> Reject</button>
+                                <div className="application-card-row">
+                                <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>
+                                    <button onClick={(e)=>handleReject(offer._id, application._id)} className="reject"> Reject</button>
+                                </div>
                             </li>
                             ))
                         }

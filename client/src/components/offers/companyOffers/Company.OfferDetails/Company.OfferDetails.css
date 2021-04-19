@@ -1,5 +1,8 @@
-h1 {
+h1, h2{
    text-align: center; 
+}
+ul{
+  list-style: none;  
 }
 .offer-details-container {
     width: 30%;
@@ -13,6 +16,26 @@ h1 {
 }
 .applicationCard-container li{
     border: 5px solid rgb(68, 152, 190);
+    border-radius: 10px;
     margin: 10px 0;
     padding: 0 10px;
+}
+.application-card-row{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.application-card-row button{
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    margin-left: 5px;
+}
+.like{
+    background-color: rgb(107, 231, 173);
+    color: rgb(248, 243, 223);
+}
+.reject{
+    background-color: rgb(235, 65, 43);
+    color: rgb(248, 243, 223);
 }

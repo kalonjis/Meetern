@@ -42,7 +42,7 @@ const studentSchema = new mongoose.Schema(
         },
         picture: {
             type: String,
-            default: "./uploads/student/profil/random-student.png"
+            default: "./uploads/profil/students/random-student.jpg"
         },
         userType: {
             type: String,

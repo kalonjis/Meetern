@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CreateOfferForm from './CreateOfferForm';
-import OfferCard from './OfferCard';
+import OfferCard from '../OfferCard';
 
 const OffersCompany = () =>{
     const company =  useSelector((state)=> state.companyReducer);

@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-// import { getAllStudents } from '../../../actions/allStudents.actions';
-// import { getOffer } from '../../../actions/offer.action';
-// import OfferDetails from './Company.OfferDetails';
-// import CreateOfferForm from './CreateOfferForm';
+import CreateOfferForm from './CreateOfferForm';
 import OfferCard from './OfferCard';
-
 
 const OffersCompany = () =>{
     const company =  useSelector((state)=> state.companyReducer);
     const allOffers = useSelector((state)=> state.allOffersReducer);
     const [myOffers, setMyOffers] = useState([]);
+    const [addOffer, setAddOffer] = useState(false);
 
     useEffect(()=>{
         if(allOffers[0]){
@@ -19,19 +16,25 @@ const OffersCompany = () =>{
     },[allOffers, company])
     
     return (
-        <div className="offers-company-container">
-            <h1>Welcome to the company offer page</h1>
-
-            <h2>Your offers list</h2> 
-            <button>ADD an OFFER</button>
-            <ol className="offers-company-list">
-                {
-                    myOffers.map( offer=> (
-                        <OfferCard key={offer._id} offer={offer} />
-                    ))
-                }
-            </ol>
-        </div>
+        <>
+            { addOffer === false &&(
+                <div className="offers-company-container">
+                    <h1>Welcome to the company offer page</h1>
+                    <h2>Your offers list</h2> 
+                    <button onClick={ e=> setAddOffer(true)}>ADD an OFFER</button>
+                    <ol className="offers-company-list">
+                        {
+                            myOffers.map( offer=> (
+                                <OfferCard key={offer._id} offer={offer} />
+                            ))
+                        }
+                    </ol>
+                </div>
+            )}
+            {addOffer &&(
+                <CreateOfferForm />
+            )}
+        </>
     )
 }
 export default OffersCompany;

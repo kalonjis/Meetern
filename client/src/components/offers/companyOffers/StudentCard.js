@@ -17,7 +17,7 @@ const StudentCard = ({id})=>{
     console.log(student.picture)
 
     return (
-        <div className="student-info" style={{border:  '2px solid blue', width:'30%'}} >
+        <div className="student-info">
             <h2>{student.firstname +" "+ student.lastname}</h2>
             <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.png'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
             <p>Bio : {student.bio}</p>

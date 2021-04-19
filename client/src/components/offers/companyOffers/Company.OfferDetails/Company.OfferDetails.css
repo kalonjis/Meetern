@@ -1,0 +1,18 @@
+h1 {
+   text-align: center; 
+}
+.offer-details-container {
+    width: 30%;
+    margin: 0 auto;
+}
+.applicationCard-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between ;
+
+}
+.applicationCard-container li{
+    border: 5px solid rgb(68, 152, 190);
+    margin: 10px 0;
+    padding: 0 10px;
+}

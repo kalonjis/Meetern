@@ -10,8 +10,6 @@ const offer = useSelector((state)=> state.offerReducer);
 const [applicationList, setApplicationList] = useState([])
 const dispatch = useDispatch();
 
-console.log(offer.position);
-
 useEffect(()=>{
     if(!isEmpty(offer)){
         let appList = []
@@ -21,7 +19,6 @@ useEffect(()=>{
         setApplicationList(appList)
     }
 },[offer])
-console.log(applicationList)
 
 const handleLike = (offerId, applicationId)=>{
     dispatch(likeStudent (offerId, applicationId))

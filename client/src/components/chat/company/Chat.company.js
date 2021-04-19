@@ -7,7 +7,7 @@ import StudentCard from './StudentCard';
     const company =  useSelector((state)=> state.companyReducer);
     const allOffers = useSelector((state)=> state.allOffersReducer);
     const [myOffers, setMyOffers] = useState([]);
-    const [studentList, setStudentList] = useState([]);
+    const [studentIdList, setStudentIdList] = useState([]);
     
     useEffect(()=>{
         if (allOffers[0]){
@@ -28,18 +28,18 @@ import StudentCard from './StudentCard';
                     }
                 })
             ))
-            setStudentList([...new Set (likedList)])
+            setStudentIdList([...new Set (likedList)])
         }
     },[myOffers])
-    console.log(studentList)
+    console.log(studentIdList)
 
     return (
         <div>
             contact a student!
            <ul>
               {
-                  studentList.map( student => {
-                    return <StudentCard id={student}/>
+                  studentIdList.map( studentId => {
+                    return <StudentCard id={studentId}/>
                   })
               } 
            </ul>

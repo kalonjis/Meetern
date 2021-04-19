@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { isEmpty } from '../../utils';
 
+
 const StudentCard = ({id})=>{
 
     const allStudents = useSelector( state => state.allStudentsReducer)
@@ -13,12 +14,12 @@ const StudentCard = ({id})=>{
            return setStudent((allStudents.filter ( student => student._id === id))[0])
         }
     },[id, allStudents])
-
+    console.log(student.picture)
 
     return (
         <div className="student-info" style={{border:  '2px solid blue', width:'30%'}} >
             <h2>{student.firstname +" "+ student.lastname}</h2>
-            <img src={student.picture} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
+            <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.png'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
             <p>Bio : {student.bio}</p>
             <p> internshipStart:  {student.internshipStart}</p>
             <p>internshipDuration: {student.internshipDuration}</p>

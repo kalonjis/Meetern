@@ -32,7 +32,10 @@ const OffersCompany = () =>{
                 </div>
             )}
             {addOffer &&(
+                <>
                 <CreateOfferForm />
+                <button onClick={ e=> setAddOffer(false)} >Cancel</button>
+                </>
             )}
         </>
     )

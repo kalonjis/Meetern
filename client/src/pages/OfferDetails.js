@@ -3,13 +3,13 @@ import OfferDetailsCompany from '../components/offers/companyOffers/Company.Offe
 import {useParams} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getOffer } from '../actions/offer.action';
-import { getAllStudents } from '../actions/allStudents.actions'
+// import { getAllStudents } from '../actions/allStudents.actions'
 
 const OfferDetails = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
     dispatch(getOffer(id))
-    dispatch(getAllStudents())
+    // dispatch(getAllStudents())
 
     return (
       <div className="offers-page">

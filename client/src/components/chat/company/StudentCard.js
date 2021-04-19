@@ -8,7 +8,7 @@ const StudentCard = ({id}) => {
     useEffect(()=>{
         setStudent((allStudents.filter ( student => student._id === id))[0])
     },[id, allStudents])
-    console.log(student.picture)
+
     return (
         <li key={id}>
             <img src={student.picture} alt="pic" style={{width: "30px" , height: "30px"}}/>

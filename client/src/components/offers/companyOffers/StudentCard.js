@@ -19,7 +19,7 @@ const StudentCard = ({id})=>{
     return (
         <div className="student-info">
             <h2>{student.firstname +" "+ student.lastname}</h2>
-            <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.png'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
+            <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
             <p>Bio : {student.bio}</p>
             <p> internshipStart:  {student.internshipStart}</p>
             <p>internshipDuration: {student.internshipDuration}</p>

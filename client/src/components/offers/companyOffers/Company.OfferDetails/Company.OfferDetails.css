@@ -1,6 +1,37 @@
-/* h1, h2{
-   text-align: center; 
+.company-offer-details-page-container .offerCard-container{
+    width: 40%;
+    margin: 20px auto;
+    border: 5px solid rgb(4, 174, 241);
+    border-radius: 10px;
+    background: rgb(206, 239, 240);
 }
+.company-offer-details-page-container h1{
+    background: rgb(246, 244, 244);
+    text-align: center;
+    margin-top: 0;
+    padding: 20px;
+ }
+.company-offer-details-page-container .offerCard-details{
+    padding-left: 10px;
+ }
+.company-applications-list-container h2{
+    text-align: center;
+}
+.company-applicationCards-container{
+  list-style: none;  
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between ;
+}
+.company-applicationCard{
+    width: 30%;
+    border: 5px solid rgb(4, 174, 241);
+    border-radius: 10px;
+    background: rgb(206, 239, 240);
+    margin-top: 20px;
+}
+
+/* 
 ul{
   list-style: none;  
 }

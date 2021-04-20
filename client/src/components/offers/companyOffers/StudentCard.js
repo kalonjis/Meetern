@@ -17,16 +17,18 @@ const StudentCard = ({id})=>{
     console.log(student.picture)
 
     return (
-        <div className="student-info">
-            <h2>{student.firstname +" "+ student.lastname}</h2>
-            <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
-            <p>Bio : {student.bio}</p>
-            <p> internshipStart:  {student.internshipStart}</p>
-            <p>internshipDuration: {student.internshipDuration}</p>
-            <p>school: {student.school}</p>
-            <p>studyOption: {student.studyOption}</p>
-            <p>currentStudyLevel: {student.currentStudyLevel}</p>
-            <p>portfolio: {student.portfolio}</p>
+        <div className="studentCard-container">
+            <h3>{student.firstname +" "+ student.lastname}</h3>
+            <div className="studentCard-student-details">
+                <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
+                <p>Bio : {student.bio}</p>
+                <p> internshipStart:  {student.internshipStart}</p>
+                <p>internshipDuration: {student.internshipDuration}</p>
+                <p>school: {student.school}</p>
+                <p>studyOption: {student.studyOption}</p>
+                <p>currentStudyLevel: {student.currentStudyLevel}</p>
+                <p>portfolio: <a href={student.portfolio}>{student.portfolio}</a></p>
+            </div>
         </div>
     )
 }

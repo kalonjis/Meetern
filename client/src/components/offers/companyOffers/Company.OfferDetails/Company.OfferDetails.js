@@ -32,18 +32,18 @@ const OfferDetailsCompany = () => {
     }
 
     return (
-        <div className= "company-offer-details-container">
+        <div className= "company-offer-details-page-container">
             <OfferCard offer={offer}/>
             
-            <div className="applications-list-container">
+            <div className="company-applications-list-container">
                 <h2>Liste des candidats </h2>
                 <>
                 {applicationList.length === 0 ? (
                     <div>Not any application yet. Let's promote it!</div>
                     ):(
-                    <ul className="applicationCard-container">
+                    <ul className="company-applicationCards-container">
                         {applicationList.map((application) => (
-                            <li key={application._id}>
+                            <li key={application._id} className="company-applicationCard">
                                 <StudentCard id={application.studentId} />
                                 <ApplicationCard application={application} />
                                 <div className="application-card-row">

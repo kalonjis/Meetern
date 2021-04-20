@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  getOffer } from '../../../actions/offer.action';
-import OfferDetails from './Student.OfferDetails/Student.OfferDetails';
-import {isEmpty, timestampParser} from '../../utils'
-import { getAllOffers } from '../../../actions/allOffers.actions';
-import OfferCard from '../OfferCard';
+import {  getOffer } from '../../../../actions/offer.action';
+import OfferDetails from '../Student.OfferDetails/Student.OfferDetails';
+import {isEmpty, timestampParser} from '../../../utils'
+import { getAllOffers } from '../../../../actions/allOffers.actions';
+import OfferCard from '../../OfferCard';
+import { Link } from 'react-router-dom'
+import ApplicationCard from '../../ApplicationCard';
+import './Offers.student.css'
+
 
 
 
 const OffersStudent = ()=>{
     const student = useSelector((state)=>state.studentReducer);
-    const [applications, setApplications] = useState([]);
+    const [applicationsIdList, setApplicationsIdList] = useState([]);
     const allOffers = useSelector((state)=>state.allOffersReducer);
     const [opportunities, setOpportunities] = useState([]);
 
     useEffect(()=>{
         if(!isEmpty(student)){
-            setApplications(student.applications)
+            setApplicationsIdList(student.applications)
         }
     },[student])
-    // console.log(student.applications)
 
     useEffect(()=>{
         if(!isEmpty(allOffers)){
-            setOpportunities(allOffers.filter( offer => !applications.includes(offer._id)))
+            setOpportunities(allOffers.filter( offer => !applicationsIdList.includes(offer._id)))
         }
-    }, [allOffers, applications])
+    }, [allOffers, applicationsIdList])
+    console.log(applicationsIdList)
 
-    console.log(opportunities)
 
     // const opportunities = 
     // const dispatch = useDispatch();
@@ -50,16 +53,44 @@ const OffersStudent = ()=>{
             student
             <div className="opportunities-container">
                 <h2>Find the perfect internship that fits to you the best</h2>
-                <ol>
+                <ul>
                     {
                         opportunities.map(offer => (
-                           <li key={offer._id}>
-                               <OfferCard offer={offer} />
-                           </li> 
+                            <li key={offer._id}>
+                                <OfferCard  offer={offer} />
+                                <Link to={`/offers/${offer._id}`}>View</Link>
+                            </li>
                         ))
                     }
-                </ol>
-
+                </ul>
+            </div>
+            <div className="myApplications-container">
+                <h2> Your applications </h2>
+                <ul>
+                    {
+                        allOffers.map((offer)=>{
+                            if (applicationsIdList.includes(offer._id)){
+                                return (
+                                    <li key={offer._id} className= "applicationCard-container">
+                                            {   <>
+                                                <OfferCard offer={offer}/>
+                                                {offer.applications.map( application =>{
+                                                    if(application.studentId === student._id){
+                                                        return <ApplicationCard application={application} />
+                                                    }else{
+                                                        return null
+                                                    }
+                                                })}
+                                                </>
+                                            }
+                                    </li>
+                                    )
+                            } else {
+                                return null
+                            }      
+                        })
+                    }
+                </ul>
             </div>
         </div>
         // <>
@@ -76,9 +107,6 @@ const OffersStudent = ()=>{
         //                     )}
         //                 </ol>
         //             </div>
-        //             <div className="myApplications-container">
-        //                 <h2> Your applications </h2>
-        //                 <ol>
         //                     {   allOffers.map((offer)=>{
         //                             if (myApplications.includes(offer._id)){
         //                                 return (

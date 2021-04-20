@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { likeStudent, rejectStudent } from '../../../../actions/offer.action'
-import ApplicationCard from '../ApplicationCard';
+import ApplicationCard from '../../ApplicationCard';
 import { isEmpty } from '../../../utils';
 import './Company.OfferDetails.css'
 import OfferCard from '../../OfferCard';
+import StudentCard from '../StudentCard';
 
 const OfferDetailsCompany = () => {
     const offer = useSelector((state)=> state.offerReducer);
@@ -43,6 +44,7 @@ const OfferDetailsCompany = () => {
                     <ul className="applicationCard-container">
                         {applicationList.map((application) => (
                             <li key={application._id}>
+                                <StudentCard id={application.studentId} />
                                 <ApplicationCard application={application} />
                                 <div className="application-card-row">
                                 <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>

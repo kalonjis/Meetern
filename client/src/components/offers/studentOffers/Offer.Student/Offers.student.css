@@ -1,0 +1,19 @@
+.opportunities-container h2{
+    width: 50%;
+    margin: 0 auto;
+}
+.opportunities-container ul{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between ;
+    width: 100%;
+}
+.opportunities-container li{
+    width: 30%;
+    border: 5px solid blue;
+    padding: 0;
+}
+.offer-details-container{
+    width: 100%;
+    margin: 0 auto; 
+}

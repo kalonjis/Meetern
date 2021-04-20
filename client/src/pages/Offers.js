@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../components/AppContext';
-import OffersCompany from '../components/offers/companyOffers/OffersCompany';
-import OffersStudent from '../components/offers/studentOffers/Offers.student';
+import OffersCompany from '../components/offers/companyOffers/OffersCompany/OffersCompany';
+import OffersStudent from '../components/offers/studentOffers/Offer.Student/Offers.student';
 
 const Offers = ()=> {
   const user = useContext(UserContext)

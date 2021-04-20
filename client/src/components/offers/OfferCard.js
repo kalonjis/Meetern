@@ -3,15 +3,15 @@ import React from 'react'
 const OfferCard = ({offer}) => {
     
     return (
-        <div className="offer-card-container">
+        <div>
             <h1>{offer.position}</h1>
-            <div className="offer-details-container" style={{border: '2px solid blue', width:'30%'}}>
-                <div>Description :  {offer.description} </div>
-                <div>Hiring possibility :  {offer.hiringPossibility} </div>
-                <div>Starting date :  {offer.internshipStart} </div>
-                <div> Duration :  {offer.internshipDuration} </div>
-                <div>Place :  {offer.internshipPlace} </div>
-                <div>Face to face : {offer.faceToface} </div>
+            <div>
+                <p>Description :  {offer.description} </p>
+                <p>Hiring possibility :  {offer.hiringPossibility} </p>
+                <p>Starting date :  {offer.internshipStart} </p>
+                <p> Duration :  {offer.internshipDuration} </p>
+                <p>Place :  {offer.internshipPlace} </p>
+                <p>Face to face : {offer.faceToface} </p>
             </div>
         </div>
     )

@@ -39,7 +39,9 @@ const OfferDetailsCompany = () => {
                 <h2>Liste des candidats </h2>
                 <>
                 {applicationList.length === 0 ? (
-                    <div>Not any application yet. Let's promote it!</div>
+                    <div className="company-0-application-message">
+                        Not any application yet. Let's promote it! Subscribe for a Premium account
+                    </div>
                     ):(
                     <ul className="company-applicationCards-container">
                         {applicationList.map((application) => (
@@ -47,7 +49,7 @@ const OfferDetailsCompany = () => {
                                 <StudentCard id={application.studentId} />
                                 <ApplicationCard application={application} />
                                 <div className="company-applicationCard-bottom">
-                                <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>
+                                    <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>
                                     <button onClick={(e)=>handleReject(offer._id, application._id)} className="reject"> Reject</button>
                                 </div>
                             </li>

@@ -1,19 +1,54 @@
+.offers-student-page-container h1{
+    text-align: center;
+}
+
 .opportunities-container h2{
-    width: 50%;
-    margin: 0 auto;
+    text-align: center;
 }
 .opportunities-container ul{
+    list-style: none;  
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between ;
-    width: 100%;
+    justify-content: space-between 
 }
-.opportunities-container li{
+.opportunityCard-student-container{
     width: 30%;
-    border: 5px solid blue;
-    padding: 0;
+    border: 5px solid rgb(4, 174, 241);
+    border-radius: 10px;
+    margin: 10px auto;
+    background: rgb(206, 239, 240);
 }
-.offer-details-container{
-    width: 100%;
-    margin: 0 auto; 
+.opportunityCard-student-container .offerCard-container h1{
+    background: rgb(246, 244, 244);
+    margin: 0 0 10px 0;
+    border-radius: 5px 5px 0 0;
+
+}
+.opportunityCard-student-container .offerCard-details{
+    padding-left: 10px;
+    padding-bottom: 5px;
+}
+.student-opportunityCard-bottom{
+    text-align: center;
+    background: rgb(251, 248, 248) ;
+    border:  solid rgb(251, 248, 248);
+    border-radius: 0 0 5px 5px;
+    margin: 10px 0 0 0;
+    padding-top: 10px;
+}
+.student-applications-container h2{
+    text-align: center;
+}
+.student-applications-container ul{
+    list-style: none;  
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+.student-applicationCard-container{
+    width: 30%;
+    border: 5px solid rgb(4, 174, 241);
+    border-radius: 10px;
+    margin: 10px;
+    background: rgb(206, 239, 240);
 }

@@ -31,47 +31,32 @@ const OffersStudent = ()=>{
     }, [allOffers, applicationsIdList])
     console.log(applicationsIdList)
 
-
-    // const opportunities = 
-    // const dispatch = useDispatch();
-    // const [offerDetails, setOfferDetails] = useState(false);
-    // const [applied, setApplied] = useState(false);
-    // const [applicId, setApplicId] = useState(null)
-
-    // const showDetails = async (offerId, type, applicationId) =>{
-    //     await dispatch(getOffer(offerId))
-    //     setApplied(type);
-    //     setApplicId(applicationId)
-    //     setOfferDetails(true);
-    // }
-    // const handleReturn = async()=>{
-    //     await dispatch(getAllOffers())
-    //     setOfferDetails(false)
-    // }
     return (
-        <div className="offers-student-container">
-            student
+        <div className="offers-student-page-container">
+            <h1>Welcome to the student offer page</h1>
             <div className="opportunities-container">
                 <h2>Find the perfect internship that fits to you the best</h2>
                 <ul>
                     {
                         opportunities.map(offer => (
-                            <li key={offer._id}>
+                            <li key={offer._id} className="opportunityCard-student-container">
                                 <OfferCard  offer={offer} />
-                                <Link to={`/offers/${offer._id}`}>View</Link>
+                                <div className="student-opportunityCard-bottom">
+                                    <Link to={`/offers/${offer._id}`}>View</Link>
+                                </div>
                             </li>
                         ))
                     }
                 </ul>
             </div>
-            <div className="myApplications-container">
+            <div className="student-applications-container">
                 <h2> Your applications </h2>
                 <ul>
                     {
                         allOffers.map((offer)=>{
                             if (applicationsIdList.includes(offer._id)){
                                 return (
-                                    <li key={offer._id} className= "applicationCard-container">
+                                    <li key={offer._id} className= "student-applicationCard-container">
                                             {   <>
                                                 <OfferCard offer={offer}/>
                                                 {offer.applications.map( application =>{

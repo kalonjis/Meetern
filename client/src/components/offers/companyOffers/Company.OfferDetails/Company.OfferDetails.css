@@ -1,6 +1,7 @@
 .company-offer-details-page-container .offerCard-container{
     width: 40%;
     margin: 20px auto;
+    padding-bottom: 10px;
     border: 5px solid rgb(4, 174, 241);
     border-radius: 10px;
     background: rgb(206, 239, 240);
@@ -30,37 +31,50 @@
     background: rgb(206, 239, 240);
     margin-top: 20px;
 }
-
-/* 
-ul{
-  list-style: none;  
-}
-.offer-details-container {
-    width: 30%;
-    margin: 0 auto;
-}
-.applicationCard-container{
+.company-applicationCard .studentCard-container-top{
+    padding-top: 10px;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between ;
+    background: rgb(246, 244, 244);
 
 }
-.applicationCard-container li{
-    border: 5px solid rgb(68, 152, 190);
-    border-radius: 10px;
-    margin: 10px 0;
-    padding: 0 10px;
+.company-applicationCard .studentCard-container-top img{
+    width:100%;
+    margin-left: 20px;
+    border: 2px solid rgb(246, 244, 244);
+    border-radius: 15px;
+    
 }
-.application-card-row{
+.company-applicationCard .studentCard-container-top h3{
+    margin-left: 50px;
+}
+.company-applicationCard .studentCard-student-details{
+    margin-left: 20px;
+}
+.company-applicationCard .application-container{
+    padding-left: 20px;
+    background: rgb(246, 244, 244);
+}
+.company-applicationCard-bottom{
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 10px;
 }
-.application-card-row button{
+.company-applicationCard-bottom button{
     flex: 1;
     text-align: center;
-    padding: 10px 0;
-    margin-left: 5px;
+    padding: 10px;
+    margin-left: 10px;
+    
+}
+
+
+/* 
+
+.applicationCard-container{
+   
+.application-card-row{
+}
+.application-card-row button{
 }
 .like{
     background-color: rgb(107, 231, 173);

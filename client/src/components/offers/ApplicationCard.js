@@ -4,9 +4,9 @@ import { timestampParser } from '../utils';
 const ApplicationCard = ({application}) => {
    
     return (
-            <div>
-                <span> <b>Statut</b> : {application.status} </span> 
-                <span> <b>Déposée le</b> : {timestampParser(application.timestamp)} </span>
+            <div className="application-container">
+                <p className="application-status"> <b>Status</b> : {application.status} </p> 
+                <p className="application-date"> <b>Sent</b> : {timestampParser(application.timestamp)} </p>
             </div>
     )
 }

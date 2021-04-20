@@ -18,9 +18,11 @@ const StudentCard = ({id})=>{
 
     return (
         <div className="studentCard-container">
-            <h3>{student.firstname +" "+ student.lastname}</h3>
-            <div className="studentCard-student-details">
+            <div className="studentCard-container-top">
                 <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
+                <h3>{student.firstname +" "+ student.lastname}</h3>
+            </div>
+            <div className="studentCard-student-details">
                 <p>Bio : {student.bio}</p>
                 <p> internshipStart:  {student.internshipStart}</p>
                 <p>internshipDuration: {student.internshipDuration}</p>

@@ -46,7 +46,7 @@ const OfferDetailsCompany = () => {
                             <li key={application._id} className="company-applicationCard">
                                 <StudentCard id={application.studentId} />
                                 <ApplicationCard application={application} />
-                                <div className="application-card-row">
+                                <div className="company-applicationCard-bottom">
                                 <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>
                                     <button onClick={(e)=>handleReject(offer._id, application._id)} className="reject"> Reject</button>
                                 </div>

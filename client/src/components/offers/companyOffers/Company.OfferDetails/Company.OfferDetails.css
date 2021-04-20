@@ -7,7 +7,7 @@
     background: rgb(206, 239, 240);
 }
 .company-offer-details-page-container h1{
-    background: rgb(246, 244, 244);
+    background: rgb(251, 248, 248);
     text-align: center;
     margin-top: 0;
     padding: 20px;
@@ -34,13 +34,13 @@
 .company-applicationCard .studentCard-container-top{
     padding-top: 10px;
     display: flex;
-    background: rgb(246, 244, 244);
+    background: rgb(251, 248, 248);
 
 }
 .company-applicationCard .studentCard-container-top img{
     width:100%;
     margin-left: 20px;
-    border: 2px solid rgb(246, 244, 244);
+    border: 2px solid rgb(251, 248, 248);
     border-radius: 15px;
     
 }
@@ -52,7 +52,7 @@
 }
 .company-applicationCard .application-container{
     padding-left: 20px;
-    background: rgb(246, 244, 244);
+    background: rgb(251, 248, 248) ;
 }
 .company-applicationCard-bottom{
     display: flex;
@@ -64,7 +64,15 @@
     text-align: center;
     padding: 10px;
     margin-left: 10px;
-    
+    background: rgb(251, 248, 248) ;
+    border: 2px solid rgb(251, 248, 248);
+    border-radius: 15px;
+}
+.company-applicationCard-bottom .like{
+    color: rgb(68, 207, 68);
+}
+.company-applicationCard-bottom .reject{
+    color: rgb(192, 43, 43);
 }
 
 

@@ -21,15 +21,22 @@
     border-radius: 10px;
     margin: 10px auto;
     background: rgb(206, 239, 240);
+}
+.offerCard-company-container .offerCard-container h1{
+   background: rgb(246, 244, 244);
+   margin: 0 0 10px 0
+}
+.offerCard-company-container .offerCard-details{
     padding-left: 10px;
     padding-bottom: 5px;
 }
 .offerCard-company-container-bottom{
-    margin
-    width: 100/3%;
-    background: crimson;
+    width: 40%;
+    margin: 5px auto;
 }
 .offerCard-company-container-bottom button{
+    width: 100%;
+    margin: 0;
     border: 2px solid  rgb(4, 174, 241);
     border-radius: 10px;
 }

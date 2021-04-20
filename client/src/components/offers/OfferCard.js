@@ -3,9 +3,9 @@ import React from 'react'
 const OfferCard = ({offer}) => {
     
     return (
-        <div>
+        <div className= "offerCard-container">
             <h1>{offer.position}</h1>
-            <div>
+            <div className="offerCard-details">
                 <p>Description :  {offer.description} </p>
                 <p>Hiring possibility :  {offer.hiringPossibility} </p>
                 <p>Starting date :  {offer.internshipStart} </p>

@@ -7,23 +7,30 @@ import CompanyCard from '../CompanyCard';
 
 const OfferDetailsStudent = () => {
     const offer = useSelector((state)=> state.offerReducer);
-    const [companyId, setCompanyId] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
 
     useEffect(()=>{
         if(!isEmpty(offer)){
-            setCompanyId(offer.companyId)
+            setIsLoading(false)
         }
     },[offer])
-    console.log(companyId)
+    console.log(offer.companyId)
 
     return (
         <div className= "student-offer-details-page-container">
-            <OfferCard offer={offer}/>
+            {isLoading &&(
+                <h2>Loading</h2>
+                )
+            }
+            { isLoading===false &&(
                 <div>
+                    <OfferCard offer={offer}/>
                     <h2>About The company</h2>
-                    <CompanyCard id={companyId}/>
-                </div>
+                    <CompanyCard id={offer.companyId}/>
+                </div>  
+                )
+            }
         </div>
     )
 }
@@ -31,31 +38,8 @@ const OfferDetailsStudent = () => {
 export default OfferDetailsStudent
 
 
-// import React, {  useState } from 'react';
-// import {  useDispatch, useSelector } from 'react-redux';
-// import { getCompanyDetails } from '../../../../actions/details.actions';
-// import { applyNow, cancelApplication } from '../../../../actions/offer.action';
-// import { getStudent } from '../../../../actions/student.action';
-// import {getAllOffers} from '../../../../actions/allOffers.actions'
-// import CompanyDetails from '../CompanyDetails';
 
-// const OfferDetails = (props) => {
-//     console.log(props.appliedYet)
-//     const offer = useSelector((state)=> state.offerReducer)
-//     const student = useSelector((state)=> state.studentReducer)
-//     console.log(offer)
-//     const companies = useSelector((state)=> state.allCompaniesReducer)
-//     console.log(companies)
-//     const applicId = props.applicationId;
-//     console.log('applicId : '+applicId)
-//     const [apply, setApply] = useState(false);
-//     const [cancel, setCancel] = useState(false)
-//     const [companyDetails, setCompanyDetails] = useState(false);
-//     const dispatch = useDispatch();
 
-//     const handleDetails =(id)=>{
-//         dispatch(getCompanyDetails(id))
-//     }
     
 //     const handleApply = async(offerId, studentId)=>{
 //         await dispatch(applyNow(offerId, studentId))

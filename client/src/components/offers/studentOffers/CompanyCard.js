@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { isEmpty } from '../../utils';
 
 const CompanyCard = ({id}) =>{
     const allCompanies = useSelector((state)=>state.allCompaniesReducer)
     const [company, setCompany] = useState([])
 
     useEffect(()=>{
-        if(allCompanies){
-            setCompany(allCompanies.filter( company => company._id === id)[0])
+        if(!isEmpty(allCompanies)){
+            return setCompany((allCompanies.filter( company => company._id === id))[0])
         }
-    },[allCompanies, id])
+    },[id, allCompanies])
 
-    console.log(company)
+    console.log(company.picture)
 
     return(
         <div className="company-info" style={{border:  '2px solid blue', width:'30%'}}>

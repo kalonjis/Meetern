@@ -1,21 +1,35 @@
 import React, { useState } from 'react';
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { getAllOffers } from '../../../../actions/allOffers.actions';
+import { getStudent} from '../../../../actions/student.action';
+import { applyNow } from '../../../../actions/offer.action';
 import { isEmpty } from '../../../utils';
+import ApplicationCard from '../../ApplicationCard';
 import OfferCard from '../../OfferCard';
 import CompanyCard from '../CompanyCard';
 
 const OfferDetailsStudent = () => {
     const offer = useSelector((state)=> state.offerReducer);
+    const student = useSelector((state => state.studentReducer))
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
+
+    const handleApply = async(offerId, studentId)=>{
+        await dispatch(applyNow(offerId, studentId))
+              dispatch(getAllOffers())
+              dispatch(getStudent(studentId))
+              console.log('apply :'+offerId, studentId)
+        }
 
     useEffect(()=>{
         if(!isEmpty(offer)){
             setIsLoading(false)
         }
     },[offer])
+
     console.log(offer.companyId)
+    console.log(student.firstname)
 
     return (
         <div className= "student-offer-details-page-container">
@@ -28,6 +42,28 @@ const OfferDetailsStudent = () => {
                     <OfferCard offer={offer}/>
                     <h2>About The company</h2>
                     <CompanyCard id={offer.companyId}/>
+                    <h2>Application info</h2>
+                    <>
+                    { ((student.applications).includes(offer._id)) ? (
+                        <div>
+                            {   offer.applications.map( application =>{
+                                    if (application.studentId === student._id){
+                                        return <ApplicationCard application={application}/>
+                                    }else{
+                                        return null
+                                    }
+                                })
+                            }
+                           <button>Annuler la candidature</button>
+                        </div>
+                        ): (
+                        <div>
+                            Saisissez votre chance : <button onClick={e=>{handleApply(offer._id, student._id)}}> Apply Now</button>
+                        </div>)
+                    }
+                    
+                    
+                    </>
                 </div>  
                 )
             }

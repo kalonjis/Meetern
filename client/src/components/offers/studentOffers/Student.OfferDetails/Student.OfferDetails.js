@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { isEmpty } from '../../../utils';
+import OfferCard from '../../OfferCard';
+import CompanyCard from '../CompanyCard';
 
 const OfferDetailsStudent = () => {
+    const offer = useSelector((state)=> state.offerReducer);
+    const [companyId, setCompanyId] = useState(null)
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        if(!isEmpty(offer)){
+            setCompanyId(offer.companyId)
+        }
+    },[offer])
+    console.log(companyId)
+
     return (
-        <div>
-            offerDetail student
+        <div className= "student-offer-details-page-container">
+            <OfferCard offer={offer}/>
+                <div>
+                    <h2>About The company</h2>
+                    <CompanyCard id={companyId}/>
+                </div>
         </div>
     )
 }

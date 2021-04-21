@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {  getOffer } from '../../../../actions/offer.action';
-import OfferDetails from '../Student.OfferDetails/Student.OfferDetails';
+import { useSelector } from 'react-redux';
 import {isEmpty, timestampParser} from '../../../utils'
-import { getAllOffers } from '../../../../actions/allOffers.actions';
 import OfferCard from '../../OfferCard';
 import { Link } from 'react-router-dom'
 import ApplicationCard from '../../ApplicationCard';

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllOffers } from '../../../../actions/allOffers.actions';
 import { getStudent} from '../../../../actions/student.action';
-import { applyNow } from '../../../../actions/offer.action';
+import { applyNow, getOffer } from '../../../../actions/offer.action';
 import { isEmpty } from '../../../utils';
 import ApplicationCard from '../../ApplicationCard';
 import OfferCard from '../../OfferCard';
@@ -16,17 +15,17 @@ const OfferDetailsStudent = () => {
     const dispatch = useDispatch();
 
     const handleApply = async(offerId, studentId)=>{
-        await dispatch(applyNow(offerId, studentId))
-              dispatch(getAllOffers())
-              dispatch(getStudent(studentId))
-              console.log('apply :'+offerId, studentId)
-        }
+        await dispatch(applyNow(offerId, studentId));
+        await dispatch( getOffer(offerId) );
+        await dispatch(getStudent(studentId));
+        console.log('apply :'+offerId, studentId);
+    }
 
     useEffect(()=>{
-        if(!isEmpty(offer)){
+        if(!isEmpty(offer) && !isEmpty(student)){
             setIsLoading(false)
         }
-    },[offer])
+    },[offer, student])
 
     console.log(offer.companyId)
     console.log(student.firstname)

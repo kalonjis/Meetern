@@ -7,12 +7,19 @@ import { isEmpty } from '../../../utils';
 import ApplicationCard from '../../ApplicationCard';
 import OfferCard from '../../OfferCard';
 import CompanyCard from '../CompanyCard';
+import { getAllCompanies } from '../../../../actions/allCompanies.actions';
 
 const OfferDetailsStudent = () => {
     const offer = useSelector((state)=> state.offerReducer);
     const student = useSelector((state => state.studentReducer))
+    const [fetchCompanies, setFetchCompanies] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
+
+    const fetchNewCompanies = async() =>{
+        await dispatch(getAllCompanies());
+        setFetchCompanies(false)
+    }
 
     const handleApply = async(offerId, studentId)=>{
         await dispatch(applyNow(offerId, studentId));
@@ -22,10 +29,14 @@ const OfferDetailsStudent = () => {
     }
 
     useEffect(()=>{
-        if(!isEmpty(offer) && !isEmpty(student)){
+        fetchNewCompanies()
+    })
+
+    useEffect(()=>{
+        if(!isEmpty(offer) && !isEmpty(student) && fetchCompanies===false){
             setIsLoading(false)
         }
-    },[offer, student])
+    },[offer, student, fetchCompanies])
 
     console.log(offer.companyId)
     console.log(student.firstname)

@@ -7,11 +7,32 @@ import { isEmpty } from '../../../utils';
 import './Company.OfferDetails.css'
 import OfferCard from '../../OfferCard';
 import StudentCard from '../StudentCard';
+import { getAllStudents } from '../../../../actions/allStudents.actions';
 
 const OfferDetailsCompany = () => {
     const offer = useSelector((state)=> state.offerReducer);
     const [applicationList, setApplicationList] = useState([])
+    const [fetchStudents, setFetchStudents] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
+
+    const fetchNewStudents = async()=>{
+        await dispatch(getAllStudents ());
+        setFetchStudents(false);
+        console.log('students refreshed');
+      }
+  
+    useEffect(()=>{
+        if(fetchStudents){
+          fetchNewStudents()
+        }
+    })
+    
+    useEffect(()=>{
+        if(!isEmpty(offer) && fetchStudents===false){
+            setIsLoading(false)
+        }
+    },[offer, fetchStudents])
 
     useEffect(()=>{
         if(!isEmpty(offer)){
@@ -33,33 +54,41 @@ const OfferDetailsCompany = () => {
 
     return (
         <div className= "company-offer-details-page-container">
-            <OfferCard offer={offer}/>
-            
-            <div className="company-applications-list-container">
-                <h2>Liste des candidats </h2>
+            { isLoading && (
+                <i className="fas fa-spinner fa-spin"></i>
+                )
+            }
+            { isLoading === false &&(
                 <>
-                {applicationList.length === 0 ? (
-                    <div className="company-0-application-message">
-                        Not any application yet. Let's promote it! Subscribe for a Premium account
-                    </div>
-                    ):(
-                    <ul className="company-applicationCards-container">
-                        {applicationList.map((application) => (
-                            <li key={application._id} className="company-applicationCard">
-                                <StudentCard id={application.studentId} />
-                                <ApplicationCard application={application} />
-                                <div className="company-applicationCard-bottom">
-                                    <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>
-                                    <button onClick={(e)=>handleReject(offer._id, application._id)} className="reject"> Reject</button>
-                                </div>
-                            </li>
-                            ))
-                        }
-                    </ul>
-                    )
-                }
+                <OfferCard offer={offer}/>
+                <div className="company-applications-list-container">
+                    <h2>Liste des candidats </h2>
+                    <>
+                    {applicationList.length === 0 ? (
+                        <div className="company-0-application-message">
+                            Not any application yet. Let's promote it! Subscribe for a Premium account
+                        </div>
+                        ):(
+                        <ul className="company-applicationCards-container">
+                            {applicationList.map((application) => (
+                                <li key={application._id} className="company-applicationCard">
+                                    <StudentCard id={application.studentId} />
+                                    <ApplicationCard application={application} />
+                                    <div className="company-applicationCard-bottom">
+                                        <button onClick={(e)=>handleLike(offer._id, application._id)} className="like">Like</button>
+                                        <button onClick={(e)=>handleReject(offer._id, application._id)} className="reject"> Reject</button>
+                                    </div>
+                                </li>
+                                ))
+                            }
+                        </ul>
+                        )
+                    }
+                    </>
+                </div>
                 </>
-            </div>
+                )
+            }
         </div>
     )
 }   

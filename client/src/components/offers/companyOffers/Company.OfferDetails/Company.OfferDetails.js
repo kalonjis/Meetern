@@ -34,16 +34,6 @@ const OfferDetailsCompany = () => {
         }
     },[offer, fetchStudents])
 
-    useEffect(()=>{
-        if(!isEmpty(offer)){
-            let appList = []
-            offer.applications.map( application =>{
-            return appList.push(application)
-            })
-            setApplicationList(appList)
-        }
-    },[offer])
-
     const handleLike = (offerId, applicationId)=>{
         dispatch(likeStudent (offerId, applicationId))
     }
@@ -64,13 +54,13 @@ const OfferDetailsCompany = () => {
                 <div className="company-applications-list-container">
                     <h2>Liste des candidats </h2>
                     <>
-                    {applicationList.length === 0 ? (
+                    {offer.applications.length === 0 ? (
                         <div className="company-0-application-message">
                             Not any application yet. Let's promote it! Subscribe for a Premium account
                         </div>
                         ):(
                         <ul className="company-applicationCards-container">
-                            {applicationList.map((application) => (
+                            {offer.applications.map((application) => (
                                 <li key={application._id} className="company-applicationCard">
                                     <StudentCard id={application.studentId} />
                                     <ApplicationCard application={application} />

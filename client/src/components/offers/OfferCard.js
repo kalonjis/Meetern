@@ -4,7 +4,7 @@ const OfferCard = ({offer}) => {
     
     return (
         <div className= "offerCard-container">
-            <h1>{offer.position}</h1>
+            <h1>{offer.position} <span>{offer.status}</span></h1>
             <div className="offerCard-details">
                 <p>Description :  {offer.description} </p>
                 <p>Hiring possibility :  {offer.hiringPossibility} </p>

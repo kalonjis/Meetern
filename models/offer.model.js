@@ -50,6 +50,10 @@ const OfferSchema = new mongoose.Schema(
                     timestamp: Number
                 }
             ]
+        },
+        status:{
+            type:String,
+            default: "open"
         }
     },
     {

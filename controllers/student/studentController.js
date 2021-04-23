@@ -50,7 +50,7 @@ module.exports.updateStudent = async (req, res) =>{
     }
 };
 
-// Delete le student avec la methode "DELETE"
+// Delete student avec la methode "DELETE"
 module.exports.deleteStudent = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);

@@ -74,7 +74,7 @@ module.exports.editOfferStatus = async(req, res) => {
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // add the student
+        // replace the status (default : "open")
         await OfferModel.findByIdAndUpdate(
             req.params.id,
             { $set :{status : req.body.status}},
@@ -95,10 +95,10 @@ module.exports.selectStudent = async (req, res) => {
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // add the student
+        // add the studentId
         await OfferModel.findByIdAndUpdate(
             req.params.id,
-            { $addToSet: {companyChoice: req.body.companyChoice}},
+            { $set: {companyChoice: req.body.companyChoice}},
             { new: true, upsert: true},
             (err, docs) => {
                 if (!err) res.status(201).json(docs)
@@ -109,16 +109,17 @@ module.exports.selectStudent = async (req, res) => {
         return res.status(500).json({ message: err})
     }
 };
+
 // Unselect the student avec la methode PATCH
 module.exports.unselectStudent = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // remove from the language list
+        // empty companyChoice
         await OfferModel.findByIdAndUpdate(
             req.params.id,
-            { $pull: {companyChoice: req.body.companyChoice}},
+            { $set: {companyChoice: null}},
             { new: true, upsert: true},
             (err, docs) => {
                 if (!err) res.status(201).json(docs)
@@ -142,6 +143,8 @@ module.exports.deleteOffer = (req, res) => {
       }
   ) 
 };
+
+/**---------------------------- Applications------------------------------------ */
 
 module.exports.apply = async (req, res) => {
     if (!ObjectId.isValid(req.params.id) || !ObjectId.isValid(req.body.studentId)) 

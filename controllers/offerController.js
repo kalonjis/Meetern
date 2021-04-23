@@ -69,27 +69,33 @@ module.exports.updateOffer = (req, res) => {
     ) 
 };
 
-module.exports.editOfferStatus = (req, res) => {
+module.exports.editOfferStatus = async(req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
-
-    OfferModel.findByIdAndUpdate(
-        req.params.id,
-        {$set: {status : req.body.status}},
-        { new: true },
-        (err, docs) => {
-            if(!err) res.send(docs);
-            else console.log('Update error: '+ err);
-        }
-    ) 
+    
+    try {
+        // add the student
+        await OfferModel.findByIdAndUpdate(
+            req.params.id,
+            { $set :{status : req.body.status}},
+            { new: true, upsert: true},
+            (err, docs) => {
+                if (!err) res.status(201).json(docs)
+                else return res.status(400).json(err);
+            }
+            );
+    } catch (err){
+        return res.status(500).json({ message: err})
+    }
 };
+
 // Select the student avec la methode "PATCH"
 module.exports.selectStudent = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) 
       res.status(400).send('ID unknown : ' + req.params.id);
     
     try {
-        // add to the language list
+        // add the student
         await OfferModel.findByIdAndUpdate(
             req.params.id,
             { $addToSet: {companyChoice: req.body.companyChoice}},

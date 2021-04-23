@@ -56,8 +56,7 @@ const OfferSchema = new mongoose.Schema(
             default: "open"
         },
         companyChoice:{
-            type:[String],
-            maxlength:1,
+            type:String
         },
     },
     {

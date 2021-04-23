@@ -7,26 +7,16 @@ import ApplicationCard from '../../ApplicationCard';
 import './Offers.student.css'
 
 
-
-
 const OffersStudent = ()=>{
     const student = useSelector((state)=>state.studentReducer);
-    const [applicationsIdList, setApplicationsIdList] = useState([]);
     const allOffers = useSelector((state)=>state.allOffersReducer);
     const [opportunities, setOpportunities] = useState([]);
 
     useEffect(()=>{
-        if(!isEmpty(student)){
-            setApplicationsIdList(student.applications)
+        if(!isEmpty(allOffers) && !isEmpty(student)){
+            setOpportunities(allOffers.filter( offer => !student.applications.includes(offer._id) && offer.status === "open"))
         }
-    },[student])
-
-    useEffect(()=>{
-        if(!isEmpty(allOffers)){
-            setOpportunities(allOffers.filter( offer => !applicationsIdList.includes(offer._id)))
-        }
-    }, [allOffers, applicationsIdList])
-    console.log(applicationsIdList)
+    }, [allOffers, student])
 
     return (
         <div className="offers-student-page-container">
@@ -51,7 +41,7 @@ const OffersStudent = ()=>{
                 <ul>
                     {
                         allOffers.map((offer)=>{
-                            if (applicationsIdList.includes(offer._id)){
+                            if (student.applications.includes(offer._id)){
                                 return (
                                     <li key={offer._id} className= "student-applicationCard-container">
                                             {   <>

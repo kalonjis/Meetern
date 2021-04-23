@@ -67,11 +67,11 @@ const OfferDetailsStudent = () => {
                                     }
                                 })
                             }
-                           <button>Annuler la candidature</button>
+                           {offer.status === "open" ? <button>Annuler la candidature</button> : <div>Cette offre vient d'etre cloturée</div>}
                         </div>
                         ): (
                         <div>
-                            Saisissez votre chance : <button onClick={e=>{handleApply(offer._id, student._id)}}> Apply Now</button>
+                            {offer.status === "open" ? <div>Saisissez votre chance :<button onClick={e=>{handleApply(offer._id, student._id)}}> Apply Now</button> </div> : <div>Cette offre vient d'etre cloturée</div>}
                         </div>)
                     }
                     </>

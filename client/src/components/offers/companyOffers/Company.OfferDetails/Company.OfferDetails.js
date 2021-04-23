@@ -37,8 +37,10 @@ const OfferDetailsCompany = () => {
     },[offer, fetchStudents])
 
     const handleClose = async(offerId)=>{
-        await dispatch(closeOffer(offerId))
-        setOpenStatus(false);
+        if (window.confirm('Voulez-vous cloturer cette offre? ')){
+            await dispatch(closeOffer(offerId))
+            setOpenStatus(false);
+            }
     }
 
     const handleOpen = async(offerId)=>{

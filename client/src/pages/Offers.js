@@ -4,6 +4,9 @@ import { getAllOffers } from '../actions/allOffers.actions';
 import { UserContext } from '../components/AppContext';
 import OffersCompany from '../components/offers/companyOffers/OffersCompany/OffersCompany';
 import OffersStudent from '../components/offers/studentOffers/Offer.Student/Offers.student';
+import { BrowserRouter  as Switch, Redirect } from 'react-router-dom';
+
+
 
 const Offers = ()=> {
   const user = useContext(UserContext);
@@ -29,7 +32,9 @@ const Offers = ()=> {
           ):( user.type === "student" ? (
             <OffersStudent/>
             ):(
-              <h2>Hello from Offers</h2>
+              <Switch>
+                <Redirect to="/" />
+              </Switch>
               )              
           )
         }

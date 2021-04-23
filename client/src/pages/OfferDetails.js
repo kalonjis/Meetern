@@ -5,6 +5,9 @@ import {useParams} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getOffer } from '../actions/offer.action';
 import OfferDetailsStudent from '../components/offers/studentOffers/Student.OfferDetails/Student.OfferDetails';
+import { BrowserRouter  as Switch, Redirect } from 'react-router-dom';
+
+
 
 const OfferDetails = () => {
     const user = useContext(UserContext)
@@ -20,7 +23,9 @@ const OfferDetails = () => {
               ):( user.type === "student" ? (
                   <OfferDetailsStudent />
                 ):(
-                  <h2>Hello from Offers</h2>
+                  <Switch>
+                    <Redirect to="/" />
+                  </Switch>
                 )                 
               )
             }

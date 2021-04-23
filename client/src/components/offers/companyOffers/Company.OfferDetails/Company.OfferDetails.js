@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { likeStudent, rejectStudent } from '../../../../actions/offer.action'
+import { likeStudent, openOffer, rejectStudent } from '../../../../actions/offer.action'
 import ApplicationCard from '../../ApplicationCard';
 import { isEmpty } from '../../../utils';
 import './Company.OfferDetails.css'
@@ -16,6 +16,7 @@ const OfferDetailsCompany = () => {
     const [fetchStudents, setFetchStudents] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
+    const [openStatus, setOpenStatus] = useState(true)
 
     const fetchNewStudents = async()=>{
         await dispatch(getAllStudents ());
@@ -37,7 +38,12 @@ const OfferDetailsCompany = () => {
 
     const handleClose = async(offerId)=>{
         await dispatch(closeOffer(offerId))
-        console.log("status closed")
+        setOpenStatus(false);
+    }
+
+    const handleOpen = async(offerId)=>{
+        await dispatch(openOffer(offerId))
+        setOpenStatus(true)
     }
 
     const handleLike = (offerId, applicationId)=>{
@@ -59,8 +65,14 @@ const OfferDetailsCompany = () => {
                 <div className="offer-details-container">
                     <OfferCard offer={offer}/>
                     <div className="change-status-button">
-                        <button className="close-button" onClick={ e=> handleClose(offer._id)}> Close Offer</button>
-                        {/* <button onClick={ e=> handleOpen(offer._id)}> Open Offer</button> */}
+                        { openStatus && (
+                            <button className="close-button" onClick={ e=> handleClose(offer._id)}> Close Offer</button>
+                            )
+                        }
+                        {openStatus === false && (
+                            <button className="open-button" onClick={ e=> handleOpen(offer._id)}> Open Offer</button>
+                            )
+                        }
                     </div>
                 </div>
 

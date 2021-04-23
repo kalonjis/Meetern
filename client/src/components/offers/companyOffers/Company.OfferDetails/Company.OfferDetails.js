@@ -16,7 +16,7 @@ const OfferDetailsCompany = () => {
     const [fetchStudents, setFetchStudents] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
-    const [openStatus, setOpenStatus] = useState(true)
+    const [openStatus, setOpenStatus] = useState(null)
 
     const fetchNewStudents = async()=>{
         await dispatch(getAllStudents ());
@@ -33,7 +33,9 @@ const OfferDetailsCompany = () => {
     useEffect(()=>{
         if(!isEmpty(offer) && fetchStudents===false){
             setIsLoading(false)
+            setOpenStatus(offer.status === "open" ? true : false)
         }
+        
     },[offer, fetchStudents])
 
     const handleClose = async(offerId)=>{

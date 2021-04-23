@@ -66,7 +66,7 @@ export const likeStudent = (offerId, applicationId) =>{
     return(dispatch)=>{
         return axios({
             method:"patch",
-            url:`${process.env.REACT_APP_API_URL}api/offer/editStatus/${offerId}`,
+            url:`${process.env.REACT_APP_API_URL}api/offer/editApplicationStatus/${offerId}`,
             data:{applicationId :applicationId,
                   status: "liked"}
             })
@@ -84,7 +84,7 @@ export const rejectStudent = (offerId, applicationId) =>{
     return(dispatch)=>{
         return axios({
             method:"patch",
-            url:`${process.env.REACT_APP_API_URL}api/offer/editStatus/${offerId}`,
+            url:`${process.env.REACT_APP_API_URL}api/offer/editApplicationStatus/${offerId}`,
             data:{applicationId :applicationId,
                   status: "rejected"}
             })
@@ -102,7 +102,7 @@ export const cancelApplication = (offerId, applicationId, studentId) =>{
     return(dispatch)=>{
         return axios({
             method:"patch",
-            url:`${process.env.REACT_APP_API_URL}api/offer/editStatus/${offerId}`,
+            url:`${process.env.REACT_APP_API_URL}api/offer/editApplicationStatus/${offerId}`,
             data:{applicationId :applicationId,
                   status: "cancelled by the student"}
             })

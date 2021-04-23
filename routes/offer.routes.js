@@ -10,11 +10,12 @@ router.get("/", offerController.getAllOffers);
 router.get("/:id", offerController.offerInfo);
 router.post("/", offerController.createOffer);
 router.put("/:id", offerController.updateOffer);
+router.put("/editOfferStatus/:id", offerController.editOfferStatus);
 router.delete("/:id", offerController.deleteOffer);
 
 // applications
 router.patch("/apply/:id", offerController.apply);
 router.patch("/deleteApplication/:id", offerController.deleteApplication);
-router.patch("/editStatus/:id", offerController.editStatus);
+router.patch("/editApplicationStatus/:id", offerController.editApplicationStatus);
 
 module.exports = router;

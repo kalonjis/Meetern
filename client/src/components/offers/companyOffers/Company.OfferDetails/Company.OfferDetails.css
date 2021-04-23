@@ -12,6 +12,13 @@
     margin-top: 0;
     padding: 20px;
  }
+ .offerCard-offer-status{
+    margin-bottom: 0; 
+    padding-right: 0;
+    font-size:20px ;
+    font-style: italic;
+    font-weight: lighter;
+ }
 .company-offer-details-page-container .offerCard-details{
     padding-left: 10px;
  }

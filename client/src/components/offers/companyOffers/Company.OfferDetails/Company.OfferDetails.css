@@ -1,10 +1,20 @@
-.company-offer-details-page-container .offerCard-container{
+.company-offer-details-page-container .offer-details-container{
     width: 40%;
     margin: 20px auto;
     padding-bottom: 10px;
     border: 5px solid rgb(4, 174, 241);
     border-radius: 10px;
     background: rgb(206, 239, 240);
+}
+.offer-details-container .change-status-button{
+    width: 40%;
+    margin: 5px auto;
+
+}
+.company-offer-details-page-container .close-button{
+    width: 100%;
+    margin: 0;
+    background-color: rgb(241, 51, 4);
 }
 .company-offer-details-page-container h1{
     background: rgb(251, 248, 248);

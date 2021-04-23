@@ -8,10 +8,11 @@ import './Company.OfferDetails.css'
 import OfferCard from '../../OfferCard';
 import StudentCard from '../StudentCard';
 import { getAllStudents } from '../../../../actions/allStudents.actions';
+import { closeOffer } from '../../../../actions/offer.action';
+
 
 const OfferDetailsCompany = () => {
     const offer = useSelector((state)=> state.offerReducer);
-    const [applicationList, setApplicationList] = useState([])
     const [fetchStudents, setFetchStudents] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
@@ -34,6 +35,11 @@ const OfferDetailsCompany = () => {
         }
     },[offer, fetchStudents])
 
+    const handleClose = async(offerId)=>{
+        await dispatch(closeOffer(offerId))
+        console.log("status closed")
+    }
+
     const handleLike = (offerId, applicationId)=>{
         dispatch(likeStudent (offerId, applicationId))
     }
@@ -50,7 +56,14 @@ const OfferDetailsCompany = () => {
             }
             { isLoading === false &&(
                 <>
-                <OfferCard offer={offer}/>
+                <div className="offer-details-container">
+                    <OfferCard offer={offer}/>
+                    <div className="change-status-button">
+                        <button className="close-button" onClick={ e=> handleClose(offer._id)}> Close Offer</button>
+                        {/* <button onClick={ e=> handleOpen(offer._id)}> Open Offer</button> */}
+                    </div>
+                </div>
+
                 <div className="company-applications-list-container">
                     <h2>Liste des candidats </h2>
                     <>

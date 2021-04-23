@@ -1,4 +1,4 @@
-import { GET_OFFER, LIKE_STUDENT, REJECT_STUDENT} from '../actions/offer.action'
+import { CLOSE_OFFER, GET_OFFER, LIKE_STUDENT, REJECT_STUDENT} from '../actions/offer.action'
 
 const initialState = {};
 
@@ -30,6 +30,11 @@ const offerReducer = ( state= initialState, action) =>{
                             }else return application
                         })
                     };
+                    
+        case CLOSE_OFFER:
+            return {...state,
+                    status : "closed"
+                   }
                 
         default:
             return state;

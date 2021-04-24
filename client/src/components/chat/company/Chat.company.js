@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector} from 'react-redux';
 import StudentCard2 from './StudentCard2';
 import StudentCard from '../../offers/companyOffers/StudentCard';
+import StudentOffersAppliedList from './StudentOffersAppliedList';
 
 
  const Chatcompany = () =>{
@@ -57,7 +58,15 @@ import StudentCard from '../../offers/companyOffers/StudentCard';
                         } 
                     </ul>
                     <div className="student-info-container">
-                        { studentIdInfo === null  ? <div> Select a student in the list </div>: <StudentCard id={studentIdInfo}/> }
+                        { studentIdInfo === null ? ( 
+                                <div> Select a student in the list </div>
+                            ):(
+                                <div> 
+                                    <StudentCard id={studentIdInfo}/>
+                                    <StudentOffersAppliedList id={studentIdInfo} />
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
            )}

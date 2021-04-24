@@ -62,7 +62,7 @@ const StudentOffersAppliedList = ({id}) => {
                         }
                     </ul>
                     <div className="chat-company-offerCard-container">
-                        { offerDetails === null ? (
+                        { offerDetails === null || !offersAppliedList.includes(offerDetails) ? (
                                 <div> cliquez sur une offre pour voir les details </div>
                             ):( 
                                 <div>

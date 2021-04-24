@@ -1,7 +1,7 @@
-import { set } from 'mongoose';
 import React, { useEffect, useState } from 'react';
 import { useSelector} from 'react-redux';
 import { isEmpty } from '../../utils';
+import OfferCard from '../../offers/OfferCard'
 
 
 const StudentOffersAppliedList = ({id}) => {
@@ -11,6 +11,7 @@ const StudentOffersAppliedList = ({id}) => {
     const [isLoading, setIsLoading] = useState(true)
     const [myOffers, setMyOffers] = useState([]);
     const [offersAppliedList, setOffersAppliedList] =useState([])
+    const [offerDetails, setOfferDetails] = useState(null)
 
 
     useEffect(()=>{
@@ -47,15 +48,31 @@ const StudentOffersAppliedList = ({id}) => {
             { isLoading === false &&(
                 <div>
                     <h3>Candidat pour les stages suivants:</h3>
-                    <ul>
+                    <ul className="offers-list-container">
                         {
                             offersAppliedList.map( offer => (
-                                <li key={offer._id}>
-                                    <b> {offer.position}</b>
+                                <li key={offer._id} className="offer-info">
+                                    <div> {offer.position} 
+                                        <span> 
+                                            <button onClick={e => setOfferDetails(offer)}> details</button>
+                                        </span>
+                                    </div>
                                 </li>
                             ))
                         }
                     </ul>
+                    <div className="chat-company-offerCard-container">
+                        { offerDetails === null ? (
+                                <div> cliquez sur une offre pour voir les details </div>
+                            ):( 
+                                <div>
+                                <OfferCard offer={offerDetails} />
+                                <button onClick={ e => setOfferDetails(null)} > Hide Details </button>
+                                </div>
+                            )
+
+                        }
+                    </div>
                 </div>
             )}
         </div>

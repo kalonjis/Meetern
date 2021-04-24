@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector} from 'react-redux';
-import StudentCard2 from './StudentCard2';
-import StudentCard from '../../offers/companyOffers/StudentCard';
-import StudentOffersAppliedList from './StudentOffersAppliedList';
+import StudentCard2 from '../StudentCard2';
+import StudentCard from '../../../offers/companyOffers/StudentCard';
+import StudentOffersAppliedList from '../StudentOffersAppliedList';
+import './Chat.company.css'
 
 
  const Chatcompany = () =>{
@@ -36,8 +37,6 @@ import StudentOffersAppliedList from './StudentOffersAppliedList';
             setStudentIdList([...new Set (likedList)])
         }
     },[myOffers])
-    console.log(studentIdList)
-    console.log(studentIdInfo)
 
     return (
         <div className= "company-message-page-container">
@@ -46,8 +45,8 @@ import StudentOffersAppliedList from './StudentOffersAppliedList';
                 )
             }
             { isLoading === false &&(
-                <div>
-                    <ul>
+                <div className="hub-container">
+                    <ul className="hub-student-list">
                         {
                             studentIdList.map( studentId => 
                                  ( <li key={studentId} onClick={ e => setStudentIdInfo(studentId) }>
@@ -57,7 +56,7 @@ import StudentOffersAppliedList from './StudentOffersAppliedList';
                             )
                         } 
                     </ul>
-                    <div className="student-info-container">
+                    <div className="hub-student-info-container">
                         { studentIdInfo === null ? ( 
                                 <div> Select a student in the list </div>
                             ):(

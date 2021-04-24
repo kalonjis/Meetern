@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getAllOffers } from '../actions/allOffers.actions';
 import { UserContext } from '../components/AppContext';
-import Chatcompany from '../components/chat/company/Chat.company';
+import Chatcompany from '../components/chat/company/Chat.company/Chat.company';
 import { BrowserRouter  as Switch, Redirect } from 'react-router-dom';
 
 

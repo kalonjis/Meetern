@@ -10,7 +10,6 @@ const StudentOffersAppliedList = ({id}) => {
     const allOffers = useSelector((state)=> state.allOffersReducer);
     const [isLoading, setIsLoading] = useState(true)
     const [myOffers, setMyOffers] = useState([]);
-    const [offersAppliedList, setOffersAppliedList] =useState([])
     const [offerDetails, setOfferDetails] = useState(null)
 
 
@@ -18,48 +17,35 @@ const StudentOffersAppliedList = ({id}) => {
         if (!isEmpty(allOffers)){
             setMyOffers(allOffers.filter( offer => offer.companyId === company._id))
             setIsLoading(false)
-            
         }
     },[allOffers, company])
     
-    useEffect(()=>{
-        if(!isEmpty(myOffers)){
-            let list =[];
-            myOffers.map( offer =>(
-                offer.applications.map( application =>{
-                    if( application.studentId === id){
-                        return list.push(offer)
-                    }else {
-                        return null
-                    }
-                })
-                ))
-            setOfferDetails(null)
-            setOffersAppliedList(list)
-        }
-    }, [myOffers, id])
-
-    return (
+       return (
         <div className="student-applications-list-container" >
             { isLoading && (
                 <i className="fas fa-spinner fa-spin"></i>
                 )
-
             }
-            { isLoading === false &&(
+            { isLoading === false && !isEmpty(myOffers) && (
                 <div>
                     <h3>Candidat pour les stages suivants:</h3>
                     <ul className="offers-list-container">
                         {
-                            offersAppliedList.map( offer => (
-                                <li key={offer._id} className="offer-info">
-                                    <div> {offer.position} 
-                                        <span> 
-                                            <button onClick={e => setOfferDetails(offer)}> details</button>
-                                        </span>
-                                    </div>
-                                </li>
-                            ))
+                           myOffers.map( offer => (
+                               offer.applications.map( application => {
+                                   if ( application.studentId === id){
+                                       return (
+                                            <li key={offer._id} className="offer-info">
+                                                <div> {offer.position} 
+                                                    <span> 
+                                                        <button onClick={e => setOfferDetails(offer)}> details</button>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                       )
+                                   }else return null
+                               })
+                           ))
                         }
                     </ul>
                     <div className="chat-company-offerCard-container">

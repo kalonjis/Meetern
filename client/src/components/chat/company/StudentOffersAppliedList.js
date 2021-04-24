@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector} from 'react-redux';
-import { isEmpty } from '../../utils';
+import { isEmpty, timestampParser } from '../../utils';
 import OfferCard from '../../offers/OfferCard'
 
 
@@ -19,6 +19,11 @@ const StudentOffersAppliedList = ({id}) => {
             setIsLoading(false)
         }
     },[allOffers, company])
+
+    useEffect(()=>{
+        if(id)
+        setOfferDetails(null)
+    },[id])
     
        return (
         <div className="student-applications-list-container" >
@@ -35,11 +40,10 @@ const StudentOffersAppliedList = ({id}) => {
                                offer.applications.map( application => {
                                    if ( application.studentId === id){
                                        return (
-                                            <li key={offer._id} className="offer-info">
+                                            <li key={offer._id} className="offer-info" onClick={e => setOfferDetails(offer)}>
                                                 <div> {offer.position} 
-                                                    <span> 
-                                                        <button onClick={e => setOfferDetails(offer)}> details</button>
-                                                    </span>
+                                                    <span>, <b>Sent</b> : {timestampParser(application.timestamp)} </span>
+                                                    <span>, <b>Status</b> : {application.status} </span>
                                                 </div>
                                             </li>
                                        )

@@ -18,10 +18,10 @@ const StudentOffersAppliedList = ({id}) => {
         if (!isEmpty(allOffers)){
             setMyOffers(allOffers.filter( offer => offer.companyId === company._id))
             setIsLoading(false)
-
+            
         }
     },[allOffers, company])
-
+    
     useEffect(()=>{
         if(!isEmpty(myOffers)){
             let list =[];
@@ -33,7 +33,8 @@ const StudentOffersAppliedList = ({id}) => {
                         return null
                     }
                 })
-            ))
+                ))
+            setOfferDetails(null)
             setOffersAppliedList(list)
         }
     }, [myOffers, id])
@@ -62,7 +63,7 @@ const StudentOffersAppliedList = ({id}) => {
                         }
                     </ul>
                     <div className="chat-company-offerCard-container">
-                        { offerDetails === null || !offersAppliedList.includes(offerDetails) ? (
+                        { offerDetails === null ? (
                                 <div> cliquez sur une offre pour voir les details </div>
                             ):( 
                                 <div>
@@ -70,7 +71,6 @@ const StudentOffersAppliedList = ({id}) => {
                                 <button onClick={ e => setOfferDetails(null)} > Hide Details </button>
                                 </div>
                             )
-
                         }
                     </div>
                 </div>

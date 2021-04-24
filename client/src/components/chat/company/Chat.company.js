@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector} from 'react-redux';
-import StudentCard from './StudentCard';
+import StudentCard2 from './StudentCard2';
+import StudentCard from '../../offers/companyOffers/StudentCard';
 
 
  const Chatcompany = () =>{
     const company =  useSelector((state)=> state.companyReducer);
     const allOffers = useSelector((state)=> state.allOffersReducer);
+    const [isLoading, setIsLoading] = useState(true)
     const [myOffers, setMyOffers] = useState([]);
     const [studentIdList, setStudentIdList] = useState([]);
+    const [studentIdInfo, setStudentIdInfo] = useState(null)
     
     useEffect(()=>{
         if (allOffers[0]){
             setMyOffers(allOffers.filter((offer)=> (offer.companyId === company._id)))
+            setIsLoading(false)
         }
     }, [company, allOffers]);
 
@@ -32,17 +36,31 @@ import StudentCard from './StudentCard';
         }
     },[myOffers])
     console.log(studentIdList)
+    console.log(studentIdInfo)
 
     return (
-        <div>
-            contact a student!
-           <ul>
-              {
-                  studentIdList.map( studentId => {
-                    return <StudentCard id={studentId}/>
-                  })
-              } 
-           </ul>
+        <div className= "company-message-page-container">
+            { isLoading && (
+                <i className="fas fa-spinner fa-spin"></i>
+                )
+            }
+            { isLoading === false &&(
+                <div>
+                    <ul>
+                        {
+                            studentIdList.map( studentId => 
+                                 ( <li key={studentId} onClick={ e => setStudentIdInfo(studentId) }>
+                                     <StudentCard2 id={studentId} />
+                                    </li>
+                                 )
+                            )
+                        } 
+                    </ul>
+                    <div className="student-info-container">
+                        { studentIdInfo === null  ? <div> Select a student in the list </div>: <StudentCard id={studentIdInfo}/> }
+                    </div>
+                </div>
+           )}
         </div>
     )
 }

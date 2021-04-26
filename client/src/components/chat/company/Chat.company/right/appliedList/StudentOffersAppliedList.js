@@ -26,7 +26,7 @@ const StudentOffersAppliedList = (props) => {
                                 if ( application.studentId === id){
                                     return (
                                         <li key={application._id} className="offer-info" onClick={e => setOfferDetails(offer)}>
-                                            <div> {offer.position} 
+                                            <div style={offer.companyChoice === id ? {color: "gold"}: {color: "black"}}> {offer.position} 
                                                 <span>, <b>Sent</b> : {timestampParser(application.timestamp)} </span>
                                                 <span>, <b>Status</b> : {application.status} </span>
                                             </div>

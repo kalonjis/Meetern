@@ -1,8 +1,17 @@
-import React from 'react'
-import { timestampParser } from '../utils';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { isEmpty, timestampParser } from '../utils';
 
 
 const OfferCard = ({offer}) => {
+    const allStudents = useSelector( state => state.allStudentsReducer)
+    const [student, setStudent] = useState(null)
+    
+    useEffect(()=>{
+        if( !isEmpty(offer.companyChoice) && allStudents[0]){
+            setStudent( allStudents.filter( student => student._id === offer.companyChoice)[0])
+        }
+    }, [offer.companyChoice, allStudents])
     
     return (
         <div className= "offerCard-container">
@@ -15,7 +24,8 @@ const OfferCard = ({offer}) => {
                 <p> Duration :  {offer.internshipDuration} </p>
                 <p>Place :  {offer.internshipPlace} </p>
                 <p>Face to face : {offer.faceToface} </p>
-                <div> Online since : { timestampParser(offer.createdAt)}</div>
+                <p> Online since : { timestampParser(offer.createdAt)}</p>
+                <p> Selected student:{ student === null ? " No one preselected" : ` ${student.firstname} ${student.lastname}`}</p>
             </div>
         </div>
     )

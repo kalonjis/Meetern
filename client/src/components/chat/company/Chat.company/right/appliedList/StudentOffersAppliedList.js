@@ -26,11 +26,13 @@ const StudentOffersAppliedList = (props) => {
                             offer.applications.map( application => {
                                 if ( application.studentId === id){
                                     return (
-                                        <li key={application._id} className="offer-info" onClick={e => setOfferDetails(offer)}>
-                                            <div style={offer.companyChoice === id ? {color: "gold"}: {color: "black"}}> {offer.position} 
+                                        <li key={application._id} className="offer-info">
+                                            <div style={offer.companyChoice === id ? {color: "gold"}: {color: "black"}} onClick={e => setOfferDetails(offer)}>
+                                                {offer.position} 
                                                 <span>, <b>Sent</b> : {timestampParser(application.timestamp)} </span>
                                                 <span>, <b>Status</b> : {application.status} </span>
                                             </div>
+                                            {application.status === "selected" ? <button>deselect</button>: <button>Select</button>} <button>reject</button>
                                         </li>
                                     )
                                 }else return null
@@ -43,8 +45,8 @@ const StudentOffersAppliedList = (props) => {
                             <div> cliquez sur une offre pour voir les details </div>
                         ):( 
                             <div>
-                            <OfferCard offer={offerDetails} />
-                            <button onClick={ e => setOfferDetails(null)} > Hide Details </button>
+                                <OfferCard offer={offerDetails} />
+                                <button onClick={ e => setOfferDetails(null)} > Hide Details </button>
                             </div>
                         )
                     }

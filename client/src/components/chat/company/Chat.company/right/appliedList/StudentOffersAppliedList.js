@@ -10,6 +10,7 @@ const StudentOffersAppliedList = (props) => {
 
     useEffect(()=>{
         if( !isEmpty(props.id)){
+            setOfferDetails(null)
             setId(props.id)
         }
     }, [props.id])

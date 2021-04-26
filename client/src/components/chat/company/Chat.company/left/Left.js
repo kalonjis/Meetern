@@ -13,7 +13,7 @@ const Left = ({myOffers}) => {
             let likedList =[]
             myOffers.map(offer => (
                 offer.applications.map(application =>{
-                    if (application.status === "liked"){
+                    if (application.status === "liked" || application.status === "selected" ){
                         return likedList.push(application.studentId)
                     }
                     else{

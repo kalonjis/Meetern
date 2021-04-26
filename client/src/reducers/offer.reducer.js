@@ -1,4 +1,4 @@
-import { CLOSE_OFFER, GET_OFFER, LIKE_STUDENT, OPEN_OFFER, REJECT_STUDENT} from '../actions/offer.action'
+import { CLOSE_OFFER, GET_OFFER, LIKE_STUDENT, OPEN_OFFER, REJECT_STUDENT, SELECT_STUDENT} from '../actions/offer.action'
 
 const initialState = {};
 
@@ -30,6 +30,17 @@ const offerReducer = ( state= initialState, action) =>{
                             }else return application
                         })
             };
+        case SELECT_STUDENT:
+            return {...state,
+                    applications : state.applications.map((application)=>{
+                            if (application._id === action.payload.applicationId){
+                                return {
+                                    ...application,
+                                    status: "selected"
+                                }
+                            }else return application
+                        })
+        };
                     
         case CLOSE_OFFER:
             return {...state,

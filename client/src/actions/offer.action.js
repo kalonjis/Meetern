@@ -5,6 +5,7 @@ export const GET_OFFER = 'GET_OFFER';
 export const APPLY_OFFER = 'APPLY_OFFER';
 export const LIKE_STUDENT = 'LIKE_STUDENT';
 export const REJECT_STUDENT = 'REJECT_STUDENT';
+export const SELECT_STUDENT = 'SELECT_STUDENT';
 export const CANCEL_APPLICATION = 'CANCEL_APPLICATION';
 export const CLOSE_OFFER = 'CLOSE_OFFER';
 export const OPEN_OFFER = 'OPEN_OFFER';
@@ -83,6 +84,24 @@ export const likeStudent = (offerId, applicationId) =>{
                 .then((res)=>{
                     dispatch({
                         type: REJECT_STUDENT,
+                        payload:{applicationId}
+                    })
+                })
+                .catch((err)=> console.log(err))
+            }
+    };
+
+    export const selectStudent = (offerId, applicationId) =>{
+        return(dispatch)=>{
+            return axios({
+                method:"patch",
+                url:`${process.env.REACT_APP_API_URL}api/offer/editApplicationStatus/${offerId}`,
+                data:{applicationId :applicationId,
+                    status: "selected"}
+                })
+                .then((res)=>{
+                    dispatch({
+                        type: SELECT_STUDENT,
                         payload:{applicationId}
                     })
                 })

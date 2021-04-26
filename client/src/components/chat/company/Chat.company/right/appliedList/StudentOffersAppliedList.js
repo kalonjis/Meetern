@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getOffer } from '../../../../../../actions/offer.action';
+import { getOffer, selectStudent } from '../../../../../../actions/offer.action';
 import { isEmpty, timestampParser } from '../../../../../utils';
 import OfferCard2 from './OfferCard2';
 
@@ -25,6 +25,12 @@ const StudentOffersAppliedList = (props) => {
         setOfferDetails(true)
     }
 
+    const handleSelect = async(offerid, applicationid) =>{
+        await dispatch( selectStudent(offerid, applicationid))
+        console.log("application selected")
+
+    }
+
     return (
         <div className="student-applications-list-container" >
             <div>
@@ -41,7 +47,13 @@ const StudentOffersAppliedList = (props) => {
                                                 <span>, <b>Sent</b> : {timestampParser(application.timestamp)} </span>
                                                 <span>, <b>Status</b> : {application.status} </span>
                                             </div>
-                                            {application.status === "selected" ? <button>deselect</button>: <button>Select</button>} <button>reject</button>
+                                            {application.status === "selected" ? (
+                                                    <button>deselect</button>
+                                                ): (
+                                                    <button onClick={e=> handleSelect(offer._id, application._id)}>Select</button>
+                                                )
+                                            } 
+                                            <button>reject</button>
                                         </li>
                                     )
                                 }else return null

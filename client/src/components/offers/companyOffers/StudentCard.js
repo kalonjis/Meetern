@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { isEmpty } from '../../utils';
 
 
-const StudentCard = ({id})=>{
-
+const StudentCard = (props)=>{
+    const id = props.id
+    const companyChoice = props.companyChoice
     const allStudents = useSelector( state => state.allStudentsReducer)
-    
     const [student, setStudent] = useState([])
 
     useEffect(()=>{
@@ -14,13 +14,13 @@ const StudentCard = ({id})=>{
            return setStudent((allStudents.filter ( student => student._id === id))[0])
         }
     },[id, allStudents])
-    console.log(student.picture)
 
     return (
         <div className="studentCard-container">
+                
             <div className="studentCard-container-top">
                 <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
-                <h3>{student.firstname +" "+ student.lastname}</h3>
+                <h3 style={companyChoice === id ? {color: "gold"}: {color: "black"}}>{student.firstname +" "+ student.lastname}</h3>{ companyChoice === id && <span style={{color: "gold"}}>Selected </span>}
             </div>
             <div className="studentCard-student-details">
                 <p>Bio : {student.bio}</p>

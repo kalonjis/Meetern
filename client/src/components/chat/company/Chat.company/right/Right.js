@@ -20,7 +20,7 @@ const Right = ({myOffers}) => {
             }
             { !isEmpty(myOffers) && !isEmpty(id) &&(
                 <div>
-                    <StudentCard id={id}/>
+                    <StudentCard id={id} />
                     <StudentOffersAppliedList id={id} myOffers={myOffers}/>
                 </div>
             )}

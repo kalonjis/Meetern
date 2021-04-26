@@ -1,0 +1,43 @@
+/* .hub-container{
+    display: flex;
+    border: 5px solid blue;
+    width: 50%;
+}
+.hub-student-list{
+   width: 20%;
+   background-color: yellow;
+}
+.hub-student-info-container{
+    width: 80%;
+    background-color: chartreuse;
+    
+    
+}
+.hub-student-info-container .studentCard-container{
+    background-color: crimson;
+    width: 100%;
+}
+.hub-student-info-container .student-applications-list-container{
+    background-color: darkmagenta;
+    width: 100%;
+
+
+} */
+.chat-company-page{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+.left-part{
+    width: 20%;
+    border: 2px solid aqua;
+    height: 80vh;
+}
+.middle-part{
+    width: 50%;
+    border: 2px solid blue;
+}
+.right-part{
+    width: 30%;
+    border: 2px solid violet;
+}

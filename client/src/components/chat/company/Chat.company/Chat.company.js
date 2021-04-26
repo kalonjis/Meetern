@@ -1,75 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector} from 'react-redux';
-import StudentCard2 from '../StudentCard2';
-import StudentCard from '../../../offers/companyOffers/StudentCard';
-import StudentOffersAppliedList from '../StudentOffersAppliedList';
+import Left from './left/Left'
+import Middle from './middle/Middle'
+import Right from './right/Right'
 import './Chat.company.css'
+import { useSelector } from 'react-redux'
+import { isEmpty } from '../../../utils'
 
-
- const Chatcompany = () =>{
-    const company =  useSelector((state)=> state.companyReducer);
-    const allOffers = useSelector((state)=> state.allOffersReducer);
-    const [isLoading, setIsLoading] = useState(true)
+const Chatcompany = () => {
+    const company = useSelector( state => state.companyReducer);
+    const allOffers = useSelector( state => state.allOffersReducer);
     const [myOffers, setMyOffers] = useState([]);
-    const [studentIdList, setStudentIdList] = useState([]);
-    const [studentIdInfo, setStudentIdInfo] = useState(null)
-    
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(()=>{
-        if (allOffers[0]){
-            setMyOffers(allOffers.filter((offer)=> (offer.companyId === company._id)))
+        if (!isEmpty(allOffers)){
+            setMyOffers(allOffers.filter( offer => offer.companyId === company._id))
             setIsLoading(false)
         }
-    }, [company, allOffers]);
+    },[allOffers, company])
 
-    useEffect(()=>{
-        if(myOffers[0]){
-            let likedList =[]
-            myOffers.map(offer => (
-                offer.applications.map(application =>{
-                    if (application.status === "liked"){
-                        return likedList.push(application.studentId)
-                    }
-                    else{
-                        return null
-                    }
-                })
-            ))
-            setStudentIdList([...new Set (likedList)])
-        }
-    },[myOffers])
-
+   
     return (
-        <div className= "company-message-page-container">
+        <div className="chat-company-page">
             { isLoading && (
                 <i className="fas fa-spinner fa-spin"></i>
                 )
             }
-            { isLoading === false &&(
-                <div className="hub-container">
-                    <ul className="hub-student-list">
-                        {
-                            studentIdList.map( studentId => 
-                                 ( <li key={studentId} onClick={ e => setStudentIdInfo(studentId) }>
-                                     <StudentCard2 id={studentId} />
-                                    </li>
-                                 )
-                            )
-                        } 
-                    </ul>
-                    <div className="hub-student-info-container">
-                        { studentIdInfo === null ? ( 
-                                <div> Select a student in the list </div>
-                            ):(
-                                <div> 
-                                    <StudentCard id={studentIdInfo}/>
-                                    <StudentOffersAppliedList id={studentIdInfo} />
-                                </div>
-                            )
-                        }
+            { isLoading === false && !isEmpty(myOffers) && (
+                <>
+                    <div className="left-part">
+                        <Left myOffers={myOffers}/>
                     </div>
-                </div>
-           )}
+                    <div className="middle-part">
+                        <Middle/>
+                    </div>
+                    <div className="right-part">
+                        <Right myOffers={myOffers}/>
+                    </div>
+                </>
+            )}
         </div>
     )
 }
+
 export default Chatcompany

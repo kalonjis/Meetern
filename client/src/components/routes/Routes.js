@@ -17,6 +17,7 @@ const routes = () =>{
                <Route path="/offers" exact component ={Offers} />
                <Route path="/offers/:id" exact component ={OfferDetails} />
                <Route path="/messages" exact component ={Messages} />
+               <Route path="/messages/:id" exact component ={Messages} />
                <Redirect to="/" />
            </Switch>
        </Router>

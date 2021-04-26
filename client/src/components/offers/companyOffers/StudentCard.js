@@ -10,7 +10,7 @@ const StudentCard = ({id})=>{
     const [student, setStudent] = useState([])
 
     useEffect(()=>{
-        if(!isEmpty(allStudents)){
+        if(!isEmpty(allStudents) && !isEmpty(id)){
            return setStudent((allStudents.filter ( student => student._id === id))[0])
         }
     },[id, allStudents])

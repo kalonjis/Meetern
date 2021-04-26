@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getOffer } from '../../../../../../actions/offer.action';
 import { isEmpty, timestampParser } from '../../../../../utils';
-import OfferCard from '../../../../../offers/OfferCard'
+import OfferCard2 from './OfferCard2';
 
 
 const StudentOffersAppliedList = (props) => {
     const [id, setId] = useState(null)
     const myOffers = props.myOffers
-    const [offerDetails, setOfferDetails] = useState(null)
+    const [offerDetails, setOfferDetails] = useState(false)
+    const dispatch = useDispatch()
+
 
     useEffect(()=>{
         if( !isEmpty(props.id)){
-            setOfferDetails(null)
+            setOfferDetails(false)
             setId(props.id)
         }
     }, [props.id])
     console.log("newId :"+ id )
+
+    const getOfferDetails = async (offerId)=>{
+        await dispatch( getOffer(offerId))
+        setOfferDetails(true)
+    }
 
     return (
         <div className="student-applications-list-container" >
@@ -27,7 +36,7 @@ const StudentOffersAppliedList = (props) => {
                                 if ( application.studentId === id){
                                     return (
                                         <li key={application._id} className="offer-info">
-                                            <div style={offer.companyChoice === id ? {color: "gold"}: {color: "black"}} onClick={e => setOfferDetails(offer)}>
+                                            <div style={offer.companyChoice === id ? {color: "gold"}: {color: "black"}} onClick={e => getOfferDetails(offer._id)}>
                                                 {offer.position} 
                                                 <span>, <b>Sent</b> : {timestampParser(application.timestamp)} </span>
                                                 <span>, <b>Status</b> : {application.status} </span>
@@ -41,12 +50,12 @@ const StudentOffersAppliedList = (props) => {
                     }
                 </ul>
                 <div className="chat-company-offerCard-container">
-                    { offerDetails === null ? (
+                    { offerDetails === false ? (
                             <div> cliquez sur une offre pour voir les details </div>
                         ):( 
                             <div>
-                                <OfferCard offer={offerDetails} />
-                                <button onClick={ e => setOfferDetails(null)} > Hide Details </button>
+                                <OfferCard2 />
+                                <button onClick={ e => setOfferDetails(false)} > Hide Details </button>
                             </div>
                         )
                     }

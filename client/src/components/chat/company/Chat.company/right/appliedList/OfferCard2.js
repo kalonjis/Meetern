@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { rejectStudent, selectStudent } from '../../../../../../actions/offer.action';
+import ApplicationCard from '../../../../../offers/ApplicationCard';
 import { isEmpty, timestampParser } from '../../../../../utils';
 
 
-const OfferCard2 = () => {
+const OfferCard2 = ({applicationId}) => {
     const offer = useSelector( state => state.offerReducer)
     const allStudents = useSelector( state => state.allStudentsReducer)
-    // const [student, setStudent] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
+    const dispatch = useDispatch()
     
     useEffect(()=>{
         if( !isEmpty(offer) && allStudents[0]){
             setIsLoading(false)
         }
-    }, [offer, allStudents])
-    
-    // useEffect(()=>{
-    //     if(!isEmpty(offer) && !isEmpty(offer.companyChoice) && allStudents[0]){
-    //         setStudent( allStudents.filter( student => student._id === offer.companyChoice)[0])
-    //     }
-    // }, [offer, allStudents])
+    }, [offer, allStudents, applicationId])
+
+    const handleSelect = async(offerId, applicationId) =>{
+        await dispatch( selectStudent(offerId, applicationId))
+        console.log("application selected")
+
+    }
+    const handleReject = async(offerId, applicationId)=>{
+        await dispatch(rejectStudent(offerId, applicationId))
+
+    }
     
     return (
         <div className= "offerCard-container">
@@ -28,7 +34,39 @@ const OfferCard2 = () => {
                 )
             }
             {  isLoading === false &&(
-                <>
+                <>  
+                    <div className="application-container">
+                        { offer.status === "closed" ? (
+                                <div> 
+                                    { offer.applications.map( application => {
+                                            if (application._id === applicationId){
+                                                return <ApplicationCard key={application._id} application={application}/>
+                                            } else return null
+                                        })   
+                                    } 
+                                </div>
+                            ) : (
+                                <div>
+                                    {offer.applications.map( application => {
+                                            if (application._id === applicationId){
+                                                return(
+                                                    <div key={application._id}>
+                                                    <ApplicationCard application={application}/>
+                                                    { application.status === "rejected"  ? (
+                                                            <button onClick={e=> handleSelect(offer._id, application._id)}>Select</button>
+                                                        ): (
+                                                            <button onClick={e=> handleReject(offer._id, application._id)}>Reject</button>
+                                                        )
+                                                    } 
+                                                </div>
+                                                )
+                                            } else return null
+                                        })
+                                    }
+                                </div>
+                            )
+                        }
+                    </div>
                     <h1>{offer.position} <span className="offerCard-offer-status">{offer.status}</span>
                     </h1>
                     <div className="offerCard-details">
@@ -39,14 +77,21 @@ const OfferCard2 = () => {
                         <p>Place :  {offer.internshipPlace} </p>
                         <p>Face to face : {offer.faceToface} </p>
                         <p> Online since : { timestampParser(offer.createdAt)}</p>
-                        <p> Selected student : { isEmpty(offer.companyChoice) ? (
-                            " No one preselected"
-                            ) : (
-                                allStudents.filter( student => student._id === offer.companyChoice)[0].firstname + " " +
-                                allStudents.filter( student => student._id === offer.companyChoice)[0].lastname
-                                ) 
+                        <ul> Selected student : 
+                            {   offer.applications.map( application => {
+                                    if (application.status === "selected"){
+                                        return (
+                                            <li key={application._id}>
+                                                {   
+                                                    allStudents.filter( student => student._id === application.studentId)[0].firstname + " " +
+                                                    allStudents.filter( student => student._id === application.studentId)[0].lastname
+                                                }
+                                            </li>
+                                        )
+                                    } else return null
+                                }) 
                             }
-                        </p>
+                        </ul>
                     </div>
                 </>
                 )

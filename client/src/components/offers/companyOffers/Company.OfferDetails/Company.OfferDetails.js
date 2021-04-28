@@ -10,6 +10,7 @@ import StudentCard from '../StudentCard';
 import { getAllStudents } from '../../../../actions/allStudents.actions';
 import { closeOffer } from '../../../../actions/offer.action';
 import Select from 'react-select';
+import { Link } from 'react-router-dom';
 
 
 
@@ -148,6 +149,7 @@ const OfferDetailsCompany = () => {
                         <ul className="company-applicationCards-container">
                             {applications.map((application) => (
                                 <li key={application._id} className="company-applicationCard">
+                                    <button><Link to={`/messages/${application.studentId}`}>message</Link></button>
                                     <StudentCard id={application.studentId} status={application.status}/>
                                     <ApplicationCard application={application} />
                                     <div className="company-applicationCard-bottom">

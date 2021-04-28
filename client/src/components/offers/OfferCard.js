@@ -16,6 +16,7 @@ const OfferCard = ({offer}) => {
                 <p>Place :  {offer.internshipPlace} </p>
                 <p>Face to face : {offer.faceToface} </p>
                 <p> Online since : { timestampParser(offer.createdAt)}</p>
+                <p> Number of applications : {offer.applications.length}</p>
             </div>
         </div>
     )

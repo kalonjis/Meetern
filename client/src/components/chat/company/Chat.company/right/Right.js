@@ -4,6 +4,8 @@ import StudentCard from '../../../../offers/companyOffers/StudentCard';
 import StudentOffersAppliedList from './appliedList/StudentOffersAppliedList';
 import { useParams } from 'react-router';
 
+import './Right.css'
+
 const Right = ({myOffers}) => {
     const {id} = useParams()
 
@@ -13,13 +15,13 @@ const Right = ({myOffers}) => {
     },[id])
     
        return (
-        <div className="student-applications-list-container" >
+        <div className="student-hub-container" >
             { isEmpty(id) && (
-                <div>Select a student in the list</div>
+                <div className="empty-message"> Select a student in the list</div>
                 )
             }
             { !isEmpty(myOffers) && !isEmpty(id) &&(
-                <div>
+                <div >
                     <StudentCard id={id} />
                     <StudentOffersAppliedList id={id} myOffers={myOffers}/>
                 </div>

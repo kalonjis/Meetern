@@ -1,0 +1,20 @@
+.student-hub-container {
+    display: flex;
+    flex-direction: column;
+}
+.student-hub-container .empty-message{
+    text-align: center;
+}
+.student-hub-container .studentCard-container{
+    background-color: bisque;
+    margin: 5px auto;
+    width : 90%;
+    padding: 10px;
+}
+
+.student-hub-container .student-applications-list-container{
+    background-color: rgb(201, 255, 196);
+    margin: 5px 10px;
+}
+
+

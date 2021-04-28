@@ -17,10 +17,9 @@ const StudentCard = (props)=>{
 
     return (
         <div className="studentCard-container">
-                
             <div className="studentCard-container-top">
                 <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="student's pic" style={{width: "50px" , height: "50px"}}/>
-                <h3 style={selected ? {color: "gold"}: {color: "black"}}>{student.firstname +" "+ student.lastname}</h3>{ selected && <span style={{color: "gold"}}>Selected </span>}
+                <span style={selected ? {color: "gold"}: {color: "black"}}>{student.firstname +" "+ student.lastname} </span> { selected && <span style={{color: "gold"}}> Selected </span>}
             </div>
             <div className="studentCard-student-details">
                 <p>Bio : {student.bio}</p>

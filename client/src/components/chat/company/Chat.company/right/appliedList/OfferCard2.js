@@ -52,7 +52,7 @@ const OfferCard2 = ({applicationId}) => {
                                                 return(
                                                     <div key={application._id}>
                                                     <ApplicationCard application={application}/>
-                                                    { application.status === "rejected"  ? (
+                                                    { application.status === "rejected" || application.status === "liked" ? (
                                                             <button onClick={e=> handleSelect(offer._id, application._id)}>Select</button>
                                                         ): (
                                                             <button onClick={e=> handleReject(offer._id, application._id)}>Reject</button>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { rejectStudent, selectStudent } from '../../../../../../actions/offer.action';
 import ApplicationCard from '../../../../../offers/ApplicationCard';
-import { isEmpty, timestampParser } from '../../../../../utils';
+import OfferCard from '../../../../../offers/OfferCard';
+import { isEmpty} from '../../../../../utils';
 
 
 const OfferCard2 = ({applicationId}) => {
@@ -67,31 +68,23 @@ const OfferCard2 = ({applicationId}) => {
                             )
                         }
                     </div>
-                    <h1>{offer.position} <span className="offerCard-offer-status">{offer.status}</span>
-                    </h1>
-                    <div className="offerCard-details">
-                        <p>Description :  {offer.description} </p>
-                        <p>Hiring possibility :  {offer.hiringPossibility} </p>
-                        <p>Starting date :  {offer.internshipStart} </p>
-                        <p> Duration :  {offer.internshipDuration} </p>
-                        <p>Place :  {offer.internshipPlace} </p>
-                        <p>Face to face : {offer.faceToface} </p>
-                        <p> Online since : { timestampParser(offer.createdAt)}</p>
-                        <ul> Selected student : 
-                            {   offer.applications.map( application => {
-                                    if (application.status === "selected"){
-                                        return (
-                                            <li key={application._id}>
-                                                {   
-                                                    allStudents.filter( student => student._id === application.studentId)[0].firstname + " " +
-                                                    allStudents.filter( student => student._id === application.studentId)[0].lastname
-                                                }
-                                            </li>
-                                        )
-                                    } else return null
-                                }) 
-                            }
-                        </ul>
+                    <div>
+                    <OfferCard offer={offer} />
+                    <ul> Selected student : 
+                        {   offer.applications.map( application => {
+                                if (application.status === "selected"){
+                                    return (
+                                        <li key={application._id}>
+                                            {   
+                                                allStudents.filter( student => student._id === application.studentId)[0].firstname + " " +
+                                                allStudents.filter( student => student._id === application.studentId)[0].lastname
+                                            }
+                                        </li>
+                                    )
+                                } else return null
+                            }) 
+                        }
+                    </ul>
                     </div>
                 </>
                 )

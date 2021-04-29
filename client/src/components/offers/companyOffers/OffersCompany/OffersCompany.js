@@ -60,15 +60,16 @@ const OffersCompany = () =>{
                         <span> <button onClick={ e=> setAddOffer(true)}> ADD an OFFER</button></span>
                     </h2> 
                     <div className="offers-filter">
+                        <div className=" offers-type-selector">
                         <Select
                             value = {filter}
                             options={filterOption}
                             onChange = {handleChange}
                             // isDisabled = {option => option.isDisabled}
                             // getOptionLabel ={ option => option.name}
-                        /><span>
-                            <button onClick={ e => filterOffer(filter)}> Filter</button>
-                        </span>
+                        />
+                        </div>
+                        <button onClick={ e => filterOffer(filter)}> Filter</button>
                     </div>
                     
                     <ul className="offers-company-list-container">

@@ -10,15 +10,32 @@
     background: rgb(41, 195, 200);
 }
 .offers-filter{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
     width: 50%;
+    /* background-color: aqua; */
 }
-/* .css-2b097c-container{
-    width: 80%;
-    background-color: aqua;
+.offers-filter .offers-type-selector{
+    flex: 3;
+    text-align: center;
+    padding: 5px;
+    margin-left: 10px;
+    background: rgb(41, 195, 200) ;
+    border: 2px solid rgb(251, 248, 248);
+    border-radius: 15px;
 }
-.css-2b097c-container button{
-    width: 10%;
-} */
+.offers-filter button{
+    flex: 1;
+    text-align: center;
+    padding: 0px;
+    margin-left: 10px;
+    /* background: rgb(204, 84, 84) ; */
+    border: 2px solid rgb(251, 248, 248);
+    border-radius: 15px;
+}
+
+
 .offers-company-list-container{
   list-style: none;  
   display: flex;

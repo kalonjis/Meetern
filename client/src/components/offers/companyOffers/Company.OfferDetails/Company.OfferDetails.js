@@ -59,6 +59,18 @@ const OfferDetailsCompany = () => {
         setApplications(offer.applications.filter(application => application.status === applicationStatus.label))
     };
 
+    useEffect(()=>{
+        if(!isEmpty(offer) && fetchStudents===false){
+            setApplications(offer.applications)
+            setIsLoading(false)
+            setOpenStatus(offer.status === "open")
+            setFilter({
+                value: 0,
+                label: "all"
+            });
+        }
+        
+    },[offer, fetchStudents]);
 
     const handleChange =(obj)=>{
         setFilter(obj)
@@ -76,14 +88,6 @@ const OfferDetailsCompany = () => {
         }
     });
     
-    useEffect(()=>{
-        if(!isEmpty(offer) && fetchStudents===false){
-            setApplications(offer.applications)
-            setIsLoading(false)
-            setOpenStatus(offer.status === "open" ? true : false)
-        }
-        
-    },[offer, fetchStudents]);
 
     const handleClose = async(offerId)=>{
         if (window.confirm('Voulez-vous cloturer cette offre? ')){
@@ -130,15 +134,16 @@ const OfferDetailsCompany = () => {
                 <div className="company-applications-list-container">
                     <h2>Liste des candidats </h2>
                     <div className="applications-filter">
-                        <Select
-                            value = {filter}
-                            options={filterOption}
-                            onChange = {handleChange}
-                            // isDisabled = {option => option.isDisabled}
-                            // getOptionLabel ={ option => option.name}
-                        /><span>
-                            <button onClick={ e => filterApplications(filter)}> Filter</button>
-                        </span>
+                        <div className=" application-type-selector">
+                            <Select
+                                value = {filter}
+                                options={filterOption}
+                                onChange = {handleChange}
+                                // isDisabled = {option => option.isDisabled}
+                                // getOptionLabel ={ option => option.name}
+                            />
+                        </div>
+                        <button onClick={ e => filterApplications(filter)}> Filter</button>
                     </div>
                     <>
                     {offer.applications.length === 0 ? (

@@ -11,7 +11,7 @@ const StudentCard2 = ({id}) => {
 
     return (
         <div>
-            <img src={student.picture} alt="pic" style={{width: "30px" , height: "30px"}}/>
+            <img src={window.location.origin + '/uploads/profil/students/'+student.firstname +'.jpg'} alt="pic" style={{width: "30px" , height: "30px"}}/>
             <span> {student.firstname}</span>
         </div>
     )

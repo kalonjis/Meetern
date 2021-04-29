@@ -95,20 +95,27 @@
     color: rgb(192, 43, 43);
 }
 
-
-/* 
-
-.applicationCard-container{
-   
-.application-card-row{
+.applications-filter{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    width: 50%;
 }
-.application-card-row button{
+.applications-filter .application-type-selector{
+    flex: 3;
+    text-align: center;
+    padding: 10px;
+    margin-left: 10px;
+    background: rgb(251, 248, 248) ;
+    border: 2px solid rgb(251, 248, 248);
+    border-radius: 15px;
 }
-.like{
-    background-color: rgb(107, 231, 173);
-    color: rgb(248, 243, 223);
+.applications-filter button{
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    margin-left: 10px;
+    background: rgb(251, 248, 248) ;
+    border: 2px solid rgb(251, 248, 248);
+    border-radius: 15px;
 }
-.reject{
-    background-color: rgb(235, 65, 43);
-    color: rgb(248, 243, 223);
-} */
